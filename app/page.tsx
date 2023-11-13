@@ -14,7 +14,7 @@ export default function Home() {
             className="rounded-full mx-auto"
           />
           <Link href="/">
-            <h2 className="px-20 font-medium text-yellow-900 pt-5 ">Download my CV</h2>
+            <h2 className="px-20 font-medium text-yellow-900 pt-5 "> <Link href="/CV_RT.pdf">Download my CV </Link></h2>
           </Link>
         </div>
         <div className="mt-4 md:mt-0 pb-5">
