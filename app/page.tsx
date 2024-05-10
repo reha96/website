@@ -32,7 +32,7 @@ export default function Home() {
               <span className="font-medium text-yellow-900"> Running out of time(rs): effects of scarcity cues on perceived task load, perceived benevolence and user experience on e-commerce sites. </span>
             </Link> <span className="font-semibold">Behaviour and Information Technology, </span> <span> 2023 (with A. Sergeeva, K. Bongard-Blanchy, V. Distler, S. Doublet, and V. Koenig) </span>
             </p>
-            <h2 className="text-2xl font-semibold pt-5 pb-5">Working Papers</h2>
+            {/* <h2 className="text-2xl font-semibold pt-5 pb-5">Working Papers</h2> */}
 
             {/* <p className="mt-2 text-md pb-5">Autoplay (single authored)</p> */}
             <h2 className="text-2xl font-semibold pt-5 pb-5">Work in Progress</h2>
