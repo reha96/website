@@ -36,7 +36,7 @@ export default function Home() {
 
             {/* <p className="mt-2 text-md pb-5">Autoplay (single authored)</p> */}
             <h2 className="text-2xl font-semibold pt-5 pb-5">Work in Progress</h2>
-            <p> <span className="font-medium">Affirmative action, inequality and job referrals: A field experiment. </span> <span> (with J. Díaz, M. Munoz, and E. Reuben) </span></p>
+            <p> <span className="font-medium">Affirmative action, inequality, and job referrals: A field experiment. </span> <span> (with J. Díaz, M. Munoz, and E. Reuben) </span></p>
           </div>
         </div>
       </div>
