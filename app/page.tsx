@@ -6,6 +6,7 @@ export default function Home() {
     <main className="flex min-h-screen flex-col items-center justify-between p-24">
       <div className="max-w-6xl flex flex-col md:flex-row items-center md:items-start">
         <div className="flex-shrink-0 pr-10 ">
+        <div className="flex flex-col items-center">
           <Image
             src="/pp.png"
             alt="RT photo"
@@ -16,6 +17,7 @@ export default function Home() {
           <Link href="/">
             <h2 className="px-20 font-medium text-yellow-900 pt-5 "> <Link href="/CV_RT.pdf">See my CV </Link></h2>
           </Link>
+          </div>
         </div>
         <div className="mt-4 md:mt-0 pb-5">
           <Link href="/">
