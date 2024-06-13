@@ -23,7 +23,7 @@ export default function Home() {
           <Link href="/">
             <h1 className="text-3xl font-bold pb-5">Reha Tuncer</h1>
           </Link>
-          <p className="mt-2 text-md pb-5">I am a PhD Candidate at the <Link href="https://hci.uni.lu/reha-tuncer/"> <span className="font-medium text-yellow-900">University of Luxembourg. </span></Link> My research interests are in Behavioral and Experimental Economics. I currently study the role of affirmative action to reduce inequality in job referrals.</p>
+          <p className="mt-2 text-md pb-5">I am a PhD Candidate at the <Link href="https://hci.uni.lu/reha-tuncer/"> <span className="font-medium text-yellow-900">University of Luxembourg. </span></Link> My research interests are in Behavioral and Experimental Economics. I currently study inequality with regards to social class in referrals.</p>
           <div className="mt-4">
             <h2 className="text-2xl font-semibold pt-5 pb-5">Publications</h2>
             <p className="mt-2 text-md pb-5">   <Link href="https://doi.org/10.1111/ecca.12524">
@@ -38,7 +38,7 @@ export default function Home() {
 
             {/* <p className="mt-2 text-md pb-5">Autoplay (single authored)</p> */}
             <h2 className="text-2xl font-semibold pt-5 pb-5">Work in Progress</h2>
-            <p> <span className="font-medium">Affirmative action, inequality, and job referrals: A field experiment. </span> <span> (with J. Díaz, M. Munoz, and E. Reuben) </span></p>
+            <p> <span className="font-medium">Skills, inequality, and referrals: A field experiment. </span> <span> (with J. Díaz, M. Munoz, and E. Reuben) </span></p>
           </div>
         </div>
       </div>
