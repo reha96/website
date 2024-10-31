@@ -88,6 +88,12 @@ export default function Home() {
                 2023 (with A. Sergeeva, K. Bongard-Blanchy, V. Distler, S.
                 Doublet, and V. Koenig){" "}
               </span>
+              <Link
+                href="https://osf.io/xgdpm/"
+                className="inline-block bg-gray-200 rounded-full px-3 py-1 text-sm font-semibold text-gray-700 mr-2 mb-2 hover:bg-gray-300"
+              >
+                Data & Code
+              </Link>
             </p>
             {/* <h2 className="text-2xl font-semibold pt-5 pb-5">Working Papers</h2> */}
 
