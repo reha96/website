@@ -8,7 +8,7 @@ export default function Home() {
         <div className="flex-shrink-0 pr-10 ">
           <div className="flex flex-col items-center">
             <Image
-              src="/pp.png"
+              src="/pp.webp"
               alt="RT photo"
               width={300}
               height={300}
