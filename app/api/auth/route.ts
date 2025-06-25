@@ -7,6 +7,14 @@ export async function POST(request: NextRequest) {
     // Get credentials from environment variables
     const validUsername = process.env.PRIVATE_USERNAME || "admin";
     const validPassword = process.env.PRIVATE_PASSWORD || "password";
+    
+    // Debug logging (remove in production)
+    console.log('Environment check:', {
+      hasPrivateUsername: !!process.env.PRIVATE_USERNAME,
+      hasPrivatePassword: !!process.env.PRIVATE_PASSWORD,
+      validUsername: validUsername,
+      nodeEnv: process.env.NODE_ENV
+    });
 
     if (username === validUsername && password === validPassword) {
       // Create response with success

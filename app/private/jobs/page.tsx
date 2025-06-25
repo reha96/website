@@ -43,22 +43,37 @@ const LogoutIcon = () => (
 
 // Real data based on your Google Keep notes and Drive structure
 const jobApplicationsData = [
-  // Government Jobs (govjobs.lu)
+  // Banking & Financial Services
   {
     id: 1,
-    company: "Government (govjobs.lu)",
-    position: "Data Analyst",
+    company: "Banque de Luxembourg",
+    position: "HR Data Scientist",
     status: "Applied",
     stage: "Application Submitted",
-    dateApplied: "2025-03-05",
+    dateApplied: "2025-06-25",
     location: "Luxembourg",
-    notes: "Application deadline: March 5th",
+    notes: "HR Data Scientist role focusing on predictive analytics and HR data ecosystem. B-Corp certified bank with 100+ years presence in Luxembourg. Reference: 2025-1088",
     driveFolder: "#",
-    source: "govjobs.lu",
-    reference: "A1/Fevrier/20250205-dataanalystemfrfe00033831-345188"
+    source: "jobs.banquedeluxembourg.com",
+    reference: "2025-1088"
   },
+  // Government Jobs (govjobs.lu)
   {
     id: 2,
+    company: "Government (govjobs.lu)",
+    position: "Data Analyst",
+    status: "Rejected",
+    stage: "Application Rejected",
+    dateApplied: "2025-03-05",
+    location: "Luxembourg",
+    notes: "Application deadline: March 5th. Rejection letter received May 16, 2025. Center for State IT Technologies position (Centre des technologies de l'information de l'État). Reference: 51339452",
+    driveFolder: "#",
+    source: "govjobs.lu",
+    reference: "A1/Fevrier/20250205-dataanalystemfrfe00033831-345188",
+    rejectionDate: "2025-05-16"
+  },
+  {
+    id: 3,
     company: "STATEC",
     position: "Data Production Survey",
     status: "Applied",
@@ -70,7 +85,7 @@ const jobApplicationsData = [
     source: "govjobs.lu"
   },
   {
-    id: 3,
+    id: 4,
     company: "STATEC",
     position: "Analyste quantitatif (Économiste)",
     status: "Applied",
@@ -83,7 +98,7 @@ const jobApplicationsData = [
     reference: "E00034989"
   },
   {
-    id: 4,
+    id: 5,
     company: "EIB",
     position: "Trainee",
     status: "Applied",
@@ -95,7 +110,7 @@ const jobApplicationsData = [
     source: "EIB Website"
   },
   {
-    id: 5,
+    id: 6,
     company: "Government",
     position: "Business Analyst",
     status: "Applied",
@@ -108,7 +123,7 @@ const jobApplicationsData = [
   },
   // Networking & Contacts
   {
-    id: 6,
+    id: 7,
     company: "Encevo/Enovos",
     position: "Billing Analyst",
     status: "Interview",
@@ -122,7 +137,7 @@ const jobApplicationsData = [
   },
   // Recruiters
   {
-    id: 7,
+    id: 8,
     company: "KRC Recruitment",
     position: "Various Data Analyst Roles",
     status: "Applied",
@@ -134,7 +149,7 @@ const jobApplicationsData = [
     source: "Recruiter"
   },
   {
-    id: 8,
+    id: 9,
     company: "AZ Consult",
     position: "Data Analyst Roles",
     status: "Applied",
@@ -147,7 +162,7 @@ const jobApplicationsData = [
   },
   // NATO/NSPA
   {
-    id: 9,
+    id: 10,
     company: "NATO NSPA",
     position: "Data Analyst (PA-8-15-A2)",
     status: "Researching",
@@ -223,7 +238,7 @@ const jobSearchInsights = {
     "Double decker CV format"
   ],
   tools: ["Microsoft tools", "Power BI", "SAP consultancy CUBIS"],
-  targetSectors: ["Government", "FinTech", "EU Institutions", "Consulting"],
+  targetSectors: ["Government", "FinTech", "EU Institutions", "Banking", "Consulting"],
   keyPlatforms: ["govjobs.lu", "LinkedIn", "Recruiter networks", "Direct company contact"]
 };
 
@@ -389,8 +404,7 @@ export default function JobsPage() {
             </div>
             <div className="text-center">
               <div className="text-lg font-bold text-orange-600">
-                {jobApplicationsData.filter(app => app.source?.includes("Website")).length + 
-                 jobApplicationsData.filter(app => app.source?.includes("emply")).length}
+                {jobApplicationsData.filter(app => app.source?.includes("Website") || app.source?.includes("emply") || app.source?.includes("banquedeluxembourg")).length}
               </div>
               <div className="text-gray-600">Direct Apply</div>
             </div>
@@ -560,6 +574,8 @@ export default function JobsPage() {
                             ? "bg-purple-100 text-purple-800"
                             : application.status === "Interview"
                             ? "bg-green-100 text-green-800"
+                            : application.status === "Rejected"
+                            ? "bg-red-100 text-red-800"
                             : "bg-gray-100 text-gray-800"
                         }`}>
                           {application.stage}
@@ -608,10 +624,11 @@ export default function JobsPage() {
           <h3 className="text-lg font-medium text-gray-900 mb-4">Personal Notes & Insights</h3>
           <div className="prose prose-sm text-gray-600">
             <ul className="space-y-2">
-              <li>🎯 <strong>Focus:</strong> Government and EU institutions in Luxembourg</li>
-              <li>📊 <strong>Strategy:</strong> Targeting analyst and statistician roles</li>
+              <li>🎯 <strong>Focus:</strong> Government, EU institutions, and financial services in Luxembourg</li>
+              <li>📊 <strong>Strategy:</strong> Targeting data scientist, analyst, and statistician roles</li>
               <li>📝 <strong>Next Steps:</strong> Follow up on pending applications</li>
-              <li>💡 <strong>Insights:</strong> All applications are recent (May 2025), showing active job search</li>
+              <li>💡 <strong>Insights:</strong> Expanding into banking sector with HR Data Scientist application</li>
+              <li>🏦 <strong>Latest:</strong> Applied to Banque de Luxembourg for HR Data Scientist role (June 25, 2025)</li>
             </ul>
           </div>
         </div>
