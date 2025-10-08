@@ -520,7 +520,7 @@ export default function Home() {
           {/* Paper 5 - with orange border */}
           <div className="mb-8 p-6 border-l-4 border-orange-500 bg-orange-50 rounded-lg shadow-sm">
             <h3 className="text-lg font-medium text-gray-800 mb-1">
-              When proximity isn&apost enough: Network segregation and class bias in referrals            </h3>
+              When proximity isn&apos;t enough: Network segregation and class bias in referrals </h3>
             <p className="text-gray-600 mb-3">Munoz M, Reuben E, Tuncer R</p>
 
             <div className="flex flex-wrap gap-2 mb-3">
