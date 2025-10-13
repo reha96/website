@@ -71,7 +71,7 @@ export default function Home() {
             <div className="mb-6">
               <p className="text-blue-600 font-medium">
                 <Link href="https://hci.uni.lu/reha-tuncer/">
-                  University of Luxembourg
+                  University of Luxembourg, Department of Economics and Management
                 </Link>
               </p>
               <p className="text-gray-600">
@@ -395,7 +395,7 @@ export default function Home() {
                 {visibleAbstracts["paper3"] ? "Hide Abstract" : "Abstract"}
               </button>
               <Link
-                href=""
+                href="https://github.com/reha96/autoplay-clean"
                 className="flex items-center px-3 py-1 bg-gray-200 text-sm text-gray-700 rounded hover:bg-gray-300"
               >
                 <svg
