@@ -119,7 +119,7 @@ export default function Home() {
                     d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"
                   />
                 </svg>
-                <span>reha.tuncer@uni.lu</span>
+                <span>reha.tuncer[at]gmail.com</span>
               </div>
             </div>
 
@@ -409,7 +409,7 @@ export default function Home() {
                 GitHub
               </Link>
               <Link
-                href="/autoplay.pdf"
+                href="https://github.com/reha96/autoplay-clean/blob/main/writing/main.pdf"
                 className="flex items-center px-3 py-1 bg-gray-200 text-sm text-gray-700 rounded hover:bg-gray-300"
               >
                 <svg
@@ -481,7 +481,7 @@ export default function Home() {
                 {visibleAbstracts["paper4"] ? "Hide Abstract" : "Abstract"}
               </button>
               <Link
-                href=""
+                href="https://github.com/reha96/skills-clean"
                 className="flex items-center px-3 py-1 bg-gray-200 text-sm text-gray-700 rounded hover:bg-gray-300"
               >
                 <svg
@@ -495,7 +495,7 @@ export default function Home() {
                 GitHub
               </Link>
               <Link
-                href="/skills.pdf"
+                href="https://github.com/reha96/skills-clean/blob/main/writing/current/manuscript.pdf"
                 className="flex items-center px-3 py-1 bg-gray-200 text-sm text-gray-700 rounded hover:bg-gray-300"
               >
                 <svg
@@ -528,7 +528,7 @@ export default function Home() {
                 Social Capital
               </span>
               <span className="px-2 py-1 bg-gray-100 text-sm text-gray-700 rounded">
-                SES Bias
+                Inequality
               </span>
             </div>
 
@@ -566,7 +566,7 @@ export default function Home() {
                 {visibleAbstracts["paper5"] ? "Hide Abstract" : "Abstract"}
               </button>
               <Link
-                href=""
+                href="https://github.com/reha96/icfes-referrals-clean"
                 className="flex items-center px-3 py-1 bg-gray-200 text-sm text-gray-700 rounded hover:bg-gray-300"
               >
                 <svg
@@ -580,7 +580,7 @@ export default function Home() {
                 GitHub
               </Link>
               <Link
-                href="/segregation.pdf"
+                href="https://github.com/reha96/icfes-referrals-clean/blob/main/writing/manuscript.pdf"
                 className="flex items-center px-3 py-1 bg-gray-200 text-sm text-gray-700 rounded hover:bg-gray-300"
               >
                 <svg
