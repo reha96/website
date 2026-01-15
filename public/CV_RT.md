@@ -64,6 +64,7 @@ My research interests lie in Behavioral and Experimental Economics. My work enco
 
 ## CONFERENCE/SEMINAR PRESENTATIONS
 
+- 2025: Internal Seminar (STATEC)
 - 2025: 14th Field Days Workshop - Experiments Outside the Lab (LISER)
 - 2025: Doctoral Workshop (University of Luxembourg) 
 - 2024: Doctoral Workshop (UC Louvain)
@@ -128,4 +129,4 @@ Department of Behavioral and Cognitive Sciences
 
 ---
 
-*CV Updated: October 2025*
+*CV Updated: January 2026*
