@@ -26,7 +26,7 @@ UC Louvain (Belgium)
 
 ## RESEARCH INTERESTS
 
-My research interests lie in Behavioral and Experimental Economics. My work encompasses two main areas: digital nudging and social capital formation. In the first strand, I investigate how user interface design elements, particularly autoplay features, influence video consumption behavior and time allocation decisions. Using custom-built experimental platforms, I examine whether digital design features lead to deviations from intended behavior. In the second strand, I study peer skill identification and social networks in educational settings. Through large-scale experiments with university students, I explore how sustained social interaction affects the ability to identify peers' skills, and how network formation and segregation patterns relate to social class. My work combines lab-in-the-field experiments with detailed behavioral data to understand decision-making in both digital and social environments.
+*Behavioral economics, experimental economics, digital nudging, digital wellbeing, social networks, peer effects, homophily, network formation, field experiments*
 
 ---
 
