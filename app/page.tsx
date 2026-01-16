@@ -66,7 +66,7 @@ export default function Home() {
             <h1 className="text-3xl font-medium text-gray-800 mb-1">
               Reha Tuncer
             </h1>
-            <p className="text-lg text-gray-600 mb-6">PhD Candidate</p>
+            <p className="text-lg text-gray-600 mb-6">PhD in Economics</p>
 
             <div className="mb-6">
               <p className="text-blue-600 font-medium">
