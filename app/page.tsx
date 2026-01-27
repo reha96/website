@@ -53,11 +53,11 @@ export default function Home() {
           {/* Photo Column */}
           <div className="w-full md:w-1/3 mb-8 md:mb-0">
             <Image
-              src="/pp2.webp"
+              src="/test_pp.png"
               alt="Reha Tuncer"
               width={300}
               height={300}
-              className="w-full max-w-xs"
+              className="w-full max-w-xs rounded"
             />
           </div>
 
