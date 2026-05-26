@@ -70,17 +70,6 @@ Each README becomes a blog post with tags, topics, and chronological ordering. C
 
 To add or remove posts, edit `lib/blog-config.ts`.
 
-## Environment Variables
-
-| Variable | Required | Description |
-|----------|----------|-------------|
-| `PRIVATE_USERNAME` | No | Username for private area (default: `admin`) |
-| `PRIVATE_PASSWORD` | No | Password for private area (default: `password`) |
-
-## Private Area
-
-The `/private` section is protected by cookie-based authentication via middleware. Set `PRIVATE_USERNAME` and `PRIVATE_PASSWORD` environment variables to configure credentials.
-
 ## Deployment
 
 Standard Next.js deployment — Vercel is recommended:
