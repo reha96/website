@@ -60,8 +60,9 @@ export async function generateStaticParams(): Promise<Params[]> {
   }));
 }
 
-export async function generateMetadata({ params }: { params: Params }): Promise<Metadata> {
-  const post = await getBlogPost(params.slug);
+export async function generateMetadata({ params }: { params: Promise<Params> }): Promise<Metadata> {
+  const { slug } = await params;
+  const post = await getBlogPost(slug);
   if (!post) return { title: "Post Not Found" };
 
   return {
@@ -70,8 +71,9 @@ export async function generateMetadata({ params }: { params: Params }): Promise<
   };
 }
 
-export default async function BlogPostPage({ params }: { params: Params }) {
-  const post = await getBlogPost(params.slug);
+export default async function BlogPostPage({ params }: { params: Promise<Params> }) {
+  const { slug } = await params;
+  const post = await getBlogPost(slug);
 
   if (!post) {
     notFound();
