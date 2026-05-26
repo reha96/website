@@ -112,6 +112,88 @@ function makeDisplayTitle(meta: BlogPostMeta): string {
 }
 
 /**
+ * Build a mapping from GitHub path → blog URL so internal cross-reference
+ * links (e.g. `[Linear Algebra](math/linear_algebra/)`) can be rewritten
+ * to point to the correct blog post.
+ */
+function buildPathMapping(
+  posts: { path: string; slug: string; year: string; month: string; day: string; repo: string }[]
+): Map<string, string> {
+  const map = new Map<string, string>();
+  for (const post of posts) {
+    // Key: "repo/path" — the GitHub path within the repo
+    const key = post.path || "";
+    // Also add with trailing slash variants that appear in markdown links
+    map.set(key, `/blog/${post.year}/${post.month}/${post.day}/${post.slug}`);
+    if (key) {
+      map.set(key + "/", `/blog/${post.year}/${post.month}/${post.day}/${post.slug}`);
+    }
+  }
+  return map;
+}
+
+/**
+ * Resolve a relative markdown link target against the current README path.
+ * E.g. currentPath="math", linkTarget="linear_algebra/" → "math/linear_algebra"
+ */
+function resolveGitHubPath(currentPath: string, linkTarget: string): string {
+  // Strip trailing slash for clean resolution
+  const target = linkTarget.replace(/\/+$/, "");
+  const base = currentPath ? currentPath.split("/") : [];
+
+  if (target.startsWith("./")) {
+    // Relative to current dir
+    return [...base, target.slice(2)].join("/");
+  }
+  if (target.startsWith("../")) {
+    // Parent dir navigation
+    const parts = target.split("/");
+    let up = 0;
+    while (parts[up] === "..") up++;
+    const remaining = parts.slice(up);
+    const resolved = [...base.slice(0, Math.max(0, base.length - up)), ...remaining];
+    return resolved.join("/");
+  }
+
+  // Absolute within repo (starts without . or ..) — resolve from repo root
+  if (!target.includes("/") && base.length > 0) {
+    // Single name like "linear_algebra" → resolve relative to current dir
+    return [...base, target].join("/");
+  }
+  // Multi-segment like "math/linear_algebra" → absolute from repo root
+  return target;
+}
+
+/**
+ * Rewrite internal cross-reference links in markdown content.
+ * Converts links like `[text](math/linear_algebra/)` to `/blog/2025/05/17/math-linear-algebra`.
+ */
+function rewriteInternalLinks(
+  content: string,
+  currentPath: string,
+  pathToUrl: Map<string, string>
+): string {
+  // Match markdown links: [text](url)
+  return content.replace(/\[([^\]]+)\]\(([^)]+)\)/g, (match, text, url) => {
+    // Skip external URLs, anchors, and non-relative links
+    if (/^(https?:|#|mailto:)/.test(url)) return match;
+
+    // Resolve the relative path
+    const resolved = resolveGitHubPath(currentPath, url);
+
+    // Look up the resolved path in our mapping
+    const blogUrl = pathToUrl.get(resolved);
+
+    if (blogUrl) {
+      return `[${text}](${blogUrl})`;
+    }
+
+    // No match found — keep original link
+    return match;
+  });
+}
+
+/**
  * Fetch all blog posts with full content and metadata.
  * Called at build time for SSG.
  */
@@ -154,6 +236,12 @@ async function getAllBlogPosts(): Promise<BlogPostWithContent[]> {
     if (result) posts.push(result);
   }
 
+  // Rewrite internal cross-reference links between blog posts
+  const pathToUrl = buildPathMapping(posts);
+  for (const post of posts) {
+    post.content = rewriteInternalLinks(post.content, post.path, pathToUrl);
+  }
+
   // Sort by date, newest first
   posts.sort((a, b) => new Date(b.date).getTime() - new Date(a.date).getTime());
 
@@ -175,6 +263,11 @@ export async function getBlogPost(slug: string): Promise<BlogPostWithContent | n
   const isoDate = await fetchDate(meta.repo, meta.path);
   const { year, month, day } = dateToParts(isoDate);
 
+  // Build path mapping and rewrite internal cross-reference links
+  const allPostsMeta = await getAllBlogPostsMeta();
+  const pathToUrl = buildPathMapping(allPostsMeta);
+  const rewrittenContent = rewriteInternalLinks(content, meta.path, pathToUrl);
+
   return {
     slug,
     title: titleFromMd,
@@ -188,7 +281,7 @@ export async function getBlogPost(slug: string): Promise<BlogPostWithContent | n
     topic: meta.topic,
     author: AUTHOR,
     excerpt,
-    content,
+    content: rewrittenContent,
   };
 }
 
