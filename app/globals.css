@@ -5,6 +5,11 @@
 /* Highlight.js theme for code syntax highlighting */
 @import 'highlight.js/styles/github.css';
 
+/* Smooth scrolling for anchor links (TOC sidebar) */
+html {
+  scroll-behavior: smooth;
+}
+
 /* Blog content typography */
 .blog-content h1 { @apply text-2xl font-medium text-gray-900 mt-8 mb-4; }
 .blog-content h2 { @apply text-xl font-medium text-gray-800 mt-8 mb-3 pb-1 border-b border-gray-200; }
