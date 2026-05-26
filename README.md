@@ -1,36 +1,95 @@
-This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
+# Reha Tuncer — Academic Website & Blog
+
+Personal academic website built with Next.js, featuring research papers, CV, and a blog of DLH learning projects sourced from GitHub.
+
+## Tech Stack
+
+- **Framework:** Next.js 14 (App Router)
+- **Language:** TypeScript 5
+- **Styling:** Tailwind CSS 3
+- **Markdown:** react-markdown + remark-gfm + rehype-highlight
+- **Runtime:** Node.js 22.x
 
 ## Getting Started
 
-First, run the development server:
-
 ```bash
+# Install dependencies
+npm install
+
+# Run development server
 npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
+
+# Open http://localhost:3000
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+## Project Structure
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+```
+website/
+├── app/
+│   ├── layout.tsx              # Root layout with Navbar
+│   ├── page.tsx                # Homepage (academic profile, papers)
+│   ├── globals.css             # Global styles
+│   ├── blog/
+│   │   ├── layout.tsx          # Blog section layout
+│   │   ├── page.tsx            # Blog index (SSG, filterable by tag/topic)
+│   │   └── [year]/[month]/[day]/[slug]/
+│   │       └── page.tsx        # Individual blog post (SSG)
+│   ├── api/
+│   │   ├── auth/route.ts       # Login endpoint
+│   │   ├── check-auth/route.ts # Auth status check
+│   │   └── logout/route.ts     # Logout endpoint
+│   └── private/                # Private area (password-protected)
+│       ├── page.tsx            # Login page
+│       └── jobs/               # Job applications tracker
+├── components/
+│   ├── navbar.tsx              # Navigation bar
+│   ├── markdown-renderer.tsx   # Client-side markdown renderer
+│   └── blog-index-client.tsx   # Blog index with filters
+├── lib/
+│   ├── blog-types.ts           # TypeScript interfaces
+│   ├── blog-config.ts          # Blog post metadata config
+│   └── github.ts               # GitHub API fetch utilities
+├── public/                     # Static assets (images, PDFs)
+├── middleware.ts               # Auth middleware for /private routes
+├── next.config.js
+├── tailwind.config.ts
+├── tsconfig.json
+└── package.json
+```
 
-This project uses [`next/font`](https://nextjs.org/docs/basic-features/font-optimization) to automatically optimize and load Inter, a custom Google Font.
+## Blog
 
-## Learn More
+The blog at `/blog` fetches README.md files from the following GitHub repositories at build time:
 
-To learn more about Next.js, take a look at the following resources:
+- [`dlh-machine_learning`](https://github.com/reha96/dlh-machine_learning) — ML foundations
+- [`dlh-higher_level_programming`](https://github.com/reha96/dlh-higher_level_programming) — Python programming
+- [`DLH-AI-Academy`](https://github.com/reha96/DLH-AI-Academy) — AI Academy
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+Each README becomes a blog post with tags, topics, and chronological ordering. Content is statically generated at build time (SSG) and rendered client-side with syntax highlighting.
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js/) - your feedback and contributions are welcome!
+To add or remove posts, edit `lib/blog-config.ts`.
 
-## Deploy on Vercel
+## Environment Variables
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+| Variable | Required | Description |
+|----------|----------|-------------|
+| `PRIVATE_USERNAME` | No | Username for private area (default: `admin`) |
+| `PRIVATE_PASSWORD` | No | Password for private area (default: `password`) |
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/deployment) for more details.
+## Private Area
+
+The `/private` section is protected by cookie-based authentication via middleware. Set `PRIVATE_USERNAME` and `PRIVATE_PASSWORD` environment variables to configure credentials.
+
+## Deployment
+
+Standard Next.js deployment — Vercel is recommended:
+
+```bash
+npm run build
+npm start
+```
+
+## License
+
+Private — all rights reserved.

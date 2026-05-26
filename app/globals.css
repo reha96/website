@@ -2,6 +2,30 @@
 @tailwind components;
 @tailwind utilities;
 
+/* Highlight.js theme for code syntax highlighting */
+@import 'highlight.js/styles/github.css';
+
+/* Blog content typography */
+.blog-content h1 { @apply text-2xl font-medium text-gray-900 mt-8 mb-4; }
+.blog-content h2 { @apply text-xl font-medium text-gray-800 mt-8 mb-3 pb-1 border-b border-gray-200; }
+.blog-content h3 { @apply text-lg font-medium text-gray-800 mt-6 mb-2; }
+.blog-content h4 { @apply text-base font-semibold text-gray-800 mt-5 mb-2; }
+.blog-content p { @apply my-3 leading-relaxed; }
+.blog-content ul { @apply my-3 pl-6 list-disc space-y-1; }
+.blog-content ol { @apply my-3 pl-6 list-decimal space-y-1; }
+.blog-content li { @apply leading-relaxed; }
+.blog-content blockquote { @apply border-l-4 border-orange-400 bg-orange-50 px-4 py-2 my-4 italic text-gray-700; }
+.blog-content a { @apply text-blue-600 no-underline hover:underline; }
+.blog-content strong { @apply font-semibold text-gray-900; }
+.blog-content hr { @apply my-8 border-gray-200; }
+.blog-content pre { @apply bg-gray-900 text-gray-100 rounded-lg p-4 my-4 overflow-x-auto text-sm; }
+.blog-content pre code { @apply bg-transparent p-0 text-gray-100; }
+.blog-content :not(pre) > code { @apply bg-gray-100 px-1.5 py-0.5 rounded text-sm text-pink-600 font-mono; }
+.blog-content img { @apply rounded-lg my-4 max-w-full; }
+.blog-content table { @apply min-w-full border-collapse my-6; }
+.blog-content th { @apply border border-gray-200 px-4 py-2 bg-gray-50 text-left text-sm font-semibold; }
+.blog-content td { @apply border border-gray-200 px-4 py-2 text-sm; }
+
 :root {
   --foreground-rgb: 0, 0, 0;
   --background-start-rgb: 255, 255, 255;
