@@ -30,31 +30,3 @@ html {
 .blog-content table { @apply min-w-full border-collapse my-6; }
 .blog-content th { @apply border border-gray-200 px-4 py-2 bg-gray-50 text-left text-sm font-semibold; }
 .blog-content td { @apply border border-gray-200 px-4 py-2 text-sm; }
-
-:root {
-  --foreground-rgb: 0, 0, 0;
-  --background-start-rgb: 255, 255, 255;
-  --background-end-rgb: 255, 255, 255;
-}
-
-@media (prefers-color-scheme: light) {
-  :root {
-    --foreground-rgb: 0, 0, 0;
-    --background-start-rgb: 255, 255, 255;
-    --background-end-rgb: 255, 255, 255;
-  }
-}
-
-body {
-  color: rgb(var(--foreground-rgb));
-  background: linear-gradient(
-      to bottom,
-      transparent,
-      rgb(var(--background-end-rgb))
-    )
-    rgb(var(--background-start-rgb));
-}
-
-html {
-  overflow-y: scroll;
-}

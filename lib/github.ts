@@ -115,7 +115,7 @@ function makeDisplayTitle(meta: BlogPostMeta): string {
  * Fetch all blog posts with full content and metadata.
  * Called at build time for SSG.
  */
-export async function getAllBlogPosts(): Promise<BlogPostWithContent[]> {
+async function getAllBlogPosts(): Promise<BlogPostWithContent[]> {
   const entries = Object.entries(BLOG_POSTS_CONFIG);
   const posts: BlogPostWithContent[] = [];
 
