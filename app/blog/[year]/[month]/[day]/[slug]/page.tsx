@@ -30,15 +30,25 @@ function cleanHeadingText(raw: string): string {
 /**
  * Extract ## and ### headings from markdown for the table of contents.
  * Uses github-slugger (same package as rehype-slug) for matching IDs.
+ * Deduplicates by appending -1, -2 etc., matching rehype-slug's behavior.
  */
 function extractHeadings(markdown: string): TocHeading[] {
   const headingRegex = /^(#{2,3})\s+(.+)$/gm;
   const headings: TocHeading[] = [];
+  const seenIds = new Map<string, number>();
   let match: RegExpExecArray | null;
   while ((match = headingRegex.exec(markdown)) !== null) {
     const level = match[1].length;
     const rawText = match[2].trim();
-    const id = slug(rawText);
+    let id = slug(rawText);
+
+    // Deduplicate: match rehype-slug's behavior of appending -1, -2, etc.
+    const count = seenIds.get(id) ?? 0;
+    if (count > 0) {
+      id = `${id}-${count}`;
+    }
+    seenIds.set(slug(rawText), count + 1);
+
     const text = cleanHeadingText(rawText);
     headings.push({ text: text || rawText, id, level });
   }

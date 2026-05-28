@@ -1,5 +1,6 @@
 import { BLOG_POSTS_CONFIG, BlogPostMeta } from "./blog-config";
 import { BlogPost, BlogPostWithContent } from "./blog-types";
+import { getLocalBlogPosts, getLocalBlogPostsMeta, getLocalBlogPost } from "./local-blog";
 
 const GITHUB_RAW = "https://raw.githubusercontent.com/reha96";
 const GITHUB_API = "https://api.github.com";
@@ -242,6 +243,10 @@ async function getAllBlogPosts(): Promise<BlogPostWithContent[]> {
     post.content = rewriteInternalLinks(post.content, post.path, pathToUrl);
   }
 
+  // Merge local blog posts (content/blog/*.md) — skip link rewriting (no cross-repo links)
+  const localPosts = getLocalBlogPosts();
+  posts.push(...localPosts);
+
   // Sort by date, newest first
   posts.sort((a, b) => new Date(b.date).getTime() - new Date(a.date).getTime());
 
@@ -252,6 +257,10 @@ async function getAllBlogPosts(): Promise<BlogPostWithContent[]> {
  * Get a single blog post by slug (with full content).
  */
 export async function getBlogPost(slug: string): Promise<BlogPostWithContent | null> {
+  // Check local posts first
+  const localPost = getLocalBlogPost(slug);
+  if (localPost) return localPost;
+
   const meta = BLOG_POSTS_CONFIG[slug];
   if (!meta) return null;
 
