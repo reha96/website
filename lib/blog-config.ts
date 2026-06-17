@@ -41,6 +41,30 @@ export const BLOG_POSTS_CONFIG: Record<string, BlogPostMeta> = {
     tags: ["Advanced Linear Algebra", "Eigenvalues", "Determinants", "Matrices", "NumPy", "Python"],
     topic: "Math",
   },
+  "math-probability": {
+    repo: "dlh-machine_learning",
+    path: "math/probability",
+    tags: ["Probability", "Statistics", "Distributions", "Binomial", "Normal", "Python"],
+    topic: "Math",
+  },
+  "math-bayesian-prob": {
+    repo: "dlh-machine_learning",
+    path: "math/bayesian_prob",
+    tags: ["Bayesian", "Probability", "Statistics", "Posterior", "Likelihood", "NumPy"],
+    topic: "Math",
+  },
+  "math-calculus": {
+    repo: "dlh-machine_learning",
+    path: "math/calculus",
+    tags: ["Calculus", "Derivatives", "Integrals", "Math", "Python", "Polynomials"],
+    topic: "Math",
+  },
+  "math-plotting": {
+    repo: "dlh-machine_learning",
+    path: "math/plotting",
+    tags: ["Plotting", "Matplotlib", "Visualization", "Python", "PCA", "Charts"],
+    topic: "Math",
+  },
   "pipeline": {
     repo: "dlh-machine_learning",
     path: "pipeline",
@@ -56,6 +80,12 @@ export const BLOG_POSTS_CONFIG: Record<string, BlogPostMeta> = {
 
   // ── dlh-higher_level_programming ──────────────────────────
 
+  "dlh-higher-level-programming": {
+    repo: "dlh-higher_level_programming",
+    path: "",
+    tags: ["Python", "Programming", "OOP", "Data Structures", "Algorithms", "Curriculum"],
+    topic: "Python",
+  },
   "python-hello-world": {
     repo: "dlh-higher_level_programming",
     path: "python-hello_world",
@@ -115,6 +145,21 @@ export const BLOG_POSTS_CONFIG: Record<string, BlogPostMeta> = {
     path: "python-serialization",
     tags: ["Python", "Serialization", "JSON", "Pickle", "XML", "CSV"],
     topic: "Python",
+  },
+
+  // ── dlh-shell ─────────────────────────────────────────────
+
+  "dlh-shell": {
+    repo: "dlh-shell",
+    path: "",
+    tags: ["Shell", "Linux", "Permissions", "Bash", "Command Line", "System"],
+    topic: "Shell",
+  },
+  "dlh-shell-permissions": {
+    repo: "dlh-shell",
+    path: "permissions",
+    tags: ["Shell", "Linux", "Permissions", "chmod", "chown", "Bash"],
+    topic: "Shell",
   },
 
   // ── DLH-AI-Academy ────────────────────────────────────────
