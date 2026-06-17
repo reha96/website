@@ -63,7 +63,7 @@ async function fetchDate(repo: string, path: string): Promise<string> {
   try {
     if (path) {
       // Get the first commit date for the specific file path
-      const url = `${GITHUB_API}/repos/reha96/${repo}/commits?path=${encodeURIComponent(path + "/README.md")}&per_page=1`;
+      const url = `${GITHUB_API}/repos/reha96/${repo}/commits?path=${encodeURIComponent(path + "/README.md")}&per_page=1&sort=author-date&direction=asc`;
       const res = await fetch(url, { next: { revalidate: false } });
       if (!res.ok) throw new Error("Failed to fetch commits");
       const commits = await res.json();
