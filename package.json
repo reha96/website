@@ -13,6 +13,7 @@
     "gray-matter": "^4.0.3",
     "katex": "^0.17.0",
     "next": "^15.5.10",
+    "pagefind": "^1.3.0",
     "react": "^19.0.0",
     "react-dom": "^19.0.0",
     "react-markdown": "^10.1.0",
@@ -28,8 +29,7 @@
     "@types/react-dom": "^19",
     "autoprefixer": "^10.4.19",
     "eslint": "^8",
-    "eslint-config-next": "15.5.10",
-    "pagefind": "^1.3.0",
+    "eagefind": "^1.3.0",
     "postcss": "^8.5.10",
     "tailwindcss": "^3.4.3",
     "typescript": "^5"
