@@ -13,6 +13,9 @@
 /.next/
 /out/
 
+# generated search index
+/public/search-index.json
+
 # pagefind — generated at build time
 /public/pagefind/
 

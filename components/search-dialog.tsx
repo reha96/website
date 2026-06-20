@@ -15,40 +15,49 @@ interface SearchDialogProps {
 }
 
 /**
- * Dynamically imports the Pagefind ES module.
- * Caches the promise so the import only happens once.
- * Uses dynamic import() which handles ES modules natively.
+ * Fetches the static search index JSON (generated at build time)
+ * and caches the promise so it only loads once.
  */
-let pagefindPromise: Promise<any> | null = null;
+interface SearchEntry {
+  title: string;
+  url: string;
+  excerpt: string;
+  date: string;
+  tags: string[];
+  type: "blog" | "til";
+}
 
-function loadPagefind(): Promise<any> {
-  if (pagefindPromise) return pagefindPromise;
+let cachedIndex: Promise<SearchEntry[]> | null = null;
 
-  pagefindPromise = import(/* webpackIgnore: true */ "/pagefind/pagefind.js")
-    .then((mod) => {
-      // Pagefind ES module exports functions directly: mod.search(), mod.init(), etc.
-      // We wrap them in an object with a .search() method for our existing code.
-      return {
-        search: async (query: string) => {
-          // Ensure Pagefind is initialized before searching
-          if (typeof mod.init === "function") {
-            await mod.init();
-          }
-          return mod.search(query);
-        },
-      };
-    })
-    .catch((err) => {
-      pagefindPromise = null; // allow retry
-      throw err;
-    });
+function fetchIndex(): Promise<SearchEntry[]> {
+  if (cachedIndex) return cachedIndex;
+  cachedIndex = fetch("/search-index.json").then((r) => {
+    if (!r.ok) throw new Error("Failed to load search index");
+    return r.json();
+  });
+  return cachedIndex;
+}
 
-  return pagefindPromise;
+/** Simple relevance scoring — title matches weighted highest. */
+function score(entry: SearchEntry, query: string): number {
+  const q = query.toLowerCase();
+  const words = q.split(/\s+/);
+  let s = 0;
+  const title = entry.title.toLowerCase();
+  const excerpt = entry.excerpt.toLowerCase();
+  for (const w of words) {
+    if (!w) continue;
+    if (title.includes(w)) s += 10;
+    else if (excerpt.includes(w)) s += 3;
+    for (const t of entry.tags) if (t.toLowerCase().includes(w)) s += 5;
+  }
+  if (title.startsWith(q)) s += 20;
+  return s;
 }
 
 /**
  * Modal search dialog triggered by ⌘K / Ctrl+K from the Navbar.
- * Uses Pagefind's JS API to search the static index built at post-build time.
+ * Uses a static JSON search index for fast client-side filtering.
  */
 export default function SearchDialog({ open, onClose }: SearchDialogProps) {
   const [query, setQuery] = useState("");
@@ -93,20 +102,24 @@ export default function SearchDialog({ open, onClose }: SearchDialogProps) {
       setLoading(true);
       setError(null);
       try {
-        const pagefind = await loadPagefind();
-        const search = await pagefind.search(query.trim());
-        const items: SearchResult[] = [];
-        if (search?.results) {
-          for (const result of search.results.slice(0, 15)) {
-            const data = await result.data();
-            items.push({
-              url: data.url,
-              excerpt: data.excerpt || "",
-              meta: data.meta || {},
-            });
-          }
-        }
-        setResults(items);
+        const entries = await fetchIndex();
+        const q = query.trim();
+        const results = entries
+          .map((e) => ({ entry: e, s: score(e, q) }))
+          .filter((e) => e.s > 0)
+          .sort((a, b) => b.s - a.s)
+          .slice(0, 15);
+        setResults(
+          results.map((r) => ({
+            url: r.entry.url,
+            excerpt: r.entry.excerpt,
+            meta: {
+              title: r.entry.title,
+              date: r.entry.date,
+              type: r.entry.type,
+            },
+          }))
+        );
       } catch {
         setError("Search failed. Please try again.");
       } finally {
