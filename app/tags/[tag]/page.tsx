@@ -67,7 +67,7 @@ export default async function TagPage({ params }: { params: Promise<Params> }) {
         {/* Blog Posts */}
         {blogPosts.length > 0 && (
           <section className="mb-10">
-            <h2 className="text-lg font-medium text-gray-800 dark:text-gray-200 mb-4 pb-2 border-b border-gray-200 dark:border-oil-green-600">
+            <h2 className="text-lg font-medium text-gray-800 dark:text-gray-200 mb-4 pb-2 border-b border-gray-200 dark:border-glaucous-700">
               Blog Posts ({blogPosts.length})
             </h2>
             {years.map((year) => (
@@ -103,7 +103,7 @@ export default async function TagPage({ params }: { params: Promise<Params> }) {
         {/* TILs */}
         {tils.length > 0 && (
           <section className="mb-10">
-            <h2 className="text-lg font-medium text-gray-800 dark:text-gray-200 mb-4 pb-2 border-b border-gray-200 dark:border-oil-green-600">
+            <h2 className="text-lg font-medium text-gray-800 dark:text-gray-200 mb-4 pb-2 border-b border-gray-200 dark:border-glaucous-700">
               TILs ({tils.length})
             </h2>
             <div className="space-y-4">
@@ -114,7 +114,7 @@ export default async function TagPage({ params }: { params: Promise<Params> }) {
                     className="group"
                   >
                     <div className="flex items-baseline gap-4">
-                      <span className="text-xs text-gray-400 dark:text-gray-500 whitespace-nowrap min-w-[100px] px-1.5 py-0.5 bg-gray-100 dark:bg-oil-green-700 rounded">
+                      <span className="text-xs text-gray-400 dark:text-gray-500 whitespace-nowrap min-w-[100px] px-1.5 py-0.5 bg-gray-100 dark:bg-glaucous-800 rounded">
                         {til.topic}
                       </span>
                       <div>

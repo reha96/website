@@ -23,6 +23,7 @@ const config: Config = {
           700: '#4B6980',
           800: '#385062',
           900: '#243744',
+          950: '#1C2D3A', // darkest — matches dark theme bg
         },
         coral: {
           50:  '#FDF0EE',
@@ -36,14 +37,14 @@ const config: Config = {
           800: '#7A2418',
           900: '#52180F',
         },
-        // Dark theme: oil green + sulphur yellow
+        // Dark theme: deeper glaucous blue + coral red (same palette, darker shades)
         'oil-green': {
           50:  '#E9EDE5',
           100: '#D3DBCB',
           200: '#A7B797',
           300: '#7B9363',
           400: '#5F7548',
-          500: '#4A5D3E', // oil green (dark bg)
+          500: '#4A5D3E', // kept for backward compat
           600: '#3A4A31',
           700: '#2B3725',
           800: '#1C2518',

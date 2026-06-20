@@ -75,7 +75,7 @@ export default async function TilTopicPage({ params }: { params: Promise<Params>
                         <Link
                           key={tag}
                           href={`/tags/${encodeURIComponent(tag.toLowerCase())}`}
-                          className="px-1.5 py-0.5 text-xs bg-gray-50 dark:bg-oil-green-700/50 text-gray-400 dark:text-gray-500 rounded hover:bg-gray-100 dark:hover:bg-oil-green-600 transition-colors"
+                          className="px-1.5 py-0.5 text-xs bg-gray-50 dark:bg-glaucous-800/50 text-gray-400 dark:text-gray-500 rounded hover:bg-gray-100 dark:hover:bg-glaucous-700 transition-colors"
                         >
                           {tag}
                         </Link>

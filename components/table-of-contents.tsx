@@ -65,7 +65,7 @@ export default function TableOfContents({ headings }: TableOfContentsProps) {
         <h4 className="text-xs font-semibold text-gray-400 dark:text-gray-500 uppercase tracking-wider mb-3">
           On this page
         </h4>
-        <ul className="space-y-0.5 border-l border-gray-200 dark:border-oil-green-600">
+        <ul className="space-y-0.5 border-l border-gray-200 dark:border-glaucous-700">
           {headings.map((heading) => {
             const isActive = activeId === heading.id;
             const indent = heading.level === 3 ? "pl-4" : "pl-3";
@@ -80,8 +80,8 @@ export default function TableOfContents({ headings }: TableOfContentsProps) {
                     "border-l-2 -ml-px",
                     indent,
                     isActive
-                      ? "border-glaucous-500 dark:border-sulphur-400 text-glaucous-600 dark:text-sulphur-300 font-medium"
-                      : "border-transparent text-gray-500 dark:text-gray-400 hover:text-gray-800 dark:hover:text-gray-200 hover:border-gray-300 dark:hover:border-oil-green-500",
+                      ? "border-glaucous-500 dark:border-coral-400 text-glaucous-600 dark:text-coral-400 font-medium"
+                      : "border-transparent text-gray-500 dark:text-gray-400 hover:text-gray-800 dark:hover:text-gray-200 hover:border-gray-300 dark:hover:border-glaucous-600",
                   ].join(" ")}
                 >
                   {heading.text}

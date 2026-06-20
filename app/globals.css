@@ -31,27 +31,27 @@
 }
 
 .dark {
-  /* Dark theme: oil green + sulphur yellow */
-  --color-bg:        #1C2518;
-  --color-bg-secondary: #2B3725;
-  --color-bg-tertiary:  #3A4A31;
-  --color-text:       #e5e7eb;
+  /* Dark theme: darker glaucous blue + coral red */
+  --color-bg:             #1C2D3A;  /* deepest glaucous blue */
+  --color-bg-secondary:   #243744;
+  --color-bg-tertiary:    #2D4255;
+  --color-text:           #e5e7eb;
   --color-text-secondary: #9ca3af;
-  --color-text-muted: #6b7280;
-  --color-border:     #3A4A31;
-  --color-primary:    #4A5D3E;  /* oil green */
-  --color-primary-hover: #5F7548;
-  --color-accent:     #E8D44D;  /* sulphur yellow */
-  --color-accent-hover:  #C4B01B;
-  --color-link:       #E8D44D;
-  --color-code-bg:    #2B3725;
-  --color-code-text:  #E8D44D;
-  --color-blockquote-bg:   #2B3725;
-  --color-blockquote-border: #E8D44D;
-  --color-blockquote-text:  #d1d5db;
-  --color-pre-bg:     #0E120C;
-  --color-pre-text:   #e2e8f0;
-  --color-table-header-bg: #2B3725;
+  --color-text-muted:     #6b7280;
+  --color-border:         #3A5068;
+  --color-primary:        #789BB9;  /* glaucous blue */
+  --color-primary-hover:  #8EADC9;
+  --color-accent:         #E85D4A;  /* coral red — same as light */
+  --color-accent-hover:   #F07060;
+  --color-link:           #8EADC9;  /* lightened for dark bg readability */
+  --color-code-bg:        #243744;
+  --color-code-text:      #F09787;  /* muted coral for inline code */
+  --color-blockquote-bg:        #243744;
+  --color-blockquote-border:    #E85D4A;  /* coral pop */
+  --color-blockquote-text:      #d1d5db;
+  --color-pre-bg:         #151F29;  /* deepest for code blocks */
+  --color-pre-text:       #e2e8f0;
+  --color-table-header-bg: #243744;
 }
 
 /* Smooth scrolling for anchor links (TOC sidebar) */

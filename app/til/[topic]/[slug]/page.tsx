@@ -55,14 +55,14 @@ export default async function TilEntryPage({ params }: { params: Promise<Params>
         </div>
 
         <article data-pagefind-body>
-          <header className="mb-8 pb-6 border-b border-gray-200 dark:border-oil-green-600">
+          <header className="mb-8 pb-6 border-b border-gray-200 dark:border-glaucous-700">
             <h1 className="text-3xl font-medium text-gray-900 dark:text-gray-100 mb-4" data-pagefind-meta="title">
               {til.title}
             </h1>
             <div className="flex flex-wrap items-center gap-4 text-sm text-gray-500 dark:text-gray-400 mb-4">
               <time dateTime={til.date} data-pagefind-meta="date">{formattedDate}</time>
               <span>·</span>
-              <span className="px-2 py-0.5 bg-gray-100 dark:bg-oil-green-700 rounded text-xs font-medium capitalize">
+              <span className="px-2 py-0.5 bg-gray-100 dark:bg-glaucous-800 rounded text-xs font-medium capitalize">
                 {til.topic}
               </span>
             </div>
@@ -72,7 +72,7 @@ export default async function TilEntryPage({ params }: { params: Promise<Params>
                   <Link
                     key={tag}
                     href={`/tags/${encodeURIComponent(tag.toLowerCase())}`}
-                    className="px-2 py-0.5 text-xs bg-blue-50 dark:bg-oil-green-700 text-blue-700 dark:text-sulphur-300 rounded-md hover:bg-blue-100 dark:hover:bg-oil-green-600 transition-colors"
+                    className="px-2 py-0.5 text-xs bg-blue-50 dark:bg-glaucous-800 text-blue-700 dark:text-coral-400 rounded-md hover:bg-blue-100 dark:hover:bg-glaucous-700 transition-colors"
                   >
                     {tag}
                   </Link>

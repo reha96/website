@@ -128,9 +128,9 @@ export default function SearchDialog({ open, onClose }: SearchDialogProps) {
       aria-modal="true"
       aria-label="Search"
     >
-      <div className="w-full max-w-lg bg-white dark:bg-oil-green-800 rounded-xl shadow-2xl border border-gray-200 dark:border-oil-green-600 overflow-hidden">
+      <div className="w-full max-w-lg bg-white dark:bg-glaucous-900 rounded-xl shadow-2xl border border-gray-200 dark:border-glaucous-700 overflow-hidden">
         {/* Search input */}
-        <div className="flex items-center px-4 py-3 border-b border-gray-200 dark:border-oil-green-600">
+        <div className="flex items-center px-4 py-3 border-b border-gray-200 dark:border-glaucous-700">
           <svg
             className="h-5 w-5 text-gray-400 dark:text-gray-500 mr-3 shrink-0"
             fill="none"
@@ -152,7 +152,7 @@ export default function SearchDialog({ open, onClose }: SearchDialogProps) {
             placeholder="Search posts, TILs..."
             className="flex-1 bg-transparent text-gray-800 dark:text-gray-100 placeholder-gray-400 dark:placeholder-gray-500 outline-none text-base"
           />
-          <kbd className="ml-2 px-1.5 py-0.5 text-xs text-gray-400 dark:text-gray-500 bg-gray-100 dark:bg-oil-green-700 rounded border border-gray-200 dark:border-oil-green-600">
+          <kbd className="ml-2 px-1.5 py-0.5 text-xs text-gray-400 dark:text-gray-500 bg-gray-100 dark:bg-glaucous-800 rounded border border-gray-200 dark:border-glaucous-700">
             ESC
           </kbd>
         </div>
@@ -195,7 +195,7 @@ export default function SearchDialog({ open, onClose }: SearchDialogProps) {
               key={i}
               href={result.url}
               onClick={onClose}
-              className="block px-4 py-3 hover:bg-gray-50 dark:hover:bg-oil-green-700/50 border-b border-gray-100 dark:border-oil-green-700/50 last:border-b-0 transition-colors"
+              className="block px-4 py-3 hover:bg-gray-50 dark:hover:bg-glaucous-800/50 border-b border-gray-100 dark:border-glaucous-800/50 last:border-b-0 transition-colors"
             >
               <h3 className="text-sm font-medium text-gray-800 dark:text-gray-200 mb-0.5">
                 {result.meta?.title || result.url}
@@ -216,10 +216,10 @@ export default function SearchDialog({ open, onClose }: SearchDialogProps) {
         </div>
 
         {/* Footer */}
-        <div className="px-4 py-2 border-t border-gray-200 dark:border-oil-green-600 text-xs text-gray-400 dark:text-gray-500 flex items-center justify-between">
+        <div className="px-4 py-2 border-t border-gray-200 dark:border-glaucous-700 text-xs text-gray-400 dark:text-gray-500 flex items-center justify-between">
           <span>
-            <kbd className="px-1 py-0.5 bg-gray-100 dark:bg-oil-green-700 rounded">↑↓</kbd> navigate{" "}
-            <kbd className="px-1 py-0.5 bg-gray-100 dark:bg-oil-green-700 rounded">↵</kbd> open
+            <kbd className="px-1 py-0.5 bg-gray-100 dark:bg-glaucous-800 rounded">↑↓</kbd> navigate{" "}
+            <kbd className="px-1 py-0.5 bg-gray-100 dark:bg-glaucous-800 rounded">↵</kbd> open
           </span>
         </div>
       </div>
