@@ -22,7 +22,7 @@
   --color-link:       #5F829E;
   --color-code-bg:    #f3f4f6;
   --color-code-text:  #db2777;
-  --color-blockquote-bg:   #FFF5F3;
+  --color-blockquote-bg:   #FDF0EE;
   --color-blockquote-border: #E85D4A;
   --color-blockquote-text:  #4b5563;
   --color-pre-bg:     #1e293b;
@@ -46,7 +46,7 @@
   --color-link:           #8EADC9;  /* lightened for dark bg readability */
   --color-code-bg:        #243744;
   --color-code-text:      #F09787;  /* muted coral for inline code */
-  --color-blockquote-bg:        #243744;
+  --color-blockquote-bg:        #2D4255;
   --color-blockquote-border:    #E85D4A;  /* coral pop */
   --color-blockquote-text:      #d1d5db;
   --color-pre-bg:         #151F29;  /* deepest for code blocks */
