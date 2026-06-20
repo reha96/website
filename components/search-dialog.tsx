@@ -15,6 +15,37 @@ interface SearchDialogProps {
 }
 
 /**
+ * Dynamically loads Pagefind by injecting a real DOM script tag.
+ * Bypasses Next.js's unreliable self.__next_s queue in static export.
+ * Safe to call multiple times — script is injected only once.
+ */
+let pagefindPromise: Promise<any> | null = null;
+
+function loadPagefind(): Promise<any> {
+  if (pagefindPromise) return pagefindPromise;
+
+  // Already loaded by the <script defer> in layout
+  if (typeof window !== "undefined" && (window as any).__pagefind) {
+    pagefindPromise = Promise.resolve((window as any).__pagefind);
+    return pagefindPromise;
+  }
+
+  pagefindPromise = new Promise((resolve, reject) => {
+    const script = document.createElement("script");
+    script.src = "/pagefind/pagefind.js";
+    script.onload = () => {
+      const pf = (window as any).__pagefind;
+      if (pf) resolve(pf);
+      else reject(new Error("Pagefind loaded but __pagefind not set"));
+    };
+    script.onerror = () => reject(new Error("Failed to load search index"));
+    document.head.appendChild(script);
+  });
+
+  return pagefindPromise;
+}
+
+/**
  * Modal search dialog triggered by ⌘K / Ctrl+K from the Navbar.
  * Uses Pagefind's JS API to search the static index built at post-build time.
  */
@@ -61,11 +92,7 @@ export default function SearchDialog({ open, onClose }: SearchDialogProps) {
       setLoading(true);
       setError(null);
       try {
-        const pagefind = (window as any).__pagefind;
-        if (!pagefind) {
-          setError("Search index not loaded yet");
-          return;
-        }
+        const pagefind = await loadPagefind();
         const search = await pagefind.search(query.trim());
         const items: SearchResult[] = [];
         if (search?.results) {
