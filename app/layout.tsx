@@ -1,6 +1,5 @@
 import type { Metadata } from 'next'
 import { Inter } from 'next/font/google'
-import Script from 'next/script'
 import Navbar from '@/components/navbar'
 import { ThemeProvider } from '@/components/theme-provider'
 import './globals.css'
@@ -20,8 +19,8 @@ export default function RootLayout({
   return (
     <html lang="en" suppressHydrationWarning>
       <head>
-        {/* Load Pagefind search index JS — sets window.__pagefind for the search dialog */}
-        <Script src="/pagefind/pagefind.js" strategy="beforeInteractive" />
+        {/* Load Pagefind search index — native script works reliably in static export */}
+        <script src="/pagefind/pagefind.js" defer />
       </head>
       <body className={inter.className}>
         <ThemeProvider>

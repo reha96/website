@@ -7,7 +7,7 @@
     "build": "next build",
     "start": "next start",
     "lint": "next lint",
-    "postbuild": "pagefind --site out"
+    "postbuild": "pagefind --site out && cp -r out/pagefind public/pagefind"
   },
   "dependencies": {
     "gray-matter": "^4.0.3",
