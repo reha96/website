@@ -15,32 +15,33 @@ interface SearchDialogProps {
 }
 
 /**
- * Dynamically loads Pagefind by injecting a real DOM script tag.
- * Bypasses Next.js's unreliable self.__next_s queue in static export.
- * Safe to call multiple times — script is injected only once.
+ * Dynamically imports the Pagefind ES module.
+ * Caches the promise so the import only happens once.
+ * Uses dynamic import() which handles ES modules natively.
  */
 let pagefindPromise: Promise<any> | null = null;
 
 function loadPagefind(): Promise<any> {
   if (pagefindPromise) return pagefindPromise;
 
-  // Already loaded by the <script defer> in layout
-  if (typeof window !== "undefined" && (window as any).__pagefind) {
-    pagefindPromise = Promise.resolve((window as any).__pagefind);
-    return pagefindPromise;
-  }
-
-  pagefindPromise = new Promise((resolve, reject) => {
-    const script = document.createElement("script");
-    script.src = "/pagefind/pagefind.js";
-    script.onload = () => {
-      const pf = (window as any).__pagefind;
-      if (pf) resolve(pf);
-      else reject(new Error("Pagefind loaded but __pagefind not set"));
-    };
-    script.onerror = () => reject(new Error("Failed to load search index"));
-    document.head.appendChild(script);
-  });
+  pagefindPromise = import("/pagefind/pagefind.js")
+    .then((mod) => {
+      // Pagefind ES module exports functions directly: mod.search(), mod.init(), etc.
+      // We wrap them in an object with a .search() method for our existing code.
+      return {
+        search: async (query: string) => {
+          // Ensure Pagefind is initialized before searching
+          if (typeof mod.init === "function") {
+            await mod.init();
+          }
+          return mod.search(query);
+        },
+      };
+    })
+    .catch((err) => {
+      pagefindPromise = null; // allow retry
+      throw err;
+    });
 
   return pagefindPromise;
 }
