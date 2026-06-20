@@ -13,6 +13,9 @@
 /.next/
 /out/
 
+# pagefind — generated at build time
+/public/pagefind/
+
 # pagefind — generated at build time, copied here for dev mode
 /public/pagefind/
 
