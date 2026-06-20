@@ -20,7 +20,7 @@ export default function HomePage({ abstracts }: { abstracts: Record<string, Pape
   };
 
   return (
-    <main className="flex min-h-screen flex-col items-center bg-white">
+    <main className="flex min-h-screen flex-col items-center">
       {/* Main content container */}
       <div className="w-full max-w-4xl px-6 py-8 md:py-12">
         {/* Profile Section */}
@@ -38,25 +38,25 @@ export default function HomePage({ abstracts }: { abstracts: Record<string, Pape
 
           {/* Info Column */}
           <div className="w-full md:w-2/3 md:pl-8">
-            <h1 className="text-3xl font-medium text-gray-800 mb-1">
+            <h1 className="text-3xl font-medium text-gray-800 dark:text-gray-100 mb-1">
               Reha Tuncer
             </h1>
-            <p className="text-lg text-gray-600 mb-6">PhD in Economics</p>
+            <p className="text-lg text-gray-600 dark:text-gray-400 mb-6">PhD in Economics</p>
 
             <div className="mb-6">
-              <p className="text-blue-600 font-medium">
+              <p className="font-medium" style={{ color: 'var(--color-link)' }}>
                 <Link href="https://hci.uni.lu/reha-tuncer/">
                   University of Luxembourg, Department of Economics and Management
                 </Link>
               </p>
-              <p className="text-gray-600">
+              <p className="text-gray-600 dark:text-gray-400">
                 Behavioral and Experimental Economics
               </p>
             </div>
 
             {/* Contact Information with Icons */}
             <div className="space-y-2 mb-6">
-              <div className="flex items-center text-gray-700">
+              <div className="flex items-center text-gray-700 dark:text-gray-300">
                 <svg
                   xmlns="http://www.w3.org/2000/svg"
                   className="h-5 w-5 mr-2"
@@ -79,7 +79,7 @@ export default function HomePage({ abstracts }: { abstracts: Record<string, Pape
                 </svg>
                 <span>University of Luxembourg</span>
               </div>
-              <div className="flex items-center text-gray-700">
+              <div className="flex items-center text-gray-700 dark:text-gray-300">
                 <svg
                   xmlns="http://www.w3.org/2000/svg"
                   className="h-5 w-5 mr-2"
@@ -102,7 +102,8 @@ export default function HomePage({ abstracts }: { abstracts: Record<string, Pape
             <div>
               <Link
                 href="/CV_RT.pdf"
-                className="text-blue-600 font-medium hover:underline"
+                className="font-medium hover:underline"
+                style={{ color: 'var(--color-link)' }}
               >
                 CV
               </Link>
@@ -112,40 +113,40 @@ export default function HomePage({ abstracts }: { abstracts: Record<string, Pape
 
         {/* Published Papers Section */}
         <div className="mb-16">
-          <h2 className="text-2xl font-medium text-gray-800 mb-6">
+          <h2 className="text-2xl font-medium text-gray-800 dark:text-gray-100 mb-6">
             Published Papers
           </h2>
 
-          {/* Paper 1 - with orange border */}
-          <div className="mb-8 p-6 border-l-4 border-orange-500 bg-orange-50 rounded-lg shadow-sm">
+          {/* Paper 1 - with accent border */}
+          <div className="mb-8 p-6 border-l-4 rounded-lg shadow-sm" style={{ borderColor: 'var(--color-accent)', backgroundColor: 'var(--color-blockquote-bg)' }}>
             <Link href="https://doi.org/10.1111/ecca.12524">
-              <h3 className="text-lg font-medium text-blue-600 hover:underline mb-1">
+              <h3 className="text-lg font-medium hover:underline mb-1" style={{ color: 'var(--color-link)' }}>
                 From unobserved to observed preference heterogeneity: a revealed
                 preference methodology
               </h3>
             </Link>
-            <p className="text-gray-800 mb-2">
+            <p className="text-gray-800 dark:text-gray-200 mb-2">
               Cherchye L, Saalens D, Tuncer R
             </p>
-            <p className="text-gray-600 mb-3">
+            <p className="text-gray-600 dark:text-gray-400 mb-3">
               2024. <span className="italic">Economica</span>, Vol. 91, Issue
               363, pp. 996-1022
             </p>
 
             <div className="flex flex-wrap gap-2 mb-3">
-              <span className="px-2 py-1 bg-gray-100 text-sm text-gray-700 rounded">
+              <span className="px-2 py-1 bg-gray-100 dark:bg-oil-green-700 text-sm text-gray-700 dark:text-gray-300 rounded">
                 Revealed Preference
               </span>
-              <span className="px-2 py-1 bg-gray-100 text-sm text-gray-700 rounded">
+              <span className="px-2 py-1 bg-gray-100 dark:bg-oil-green-700 text-sm text-gray-700 dark:text-gray-300 rounded">
                 Heterogeneity
               </span>
             </div>
 
             {/* Abstract section that shows/hides based on state */}
             {visibleAbstracts["paper1"] && (
-              <div className="my-4 p-4 bg-white rounded border border-gray-200">
-                <h4 className="text-sm font-semibold mb-2">Abstract</h4>
-                <p className="text-sm text-gray-700">
+              <div className="my-4 p-4 bg-white dark:bg-oil-green-800 rounded border border-gray-200 dark:border-oil-green-600">
+                <h4 className="text-sm font-semibold mb-2 dark:text-gray-200">Abstract</h4>
+                <p className="text-sm text-gray-700 dark:text-gray-300">
                   {abstracts["paper1"].text}
                 </p>
               </div>
@@ -154,7 +155,7 @@ export default function HomePage({ abstracts }: { abstracts: Record<string, Pape
             <div className="flex flex-wrap gap-2">
               <button
                 onClick={() => toggleAbstract("paper1")}
-                className="flex items-center px-3 py-1 bg-gray-200 text-sm text-gray-700 rounded hover:bg-gray-300"
+                className="flex items-center px-3 py-1 bg-gray-200 dark:bg-oil-green-700 text-sm text-gray-700 dark:text-gray-300 rounded hover:bg-gray-300 dark:hover:bg-oil-green-600"
               >
                 <svg
                   xmlns="http://www.w3.org/2000/svg"
@@ -174,7 +175,7 @@ export default function HomePage({ abstracts }: { abstracts: Record<string, Pape
               </button>
               <Link
                 href="https://osf.io/epbdq/"
-                className="flex items-center px-3 py-1 bg-gray-200 text-sm text-gray-700 rounded hover:bg-gray-300"
+                className="flex items-center px-3 py-1 bg-gray-200 dark:bg-oil-green-700 text-sm text-gray-700 dark:text-gray-300 rounded hover:bg-gray-300 dark:hover:bg-oil-green-600"
               >
                 <svg
                   xmlns="http://www.w3.org/2000/svg"
@@ -194,7 +195,7 @@ export default function HomePage({ abstracts }: { abstracts: Record<string, Pape
               </Link>
               <Link
                 href="/RP.pdf"
-                className="flex items-center px-3 py-1 bg-gray-200 text-sm text-gray-700 rounded hover:bg-gray-300"
+                className="flex items-center px-3 py-1 bg-gray-200 dark:bg-oil-green-700 text-sm text-gray-700 dark:text-gray-300 rounded hover:bg-gray-300 dark:hover:bg-oil-green-600"
               >
                 <svg
                   xmlns="http://www.w3.org/2000/svg"

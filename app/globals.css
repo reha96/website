@@ -5,28 +5,82 @@
 /* Highlight.js theme for code syntax highlighting */
 @import 'highlight.js/styles/github-dark.css';
 
+/* ── Theme CSS Variables ── */
+:root {
+  /* Light theme: glaucous blue + coral red */
+  --color-bg:        #ffffff;
+  --color-bg-secondary: #f9fafb;
+  --color-bg-tertiary:  #f3f4f6;
+  --color-text:       #1f2937;
+  --color-text-secondary: #6b7280;
+  --color-text-muted: #9ca3af;
+  --color-border:     #e5e7eb;
+  --color-primary:    #789BB9;  /* light glaucous blue */
+  --color-primary-hover: #5F829E;
+  --color-accent:     #E85D4A;  /* coral red */
+  --color-accent-hover:  #CC3D2A;
+  --color-link:       #5F829E;
+  --color-code-bg:    #f3f4f6;
+  --color-code-text:  #db2777;
+  --color-blockquote-bg:   #FFF5F3;
+  --color-blockquote-border: #E85D4A;
+  --color-blockquote-text:  #4b5563;
+  --color-pre-bg:     #1e293b;
+  --color-pre-text:   #e2e8f0;
+  --color-table-header-bg: #f9fafb;
+}
+
+.dark {
+  /* Dark theme: oil green + sulphur yellow */
+  --color-bg:        #1C2518;
+  --color-bg-secondary: #2B3725;
+  --color-bg-tertiary:  #3A4A31;
+  --color-text:       #e5e7eb;
+  --color-text-secondary: #9ca3af;
+  --color-text-muted: #6b7280;
+  --color-border:     #3A4A31;
+  --color-primary:    #4A5D3E;  /* oil green */
+  --color-primary-hover: #5F7548;
+  --color-accent:     #E8D44D;  /* sulphur yellow */
+  --color-accent-hover:  #C4B01B;
+  --color-link:       #E8D44D;
+  --color-code-bg:    #2B3725;
+  --color-code-text:  #E8D44D;
+  --color-blockquote-bg:   #2B3725;
+  --color-blockquote-border: #E8D44D;
+  --color-blockquote-text:  #d1d5db;
+  --color-pre-bg:     #0E120C;
+  --color-pre-text:   #e2e8f0;
+  --color-table-header-bg: #2B3725;
+}
+
 /* Smooth scrolling for anchor links (TOC sidebar) */
 html {
   scroll-behavior: smooth;
 }
 
-/* Blog content typography */
-.blog-content h1 { @apply text-2xl font-medium text-gray-900 mt-8 mb-4; }
-.blog-content h2 { @apply text-xl font-medium text-gray-800 mt-8 mb-3 pb-1 border-b border-gray-200; }
-.blog-content h3 { @apply text-lg font-medium text-gray-800 mt-6 mb-2; }
-.blog-content h4 { @apply text-base font-semibold text-gray-800 mt-5 mb-2; }
+body {
+  background-color: var(--color-bg);
+  color: var(--color-text);
+}
+
+/* Blog content typography — using CSS variables for theme support */
+.blog-content h1 { @apply text-2xl font-medium mt-8 mb-4; color: var(--color-text); }
+.blog-content h2 { @apply text-xl font-medium mt-8 mb-3 pb-1 border-b; color: var(--color-text); border-color: var(--color-border); }
+.blog-content h3 { @apply text-lg font-medium mt-6 mb-2; color: var(--color-text); }
+.blog-content h4 { @apply text-base font-semibold mt-5 mb-2; color: var(--color-text); }
 .blog-content p { @apply my-3 leading-relaxed; }
 .blog-content ul { @apply my-3 pl-6 list-disc space-y-1; }
 .blog-content ol { @apply my-3 pl-6 list-decimal space-y-1; }
 .blog-content li { @apply leading-relaxed; }
-.blog-content blockquote { @apply border-l-4 border-orange-400 bg-orange-50 px-4 py-2 my-4 italic text-gray-700; }
-.blog-content a { @apply text-blue-600 no-underline hover:underline; }
-.blog-content strong { @apply font-semibold text-gray-900; }
-.blog-content hr { @apply my-8 border-gray-200; }
-.blog-content pre { @apply bg-gray-900 text-gray-100 rounded-lg p-4 my-4 overflow-x-auto text-sm; }
-.blog-content pre code { @apply bg-transparent p-0 text-gray-100; }
-.blog-content :not(pre) > code { @apply bg-gray-100 px-1.5 py-0.5 rounded text-sm text-pink-600 font-mono; }
+.blog-content blockquote { @apply border-l-4 px-4 py-2 my-4 italic; border-color: var(--color-blockquote-border); background-color: var(--color-blockquote-bg); color: var(--color-blockquote-text); }
+.blog-content a { color: var(--color-link); @apply no-underline hover:underline; }
+.blog-content strong { @apply font-semibold; color: var(--color-text); }
+.blog-content hr { @apply my-8; border-color: var(--color-border); }
+.blog-content pre { @apply rounded-lg p-4 my-4 overflow-x-auto text-sm; background-color: var(--color-pre-bg); color: var(--color-pre-text); }
+.blog-content pre code { @apply bg-transparent p-0; color: var(--color-pre-text); }
+.blog-content :not(pre) > code { @apply px-1.5 py-0.5 rounded text-sm font-mono; background-color: var(--color-code-bg); color: var(--color-code-text); }
 .blog-content img { @apply rounded-lg my-4 max-w-full; }
 .blog-content table { @apply min-w-full border-collapse my-6; }
-.blog-content th { @apply border border-gray-200 px-4 py-2 bg-gray-50 text-left text-sm font-semibold; }
-.blog-content td { @apply border border-gray-200 px-4 py-2 text-sm; }
+.blog-content th { @apply border px-4 py-2 text-left text-sm font-semibold; border-color: var(--color-border); background-color: var(--color-table-header-bg); }
+.blog-content td { @apply border px-4 py-2 text-sm; border-color: var(--color-border); }

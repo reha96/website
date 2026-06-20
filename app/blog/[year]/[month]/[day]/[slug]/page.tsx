@@ -97,7 +97,7 @@ export default async function BlogPostPage({ params }: { params: Promise<Params>
   });
 
   return (
-    <div className="min-h-screen bg-white">
+    <div className="min-h-screen">
       {/* Reading progress bar at bottom */}
       <ReadingProgress />
 
@@ -107,11 +107,11 @@ export default async function BlogPostPage({ params }: { params: Promise<Params>
           <TableOfContents headings={headings} />
 
           {/* ── Main Content ── */}
-          <div className="min-w-0 flex-1">
+          <div className="min-w-0 flex-1" data-pagefind-body>
             {/* Back link */}
             <Link
               href="/blog"
-              className="inline-flex items-center text-sm text-gray-500 hover:text-gray-700 mb-6 transition-colors"
+              className="inline-flex items-center text-sm text-gray-500 dark:text-gray-400 hover:text-gray-700 dark:hover:text-gray-200 mb-6 transition-colors"
             >
               <svg className="h-4 w-4 mr-1" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 19l-7-7 7-7" />
@@ -120,15 +120,15 @@ export default async function BlogPostPage({ params }: { params: Promise<Params>
             </Link>
 
             {/* Article Header */}
-            <header className="mb-8 pb-6 border-b border-gray-200">
-              <h1 className="text-3xl font-medium text-gray-900 mb-4">{post.title}</h1>
+            <header className="mb-8 pb-6 border-b border-gray-200 dark:border-oil-green-600">
+              <h1 className="text-3xl font-medium text-gray-900 dark:text-gray-100 mb-4" data-pagefind-meta="title">{post.title}</h1>
 
-              <div className="flex flex-wrap items-center gap-4 text-sm text-gray-500 mb-4">
-                <time dateTime={post.date}>{formattedDate}</time>
+              <div className="flex flex-wrap items-center gap-4 text-sm text-gray-500 dark:text-gray-400 mb-4">
+                <time dateTime={post.date} data-pagefind-meta="date">{formattedDate}</time>
                 <span>·</span>
                 <span>{post.author}</span>
                 <span>·</span>
-                <span className="px-2 py-0.5 bg-gray-100 rounded text-xs font-medium">
+                <span className="px-2 py-0.5 bg-gray-100 dark:bg-oil-green-700 rounded text-xs font-medium">
                   {post.topic}
                 </span>
               </div>
@@ -136,21 +136,23 @@ export default async function BlogPostPage({ params }: { params: Promise<Params>
               {/* Tags */}
               <div className="flex flex-wrap gap-1.5 mb-4">
                 {post.tags.map((tag) => (
-                  <span
+                  <Link
                     key={tag}
-                    className="px-2 py-0.5 text-xs bg-blue-50 text-blue-700 rounded-md"
+                    href={`/tags/${encodeURIComponent(tag.toLowerCase())}`}
+                    className="px-2 py-0.5 text-xs bg-blue-50 dark:bg-oil-green-700 text-blue-700 dark:text-sulphur-300 rounded-md hover:bg-blue-100 dark:hover:bg-oil-green-600 transition-colors"
                   >
                     {tag}
-                  </span>
+                  </Link>
                 ))}
               </div>
 
-              {/* Source link */}
+              {/* Source link — only for GitHub-based posts */}
+              {post.repo ? (
               <a
                 href={`https://github.com/reha96/${post.repo}/tree/main/${post.path || ""}`}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="inline-flex items-center text-sm text-gray-400 hover:text-gray-600 transition-colors"
+                className="inline-flex items-center text-sm text-gray-400 dark:text-gray-500 hover:text-gray-600 dark:hover:text-gray-300 transition-colors"
               >
                 <svg
                   className="h-4 w-4 mr-1"
@@ -161,6 +163,7 @@ export default async function BlogPostPage({ params }: { params: Promise<Params>
                 </svg>
                 View source on GitHub
               </a>
+              ) : null}
             </header>
 
             {/* Article Content */}

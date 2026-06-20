@@ -21,7 +21,7 @@ interface MarkdownRendererProps {
  */
 export default function MarkdownRenderer({ content }: MarkdownRendererProps) {
   return (
-    <div className="blog-content text-gray-700 leading-relaxed space-y-4">
+    <div className="blog-content text-gray-700 dark:text-gray-300 leading-relaxed space-y-4">
       <ReactMarkdown
         remarkPlugins={[remarkGfm, remarkMath]}
         rehypePlugins={[rehypeKatex, rehypeHighlight, rehypeSlug]}
@@ -39,14 +39,12 @@ export default function MarkdownRenderer({ content }: MarkdownRendererProps) {
               </a>
             );
           },
-          // Inline code
+          // Inline code — uses CSS variables from globals.css
           code: ({ className, children, ...props }) => {
-            // Highlight.js adds a class like "language-python" to code blocks
-            // Inline code won't have a language class
             const isInline = !className;
             if (isInline) {
               return (
-                <code className="bg-gray-100 px-1.5 py-0.5 rounded text-sm text-pink-600" {...props}>
+                <code {...props}>
                   {children}
                 </code>
               );
@@ -60,25 +58,21 @@ export default function MarkdownRenderer({ content }: MarkdownRendererProps) {
           // Wrap tables for horizontal scroll on mobile
           table: ({ children }) => (
             <div className="overflow-x-auto my-6">
-              <table className="min-w-full border-collapse border border-gray-200">
-                {children}
-              </table>
+              <table>{children}</table>
             </div>
           ),
           th: ({ children }) => (
-            <th className="border border-gray-200 px-4 py-2 bg-gray-50 text-left text-sm font-semibold">
-              {children}
-            </th>
+            <th>{children}</th>
           ),
           td: ({ children }) => (
-            <td className="border border-gray-200 px-4 py-2 text-sm">{children}</td>
+            <td>{children}</td>
           ),
           img: ({ src, alt }) => (
             // eslint-disable-next-line @next/next/no-img-element
             <img src={src} alt={alt} className="rounded-lg my-4 max-w-full" loading="lazy" />
           ),
           blockquote: ({ children }) => (
-            <blockquote className="border-l-4 border-orange-400 bg-orange-50 px-4 py-2 my-4 italic text-gray-700">
+            <blockquote>
               {children}
             </blockquote>
           ),
