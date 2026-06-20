@@ -19,7 +19,7 @@
   --color-primary-hover: #5F829E;
   --color-accent:     #E85D4A;  /* coral red */
   --color-accent-hover:  #CC3D2A;
-  --color-link:       #5F829E;
+  --color-link:       #4B6980;
   --color-code-bg:    #f3f4f6;
   --color-code-text:  #db2777;
   --color-blockquote-bg:   #FDF0EE;
@@ -32,9 +32,9 @@
 
 .dark {
   /* Dark theme: darker glaucous blue + coral red */
-  --color-bg:             #1C2D3A;  /* deepest glaucous blue */
-  --color-bg-secondary:   #243744;
-  --color-bg-tertiary:    #2D4255;
+  --color-bg:             #151F29;  /* deepest — page background */
+  --color-bg-secondary:   #1C2D3A;  /* card/section background */
+  --color-bg-tertiary:    #243744;  /* inner elements (tags, etc.) */
   --color-text:           #e5e7eb;
   --color-text-secondary: #9ca3af;
   --color-text-muted:     #6b7280;
@@ -43,7 +43,7 @@
   --color-primary-hover:  #8EADC9;
   --color-accent:         #E85D4A;  /* coral red — same as light */
   --color-accent-hover:   #F07060;
-  --color-link:           #8EADC9;  /* lightened for dark bg readability */
+  --color-link:           #9DBACF;  /* lightened for dark bg readability */
   --color-code-bg:        #243744;
   --color-code-text:      #F09787;  /* muted coral for inline code */
   --color-blockquote-bg:        #2D4255;
