@@ -24,7 +24,7 @@ let pagefindPromise: Promise<any> | null = null;
 function loadPagefind(): Promise<any> {
   if (pagefindPromise) return pagefindPromise;
 
-  pagefindPromise = import("/pagefind/pagefind.js")
+  pagefindPromise = import(/* webpackIgnore: true */ "/pagefind/pagefind.js")
     .then((mod) => {
       // Pagefind ES module exports functions directly: mod.search(), mod.init(), etc.
       // We wrap them in an object with a .search() method for our existing code.
