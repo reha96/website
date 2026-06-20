@@ -15,7 +15,7 @@ interface SearchDialogProps {
 }
 
 /**
- * Modal search dialog triggered by ⌘K / Ctrl+K.
+ * Modal search dialog triggered by ⌘K / Ctrl+K from the Navbar.
  * Uses Pagefind's JS API to search the static index built at post-build time.
  */
 export default function SearchDialog({ open, onClose }: SearchDialogProps) {
@@ -26,29 +26,8 @@ export default function SearchDialog({ open, onClose }: SearchDialogProps) {
   const inputRef = useRef<HTMLInputElement>(null);
   const dialogRef = useRef<HTMLDivElement>(null);
 
-  // ⌘K / Ctrl+K to toggle, ESC to close
+  // ESC to close
   useEffect(() => {
-    const handler = (e: KeyboardEvent) => {
-      if ((e.metaKey || e.ctrlKey) && e.key === "k") {
-        e.preventDefault();
-        if (open) onClose();
-        else {
-          // The Navbar's button handler will set open=true, so we just trigger it
-          // Actually, since the Navbar owns the state, let's use a custom event
-          window.dispatchEvent(new CustomEvent("toggle-search"));
-        }
-      }
-    };
-    window.addEventListener("keydown", handler);
-    return () => window.removeEventListener("keydown", handler);
-  }, [open, onClose]);
-
-  // Listen for the custom toggle event from Navbar
-  useEffect(() => {
-    const handler = () => {
-      // This is handled by the Navbar — we just need to respond to ESC
-    };
-    // Navbar handles opening; we handle closing on ESC
     const escHandler = (e: KeyboardEvent) => {
       if (e.key === "Escape" && open) {
         onClose();

@@ -2,13 +2,25 @@
 
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import ThemeToggle from "./theme-toggle";
 import SearchDialog from "./search-dialog";
 
 export default function Navbar() {
   const pathname = usePathname();
   const [searchOpen, setSearchOpen] = useState(false);
+
+  // ⌘K / Ctrl+K to toggle search dialog
+  useEffect(() => {
+    const handler = (e: KeyboardEvent) => {
+      if ((e.metaKey || e.ctrlKey) && e.key === "k") {
+        e.preventDefault();
+        setSearchOpen((prev) => !prev);
+      }
+    };
+    window.addEventListener("keydown", handler);
+    return () => window.removeEventListener("keydown", handler);
+  }, []);
 
   const navItems = [
     { href: "/", label: "Home" },
