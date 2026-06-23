@@ -89,3 +89,31 @@ h1, h2 {
 .blog-content table { @apply min-w-full border-collapse my-6; }
 .blog-content th { @apply border px-4 py-2 text-left text-sm font-semibold; border-color: var(--color-border); background-color: var(--color-table-header-bg); }
 .blog-content td { @apply border px-4 py-2 text-sm; border-color: var(--color-border); }
+
+/* ── Nav link underline animation (anthropic.com style) ── */
+.nav-link::after {
+  content: '';
+  position: absolute;
+  bottom: 2px;
+  left: 0.625rem;
+  right: 0.625rem;
+  height: 2px;
+  background-color: currentColor;
+  border-radius: 1px;
+  transform: scaleX(0);
+  transform-origin: center;
+  transition: transform 0.25s ease;
+}
+
+.nav-link:hover::after {
+  transform: scaleX(1);
+}
+
+.nav-link-active::after {
+  transform: scaleX(1);
+}
+
+/* ── Card hover: coral fill + scale (arc.net style) ── */
+.card-hover:hover {
+  background-color: var(--color-accent) !important;
+}

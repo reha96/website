@@ -12,11 +12,25 @@ export const PAPER_TAGS: Record<string, string[]> = {
   paper5: ["Social Capital", "Inequality"],
 };
 
+/** Map each tag to the paper ID it belongs to (for linking to /academic#paperN). */
+export const PAPER_TAG_TO_ID: Record<string, string> = {};
+for (const [paperId, tags] of Object.entries(PAPER_TAGS)) {
+  for (const tag of tags) {
+    PAPER_TAG_TO_ID[tag.toLowerCase()] = paperId;
+  }
+}
+
 /** All unique paper tags as a flat array (for iterating). */
 export function getAllPaperTags(): string[] {
-  const tagSet = new Set<string>();
-  for (const tags of Object.values(PAPER_TAGS)) {
-    for (const tag of tags) tagSet.add(tag);
-  }
-  return Array.from(tagSet).sort();
+  return Object.keys(PAPER_TAG_TO_ID).sort();
+}
+
+/** Check if a tag is a paper tag (case-insensitive). */
+export function isPaperTag(tag: string): boolean {
+  return tag.toLowerCase() in PAPER_TAG_TO_ID;
+}
+
+/** Get the paper anchor ID for a paper tag (case-insensitive). */
+export function getPaperAnchor(tag: string): string | null {
+  return PAPER_TAG_TO_ID[tag.toLowerCase()] ?? null;
 }

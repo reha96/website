@@ -1,5 +1,6 @@
 "use client";
 
+import Image from "next/image";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { useState, useEffect } from "react";
@@ -39,8 +40,15 @@ export default function Navbar() {
             {/* Logo / Name */}
             <Link
               href="/"
-              className="text-lg font-medium text-gray-800 dark:text-gray-100 hover:text-gray-600 dark:hover:text-gray-300 transition-colors"
+              className="flex items-center gap-2 text-lg font-medium text-gray-800 dark:text-gray-100 hover:text-gray-600 dark:hover:text-gray-300 transition-colors"
             >
+              <Image
+                src="/favicon.ico"
+                alt=""
+                width={24}
+                height={24}
+                className="w-5 h-5 rounded"
+              />
               Reha Tuncer
             </Link>
 
@@ -67,10 +75,10 @@ export default function Navbar() {
                   <Link
                     key={item.href}
                     href={item.href}
-                    className={`px-2.5 py-1.5 text-sm font-medium rounded-md transition-colors ${
+                    className={`relative px-2.5 py-1.5 text-sm font-medium rounded-md transition-colors duration-200 nav-link ${
                       isActive
-                        ? "bg-gray-100 dark:bg-charcoal-700 text-gray-900 dark:text-gray-100"
-                        : "text-gray-600 dark:text-gray-400 hover:text-gray-900 dark:hover:text-gray-100 hover:bg-gray-50 dark:hover:bg-charcoal-700/50"
+                        ? "text-glaucous-700 dark:text-coral-400 nav-link-active"
+                        : "text-gray-600 dark:text-gray-400 hover:text-glaucous-700 dark:hover:text-coral-400"
                     }`}
                   >
                     {item.label}

@@ -1,6 +1,7 @@
 import { Metadata } from "next";
 import Link from "next/link";
 import { getAllTags } from "@/lib/tags";
+import { isPaperTag, getPaperAnchor } from "@/lib/paper-tags";
 
 export const metadata: Metadata = {
   title: "Tags — Reha Tuncer",
@@ -40,11 +41,15 @@ export default async function TagsIndexPage() {
                 // Scale font size based on count
                 const ratio = count / maxCount;
                 const size = ratio > 0.7 ? "text-base" : ratio > 0.3 ? "text-sm" : "text-xs";
+                // Paper tags link to academic page anchors; blog/TIL tags go to tag detail pages
+                const href = isPaperTag(tag)
+                  ? `/academic#${getPaperAnchor(tag)}`
+                  : `/tags/${encodeURIComponent(tag.toLowerCase())}`;
                 return (
                   <Link
                     key={tag}
-                    href={`/tags/${encodeURIComponent(tag.toLowerCase())}`}
-                    className={`inline-flex items-center gap-1 px-2.5 py-1 rounded-md transition-colors ${size} bg-gray-100 dark:bg-charcoal-700 text-gray-600 dark:text-gray-300 hover:bg-glaucous-100 dark:hover:bg-charcoal-600`}
+                    href={href}
+                    className={`inline-flex items-center gap-1 px-2.5 py-1 rounded-md transition-colors ${size} bg-glaucous-50 dark:bg-charcoal-700 text-glaucous-700 dark:text-coral-400 hover:bg-glaucous-100 dark:hover:bg-charcoal-600`}
                   >
                     {tag}
                     <span className="text-gray-400 dark:text-gray-500 text-xs">({count})</span>

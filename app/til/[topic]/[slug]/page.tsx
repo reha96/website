@@ -72,7 +72,7 @@ export default async function TilEntryPage({ params }: { params: Promise<Params>
                   <Link
                     key={tag}
                     href={`/tags/${encodeURIComponent(tag.toLowerCase())}`}
-                    className="px-2 py-0.5 text-xs bg-blue-50 dark:bg-charcoal-700 text-blue-700 dark:text-coral-400 rounded-md hover:bg-blue-100 dark:hover:bg-charcoal-600 transition-colors"
+                    className="px-2 py-0.5 text-xs bg-glaucous-50 dark:bg-charcoal-700 text-glaucous-700 dark:text-coral-400 rounded-md hover:bg-glaucous-100 dark:hover:bg-charcoal-600 transition-colors"
                   >
                     {tag}
                   </Link>

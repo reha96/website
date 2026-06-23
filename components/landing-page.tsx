@@ -1,28 +1,24 @@
 import Image from "next/image";
 import Link from "next/link";
 
-const SKILLS = [
-  "Behavioral Economics",
-  "Web Development",
-  "Reinforcement Learning",
-  "NGO Work",
-];
-
 const RESEARCH_INTERESTS = [
   {
     title: "Screen Time & Design",
     description:
       "Studying how autoplay and infinite scroll affect user behavior and attention.",
+    href: "/academic#paper3",
   },
   {
     title: "E-commerce UX",
     description:
       "How scarcity cues and time pressure shape decision-making and trust.",
+    href: "/academic#paper2",
   },
   {
     title: "Social Networks",
     description:
       "Understanding class bias and segregation in referral systems.",
+    href: "/academic#paper5",
   },
 ] as const;
 
@@ -55,31 +51,15 @@ export default function LandingPage() {
             </h1>
             <p className="text-gray-600 dark:text-[var(--color-text-secondary)] leading-relaxed mb-6">
               For my PhD, I taught myself web development to study user behavior
-              through online experiments. Today, I&apos;m training reinforcement
-              learning drones on weekends and quietly transforming NGO websites
+              through online experiments. Today, I train reinforcement learning
+              algorithms to fly drones on weekends and transform NGO websites
               during the week.
             </p>
             <p className="text-gray-600 dark:text-[var(--color-text-secondary)] leading-relaxed">
-              I am always chasing what makes humans click, and stay, while
-              creating meaningful digital experiences.
+              I chase what makes people click and stay, while also trying to
+              create meaningful digital experiences for them.
             </p>
           </div>
-        </div>
-
-        {/* ── Skills ── */}
-        <div className="flex flex-wrap gap-3 mb-16">
-          {SKILLS.map((skill) => (
-            <span
-              key={skill}
-              className="px-4 py-2 text-sm font-medium rounded-xl transition-colors duration-300"
-              style={{
-                backgroundColor: "var(--color-accent)",
-                color: "#fff",
-              }}
-            >
-              {skill}
-            </span>
-          ))}
         </div>
 
         {/* ── What I'm Curious About ── */}
@@ -95,60 +75,79 @@ export default function LandingPage() {
 
           <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
             {RESEARCH_INTERESTS.map((item) => (
-              <div
+              <Link
                 key={item.title}
-                className="p-5 rounded-2xl border-l-4 shadow-sm transition-colors duration-300 hover:bg-gray-50 dark:hover:bg-charcoal-800"
-                style={{
-                  borderLeftColor: "var(--color-accent)",
-                  backgroundColor: "var(--color-bg-secondary)",
-                }}
+                href={item.href}
+                className="group p-5 rounded-2xl shadow-sm transition-all duration-300 hover:scale-[1.03] card-hover block"
+                style={{ backgroundColor: "var(--color-bg-secondary)" }}
               >
-                <h3 className="font-serif text-lg font-medium text-gray-800 dark:text-[var(--color-text)] mb-2">
+                <h3 className="font-serif text-lg font-medium text-gray-800 dark:text-[var(--color-text)] mb-2 group-hover:text-white transition-colors duration-300">
                   {item.title}
                 </h3>
-                <p className="text-sm text-gray-600 dark:text-[var(--color-text-secondary)] leading-relaxed">
+                <p className="text-sm text-gray-600 dark:text-[var(--color-text-secondary)] leading-relaxed group-hover:text-white/90 transition-colors duration-300">
                   {item.description}
                 </p>
-              </div>
+              </Link>
             ))}
           </div>
         </section>
 
-        {/* ── CTAs ── */}
-        <div className="flex flex-wrap gap-4">
-          <Link
-            href="/academic"
-            className="inline-flex items-center px-6 py-3 font-medium rounded-xl transition-colors duration-300"
-            style={{
-              backgroundColor: "var(--color-accent)",
-              color: "#fff",
-            }}
-          >
-            View Research
-            <svg
-              className="ml-2 h-4 w-4"
-              fill="none"
-              viewBox="0 0 24 24"
-              stroke="currentColor"
-              strokeWidth={2}
+        {/* ── Explore ── */}
+        <section className="mb-16">
+          <h2 className="font-serif text-2xl font-semibold text-gray-800 dark:text-[var(--color-text)] mb-6">
+            Explore
+          </h2>
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
+            <Link
+              href="/blog"
+              className="group p-5 rounded-2xl shadow-sm transition-all duration-300 hover:scale-[1.03] card-hover block"
+              style={{ backgroundColor: "var(--color-bg-secondary)" }}
             >
-              <path
-                strokeLinecap="round"
-                strokeLinejoin="round"
-                d="M14 5l7 7m0 0l-7 7m7-7H3"
-              />
-            </svg>
-          </Link>
+              <h3 className="font-serif text-lg font-medium text-gray-800 dark:text-[var(--color-text)] mb-2 group-hover:text-white transition-colors duration-300">
+                Blog
+              </h3>
+              <p className="text-sm text-gray-600 dark:text-[var(--color-text-secondary)] leading-relaxed group-hover:text-white/90 transition-colors duration-300">
+                Learning notes from various courses: machine learning, Python
+                programming, and AI.
+              </p>
+            </Link>
+            <Link
+              href="/til"
+              className="group p-5 rounded-2xl shadow-sm transition-all duration-300 hover:scale-[1.03] card-hover block"
+              style={{ backgroundColor: "var(--color-bg-secondary)" }}
+            >
+              <h3 className="font-serif text-lg font-medium text-gray-800 dark:text-[var(--color-text)] mb-2 group-hover:text-white transition-colors duration-300">
+                TIL
+              </h3>
+              <p className="text-sm text-gray-600 dark:text-[var(--color-text-secondary)] leading-relaxed group-hover:text-white/90 transition-colors duration-300">
+                Today I Learned: Short notes on things I&apos;ve discovered
+                while coding and researching.
+              </p>
+            </Link>
+            <div
+              className="group p-5 rounded-2xl shadow-sm transition-all duration-300 hover:scale-[1.03] card-hover"
+              style={{ backgroundColor: "var(--color-bg-secondary)" }}
+            >
+              <h3 className="font-serif text-lg font-medium text-gray-800 dark:text-[var(--color-text)] mb-2 group-hover:text-white transition-colors duration-300">
+                Projects
+              </h3>
+              <p className="text-sm text-gray-600 dark:text-[var(--color-text-secondary)] leading-relaxed mb-3 group-hover:text-white/90 transition-colors duration-300">
+                RL drones, NGO websites, and experiments at the intersection of
+                economics and code.
+              </p>
+              <span className="text-xs font-medium px-2 py-0.5 rounded-md bg-gray-200 dark:bg-charcoal-600 text-gray-500 dark:text-gray-400 group-hover:bg-white/20 group-hover:text-white/80 transition-colors duration-300">
+                Coming soon
+              </span>
+            </div>
+          </div>
+        </section>
+
+        {/* ── Contact ── */}
+        <div className="mb-16">
           <a
-            href="https://hci.uni.lu/reha-tuncer/"
-            target="_blank"
-            rel="noopener noreferrer"
-            className="inline-flex items-center px-6 py-3 font-medium rounded-xl transition-colors duration-300"
-            style={{
-              backgroundColor: "var(--color-bg-secondary)",
-              color: "var(--color-text)",
-              border: "1px solid var(--color-border)",
-            }}
+            href="mailto:reha.tuncer@gmail.com"
+            className="inline-flex items-center px-6 py-3 font-medium rounded-xl transition-all duration-300 hover:scale-[1.03]"
+            style={{ backgroundColor: "var(--color-accent)", color: "#fff" }}
           >
             <svg
               className="mr-2 h-4 w-4"
@@ -163,14 +162,14 @@ export default function LandingPage() {
                 d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"
               />
             </svg>
-            Contact
+            Get in touch
           </a>
         </div>
 
-        {/* ── University Affiliation ── */}
-        <p className="mt-8 text-sm text-gray-500 dark:text-[var(--color-text-muted)]">
-          PhD &middot; University of Luxembourg
-        </p>
+        {/* ── Footer ── */}
+        <div className="border-t border-gray-200 dark:border-charcoal-700 pt-6 text-sm text-gray-400 dark:text-gray-500">
+          &copy; {new Date().getFullYear()} Reha Tuncer. All rights reserved.
+        </div>
       </div>
     </main>
   );
