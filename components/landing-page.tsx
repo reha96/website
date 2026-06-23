@@ -107,8 +107,8 @@ export default function LandingPage() {
                 Blog
               </h3>
               <p className="text-sm text-gray-600 dark:text-[var(--color-text-secondary)] leading-relaxed group-hover:text-white/90 transition-colors duration-300">
-                Learning notes from various courses: machine learning, Python
-                programming, and AI.
+                Notes from courses and projects across topics in machine
+                learning, Python programming, and AI.
               </p>
             </Link>
             <Link
