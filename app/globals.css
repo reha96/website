@@ -7,51 +7,51 @@
 
 /* ── Theme CSS Variables ── */
 :root {
-  /* Light theme: glaucous blue + coral red */
-  --color-bg:        #ffffff;
-  --color-bg-secondary: #f9fafb;
-  --color-bg-tertiary:  #f3f4f6;
+  /* Light theme: cream bg, glaucous blue + coral red */
+  --color-bg:        #DCDDC7;
+  --color-bg-secondary: #D3D4C0;
+  --color-bg-tertiary:  #C9CAB7;
   --color-text:       #1f2937;
   --color-text-secondary: #6b7280;
   --color-text-muted: #9ca3af;
-  --color-border:     #e5e7eb;
+  --color-border:     #C0C1AE;
   --color-primary:    #789BB9;  /* light glaucous blue */
   --color-primary-hover: #5F829E;
   --color-accent:     #E85D4A;  /* coral red */
   --color-accent-hover:  #CC3D2A;
   --color-link:       #5F829E;
-  --color-code-bg:    #f3f4f6;
+  --color-code-bg:    #E8E9DA;
   --color-code-text:  #db2777;
-  --color-blockquote-bg:   #FDF0EE;
+  --color-blockquote-bg:   #E5E6D5;
   --color-blockquote-border: #E85D4A;
   --color-blockquote-text:  #4b5563;
   --color-pre-bg:     #1e293b;
   --color-pre-text:   #e2e8f0;
-  --color-table-header-bg: #f9fafb;
+  --color-table-header-bg: #D3D4C0;
 }
 
 .dark {
-  /* Dark theme: darker glaucous blue + coral red */
-  --color-bg:             #1C2D3A;  /* deepest glaucous blue */
-  --color-bg-secondary:   #243744;
-  --color-bg-tertiary:    #2D4255;
-  --color-text:           #e5e7eb;
-  --color-text-secondary: #9ca3af;
-  --color-text-muted:     #6b7280;
-  --color-border:         #3A5068;
-  --color-primary:        #789BB9;  /* glaucous blue */
-  --color-primary-hover:  #8EADC9;
-  --color-accent:         #E85D4A;  /* coral red — same as light */
+  /* Dark theme: warm charcoal + cream text + coral red */
+  --color-bg:             #1A1A17;
+  --color-bg-secondary:   #242421;
+  --color-bg-tertiary:    #2E2E2B;
+  --color-text:           #DCDDC7;
+  --color-text-secondary: #A8A69A;
+  --color-text-muted:     #78776B;
+  --color-border:         #333330;
+  --color-primary:        #7BA0B5;  /* warm blue */
+  --color-primary-hover:  #8DB3C7;
+  --color-accent:         #E85D4A;  /* coral red — same both themes */
   --color-accent-hover:   #F07060;
-  --color-link:           #8EADC9;  /* lightened for dark bg readability */
-  --color-code-bg:        #243744;
-  --color-code-text:      #F09787;  /* muted coral for inline code */
-  --color-blockquote-bg:        #2D4255;
-  --color-blockquote-border:    #E85D4A;  /* coral pop */
-  --color-blockquote-text:      #d1d5db;
-  --color-pre-bg:         #151F29;  /* deepest for code blocks */
-  --color-pre-text:       #e2e8f0;
-  --color-table-header-bg: #243744;
+  --color-link:           #8DB3C7;
+  --color-code-bg:        #2A2A27;
+  --color-code-text:      #D6D7B8;  /* cream code text */
+  --color-blockquote-bg:        #242421;
+  --color-blockquote-border:    #E85D4A;
+  --color-blockquote-text:      #C5C5B3;
+  --color-pre-bg:         #12120F;
+  --color-pre-text:       #DCDDC7;
+  --color-table-header-bg: #242421;
 }
 
 /* Smooth scrolling for anchor links (TOC sidebar) */
@@ -64,9 +64,14 @@ body {
   color: var(--color-text);
 }
 
+/* ── Serif headings for academic gravitas ── */
+h1, h2 {
+  font-family: var(--font-serif), Georgia, serif;
+}
+
 /* Blog content typography — using CSS variables for theme support */
-.blog-content h1 { @apply text-2xl font-medium mt-8 mb-4; color: var(--color-text); }
-.blog-content h2 { @apply text-xl font-medium mt-8 mb-3 pb-1 border-b; color: var(--color-text); border-color: var(--color-border); }
+.blog-content h1 { @apply text-2xl font-semibold mt-8 mb-4; font-family: var(--font-serif), Georgia, serif; color: var(--color-text); }
+.blog-content h2 { @apply text-xl font-semibold mt-8 mb-3 pb-1 border-b; font-family: var(--font-serif), Georgia, serif; color: var(--color-text); border-color: var(--color-border); }
 .blog-content h3 { @apply text-lg font-medium mt-6 mb-2; color: var(--color-text); }
 .blog-content h4 { @apply text-base font-semibold mt-5 mb-2; color: var(--color-text); }
 .blog-content p { @apply my-3 leading-relaxed; }
@@ -84,3 +89,31 @@ body {
 .blog-content table { @apply min-w-full border-collapse my-6; }
 .blog-content th { @apply border px-4 py-2 text-left text-sm font-semibold; border-color: var(--color-border); background-color: var(--color-table-header-bg); }
 .blog-content td { @apply border px-4 py-2 text-sm; border-color: var(--color-border); }
+
+/* ── Nav link underline animation (anthropic.com style) ── */
+.nav-link::after {
+  content: '';
+  position: absolute;
+  bottom: 2px;
+  left: 0.625rem;
+  right: 0.625rem;
+  height: 2px;
+  background-color: currentColor;
+  border-radius: 1px;
+  transform: scaleX(0);
+  transform-origin: center;
+  transition: transform 0.25s ease;
+}
+
+.nav-link:hover::after {
+  transform: scaleX(1);
+}
+
+.nav-link-active::after {
+  transform: scaleX(1);
+}
+
+/* ── Card hover: coral fill + scale (arc.net style) ── */
+.card-hover:hover {
+  background-color: var(--color-accent) !important;
+}

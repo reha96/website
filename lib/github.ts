@@ -1,11 +1,45 @@
 import { BLOG_POSTS_CONFIG, BlogPostMeta } from "./blog-config";
 import { BlogPost, BlogPostWithContent } from "./blog-types";
 import { getLocalBlogPosts, getLocalBlogPostsMeta, getLocalBlogPost } from "./local-blog";
+import fs from "fs";
+import path from "path";
 
 const GITHUB_RAW = "https://raw.githubusercontent.com/reha96";
 const GITHUB_API = "https://api.github.com";
 
 const AUTHOR = "Reha Tuncer";
+
+/** Local cache file for commit dates — avoids GitHub API rate limits on every build. */
+const CACHE_PATH = path.join(process.cwd(), "content", "commit-dates.json");
+
+/**
+ * Load the commit date cache from disk.
+ * Returns a Map of "repo/path" → ISO date string.
+ */
+function loadCommitCache(): Map<string, string> {
+  try {
+    if (!fs.existsSync(CACHE_PATH)) return new Map();
+    const raw = JSON.parse(fs.readFileSync(CACHE_PATH, "utf-8"));
+    return new Map(Object.entries(raw));
+  } catch {
+    return new Map();
+  }
+}
+
+/**
+ * Persist the commit date cache to disk.
+ */
+function saveCommitCache(cache: Map<string, string>): void {
+  try {
+    const dir = path.dirname(CACHE_PATH);
+    if (!fs.existsSync(dir)) fs.mkdirSync(dir, { recursive: true });
+    const obj: Record<string, string> = {};
+    for (const [k, v] of cache) obj[k] = v;
+    fs.writeFileSync(CACHE_PATH, JSON.stringify(obj, null, 2), "utf-8");
+  } catch {
+    // Silently fail — cache is an optimisation, not critical
+  }
+}
 
 /**
  * Fetch a README.md file from a GitHub repo using raw.githubusercontent.com.
@@ -56,30 +90,68 @@ function extractExcerpt(content: string): string {
 }
 
 /**
+ * Fetch with a timeout — avoids hanging builds when GitHub API is rate-limited.
+ */
+async function fetchWithTimeout(url: string, timeoutMs = 10000): Promise<Response> {
+  const controller = new AbortController();
+  const timer = setTimeout(() => controller.abort(), timeoutMs);
+  try {
+    const res = await fetch(url, { signal: controller.signal, next: { revalidate: false } as any });
+    return res;
+  } finally {
+    clearTimeout(timer);
+  }
+}
+
+/**
  * Get the creation date for a repo or a specific file path.
- * Uses GitHub API — 60 req/hr unauthenticated, fine for build-time use.
+ * Checks local cache first to avoid GitHub API rate limits (60 req/hr unauthenticated).
+ * Falls back to API only for new/missing entries, then saves to cache.
+ * Uses a 10-second timeout per API call so builds never hang on rate limits.
  */
 async function fetchDate(repo: string, path: string): Promise<string> {
+  const cacheKey = path ? `${repo}/${path}` : repo;
+  const cache = loadCommitCache();
+
+  // 1. Return cached date if available
+  const cached = cache.get(cacheKey);
+  if (cached) return cached;
+
+  // 2. Fetch from GitHub API (with timeout)
+  let isoDate = "";
   try {
     if (path) {
-      // Get the first commit date for the specific file path
       const url = `${GITHUB_API}/repos/reha96/${repo}/commits?path=${encodeURIComponent(path + "/README.md")}&per_page=1&sort=author-date&direction=asc`;
-      const res = await fetch(url, { next: { revalidate: false } });
-      if (!res.ok) throw new Error("Failed to fetch commits");
-      const commits = await res.json();
-      if (Array.isArray(commits) && commits.length > 0) {
-        return commits[0].commit?.committer?.date || commits[0].commit?.author?.date || "";
+      const res = await fetchWithTimeout(url);
+      if (res.ok) {
+        const commits = await res.json();
+        if (Array.isArray(commits) && commits.length > 0) {
+          isoDate = commits[0].commit?.committer?.date || commits[0].commit?.author?.date || "";
+        }
       }
     }
-    // Fallback: repo creation date
-    const url = `${GITHUB_API}/repos/reha96/${repo}`;
-    const res = await fetch(url, { next: { revalidate: false } });
-    if (!res.ok) throw new Error("Failed to fetch repo");
-    const data = await res.json();
-    return data.created_at || new Date().toISOString();
+    if (!isoDate) {
+      const url = `${GITHUB_API}/repos/reha96/${repo}`;
+      const res = await fetchWithTimeout(url);
+      if (res.ok) {
+        const data = await res.json();
+        isoDate = data.created_at || "";
+      }
+    }
   } catch {
-    return new Date().toISOString();
+    // Timeout or network error — fall through to fallback
   }
+
+  // 3. Fallback: use today's date if API failed
+  if (!isoDate) {
+    isoDate = new Date().toISOString();
+  }
+
+  // 4. Save to cache for future builds
+  cache.set(cacheKey, isoDate);
+  saveCommitCache(cache);
+
+  return isoDate;
 }
 
 /**

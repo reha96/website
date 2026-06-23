@@ -6,6 +6,7 @@ import remarkMath from "remark-math";
 import rehypeHighlight from "rehype-highlight";
 import rehypeSlug from "rehype-slug";
 import rehypeKatex from "rehype-katex";
+import rehypeRaw from "rehype-raw";
 import "katex/dist/katex.min.css";
 
 interface MarkdownRendererProps {
@@ -24,7 +25,7 @@ export default function MarkdownRenderer({ content }: MarkdownRendererProps) {
     <div className="blog-content text-gray-700 dark:text-gray-300 leading-relaxed space-y-4">
       <ReactMarkdown
         remarkPlugins={[remarkGfm, remarkMath]}
-        rehypePlugins={[rehypeKatex, rehypeHighlight, rehypeSlug]}
+        rehypePlugins={[rehypeKatex, rehypeHighlight, rehypeSlug, rehypeRaw]}
         components={{
           a: ({ href, children, ...props }) => {
             const isExternal = href && (href.startsWith("http://") || href.startsWith("https://"));
