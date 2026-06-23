@@ -9,6 +9,10 @@ const config: Config = {
   darkMode: 'class',
   theme: {
     extend: {
+      fontFamily: {
+        serif: ['Playfair Display', 'Georgia', 'serif'],
+        sans: ['Inter', 'Inter Fallback', 'system-ui', 'sans-serif'],
+      },
       colors: {
         // ── "A Dictionary of Color Combinations" palette ──
         // Light theme: light glaucous blue + coral red
@@ -23,7 +27,6 @@ const config: Config = {
           700: '#4B6980',
           800: '#385062',
           900: '#243744',
-          950: '#1C2D3A', // darkest — matches dark theme bg
         },
         coral: {
           50:  '#FDF0EE',
@@ -37,40 +40,29 @@ const config: Config = {
           800: '#7A2418',
           900: '#52180F',
         },
-        // Dark theme: deeper glaucous blue + coral red (same palette, darker shades)
-        'oil-green': {
-          50:  '#E9EDE5',
-          100: '#D3DBCB',
-          200: '#A7B797',
-          300: '#7B9363',
-          400: '#5F7548',
-          500: '#4A5D3E', // kept for backward compat
-          600: '#3A4A31',
-          700: '#2B3725',
-          800: '#1C2518',
-          900: '#0E120C',
-        },
-        sulphur: {
-          50:  '#FDFBE6',
-          100: '#FBF7CD',
-          200: '#F7EF9B',
-          300: '#F3E769',
-          400: '#EFDF37',
-          500: '#E8D44D', // sulphur yellow (accent)
-          600: '#C4B01B',
-          700: '#938414',
-          800: '#62580D',
-          900: '#312C07',
+        // ── Warm dark theme (Claude-inspired) ──
+        charcoal: {
+          50:  '#F5F4F1',
+          100: '#E8E6DF',
+          200: '#D4D2CB',
+          300: '#A8A6A0',
+          400: '#6E6D68',
+          500: '#4A4A46',
+          600: '#333330',
+          700: '#2E2E2B',
+          800: '#242421',
+          900: '#1A1A17',
+          950: '#12120F',
         },
         // Semantic aliases
         primary: {
           light: '#789BB9',    // glaucous blue
-          dark: '#4A5D3E',     // oil green
+          dark: '#7BA0B5',     // warm blue for dark
           DEFAULT: '#789BB9',
         },
         accent: {
           light: '#E85D4A',    // coral red
-          dark: '#E8D44D',     // sulphur yellow
+          dark: '#E85D4A',     // coral red (same in both themes)
           DEFAULT: '#E85D4A',
         },
       },

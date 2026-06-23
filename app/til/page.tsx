@@ -30,7 +30,7 @@ export default function TilIndexPage() {
               <Link
                 key={topic.slug}
                 href={`/til/${topic.slug}`}
-                className="inline-flex items-center gap-1 px-3 py-1.5 text-sm rounded-md bg-gray-100 dark:bg-glaucous-800 text-gray-700 dark:text-gray-300 hover:bg-glaucous-100 dark:hover:bg-glaucous-700 transition-colors"
+                className="inline-flex items-center gap-1 px-3 py-1.5 text-sm rounded-xl bg-gray-100 dark:bg-charcoal-700 text-gray-700 dark:text-gray-300 hover:bg-glaucous-100 dark:hover:bg-charcoal-600 transition-colors"
               >
                 {topic.name}
                 <span className="text-gray-400 dark:text-gray-500 text-xs">({topic.count})</span>
@@ -41,7 +41,7 @@ export default function TilIndexPage() {
 
         {/* Recent TILs */}
         <section>
-          <h2 className="text-lg font-medium text-gray-800 dark:text-gray-200 mb-4 pb-2 border-b border-gray-200 dark:border-glaucous-700">
+          <h2 className="text-lg font-medium text-gray-800 dark:text-gray-200 mb-4 pb-2 border-b border-gray-200 dark:border-charcoal-600">
             Recent TILs
           </h2>
           <div className="space-y-4">
@@ -52,7 +52,7 @@ export default function TilIndexPage() {
                   className="group block"
                 >
                   <div className="flex items-baseline gap-4">
-                    <span className="text-xs text-gray-400 dark:text-gray-500 whitespace-nowrap min-w-[100px] px-1.5 py-0.5 bg-gray-100 dark:bg-glaucous-800 rounded">
+                    <span className="text-xs text-gray-400 dark:text-gray-500 whitespace-nowrap min-w-[100px] px-1.5 py-0.5 bg-gray-100 dark:bg-charcoal-700 rounded">
                       {til.topic}
                     </span>
                     <div>
@@ -68,7 +68,7 @@ export default function TilIndexPage() {
                         {til.tags.slice(0, 3).map((tag) => (
                           <span
                             key={tag}
-                            className="px-1.5 py-0.5 text-xs bg-gray-50 dark:bg-glaucous-800/50 text-gray-400 dark:text-gray-500 rounded"
+                            className="px-1.5 py-0.5 text-xs bg-gray-50 dark:bg-charcoal-700/50 text-gray-400 dark:text-gray-500 rounded"
                           >
                             {tag}
                           </span>

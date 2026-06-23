@@ -32,7 +32,7 @@ export default async function TagsIndexPage() {
 
         {letters.map((letter) => (
           <div key={letter} className="mb-6">
-            <h2 className="text-lg font-medium text-gray-800 dark:text-gray-200 mb-3 pb-1 border-b border-gray-200 dark:border-glaucous-700">
+            <h2 className="text-lg font-medium text-gray-800 dark:text-gray-200 mb-3 pb-1 border-b border-gray-200 dark:border-charcoal-600">
               {letter}
             </h2>
             <div className="flex flex-wrap gap-2">
@@ -44,7 +44,7 @@ export default async function TagsIndexPage() {
                   <Link
                     key={tag}
                     href={`/tags/${encodeURIComponent(tag.toLowerCase())}`}
-                    className={`inline-flex items-center gap-1 px-2.5 py-1 rounded-md transition-colors ${size} bg-gray-100 dark:bg-glaucous-800 text-gray-600 dark:text-gray-300 hover:bg-glaucous-100 dark:hover:bg-glaucous-700`}
+                    className={`inline-flex items-center gap-1 px-2.5 py-1 rounded-md transition-colors ${size} bg-gray-100 dark:bg-charcoal-700 text-gray-600 dark:text-gray-300 hover:bg-glaucous-100 dark:hover:bg-charcoal-600`}
                   >
                     {tag}
                     <span className="text-gray-400 dark:text-gray-500 text-xs">({count})</span>

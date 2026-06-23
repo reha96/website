@@ -66,7 +66,7 @@ export default function BlogIndexClient({ posts, allTags, allTopics }: BlogIndex
                 className={`px-2.5 py-1 text-xs font-medium rounded-md transition-colors ${
                   activeTopic === topic
                     ? "text-white"
-                    : "bg-gray-100 dark:bg-glaucous-800 text-gray-600 dark:text-gray-400 hover:bg-gray-200 dark:hover:bg-glaucous-700"
+                    : "bg-gray-100 dark:bg-charcoal-700 text-gray-600 dark:text-gray-400 hover:bg-gray-200 dark:hover:bg-charcoal-600"
                 }`}
                 style={activeTopic === topic ? { backgroundColor: 'var(--color-accent)' } : undefined}
               >
@@ -97,7 +97,7 @@ export default function BlogIndexClient({ posts, allTags, allTopics }: BlogIndex
                 className={`px-2 py-0.5 text-xs rounded-md transition-colors ${
                   activeTag === tag
                     ? "text-white"
-                    : "bg-gray-50 dark:bg-glaucous-800 text-gray-500 dark:text-gray-400 hover:bg-gray-100 dark:hover:bg-glaucous-700"
+                    : "bg-gray-50 dark:bg-charcoal-700 text-gray-500 dark:text-gray-400 hover:bg-gray-100 dark:hover:bg-charcoal-600"
                 }`}
                 style={activeTag === tag ? { backgroundColor: 'var(--color-primary)' } : undefined}
               >
@@ -120,7 +120,7 @@ export default function BlogIndexClient({ posts, allTags, allTopics }: BlogIndex
         ) : (
           years.map((year) => (
             <div key={year} className="mb-10">
-              <h2 className="text-xl font-medium text-gray-800 dark:text-gray-200 mb-4 pb-2 border-b border-gray-200 dark:border-glaucous-700">
+              <h2 className="text-xl font-medium text-gray-800 dark:text-gray-200 mb-4 pb-2 border-b border-gray-200 dark:border-charcoal-600">
                 {year}
               </h2>
               <div className="space-y-6">
@@ -153,7 +153,7 @@ export default function BlogIndexClient({ posts, allTags, allTopics }: BlogIndex
                             {post.tags.slice(0, 4).map((tag) => (
                               <span
                                 key={tag}
-                                className="px-1.5 py-0.5 text-xs bg-gray-100 dark:bg-glaucous-800 text-gray-500 dark:text-gray-400 rounded"
+                                className="px-1.5 py-0.5 text-xs bg-gray-100 dark:bg-charcoal-700 text-gray-500 dark:text-gray-400 rounded"
                               >
                                 {tag}
                               </span>

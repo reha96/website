@@ -32,7 +32,7 @@ export default function Navbar() {
 
   return (
     <>
-      <nav className="sticky top-0 z-50 bg-white/90 dark:bg-glaucous-950/90 backdrop-blur border-b border-gray-100 dark:border-glaucous-800">
+      <nav className="sticky top-0 z-50 bg-white/90 dark:bg-charcoal-900/90 backdrop-blur border-b border-gray-100 dark:border-charcoal-700">
         <div className="max-w-4xl mx-auto px-6">
           <div className="flex items-center justify-between h-14">
             {/* Logo / Name */}
@@ -68,8 +68,8 @@ export default function Navbar() {
                     href={item.href}
                     className={`px-2.5 py-1.5 text-sm font-medium rounded-md transition-colors ${
                       isActive
-                        ? "bg-gray-100 dark:bg-glaucous-800 text-gray-900 dark:text-gray-100"
-                        : "text-gray-600 dark:text-gray-400 hover:text-gray-900 dark:hover:text-gray-100 hover:bg-gray-50 dark:hover:bg-glaucous-800/50"
+                        ? "bg-gray-100 dark:bg-charcoal-700 text-gray-900 dark:text-gray-100"
+                        : "text-gray-600 dark:text-gray-400 hover:text-gray-900 dark:hover:text-gray-100 hover:bg-gray-50 dark:hover:bg-charcoal-700/50"
                     }`}
                   >
                     {item.label}
@@ -80,7 +80,7 @@ export default function Navbar() {
               {/* Search trigger button */}
               <button
                 onClick={() => setSearchOpen(true)}
-                className="p-2 rounded-md transition-colors hover:bg-gray-100 dark:hover:bg-glaucous-800 text-gray-600 dark:text-gray-400"
+                className="p-2 rounded-md transition-colors hover:bg-gray-100 dark:hover:bg-charcoal-700 text-gray-600 dark:text-gray-400"
                 aria-label="Search (⌘K)"
                 title="Search (⌘K)"
               >

@@ -31,27 +31,27 @@
 }
 
 .dark {
-  /* Dark theme: darker glaucous blue + coral red */
-  --color-bg:             #1C2D3A;  /* deepest glaucous blue */
-  --color-bg-secondary:   #243744;
-  --color-bg-tertiary:    #2D4255;
-  --color-text:           #e5e7eb;
-  --color-text-secondary: #9ca3af;
-  --color-text-muted:     #6b7280;
-  --color-border:         #3A5068;
-  --color-primary:        #789BB9;  /* glaucous blue */
-  --color-primary-hover:  #8EADC9;
-  --color-accent:         #E85D4A;  /* coral red — same as light */
+  /* Dark theme: warm charcoal + coral red (Claude-inspired) */
+  --color-bg:             #1A1A17;
+  --color-bg-secondary:   #242421;
+  --color-bg-tertiary:    #2E2E2B;
+  --color-text:           #FAF9F5;
+  --color-text-secondary: #A8A6A0;
+  --color-text-muted:     #6E6D68;
+  --color-border:         #333330;
+  --color-primary:        #7BA0B5;  /* warm blue */
+  --color-primary-hover:  #8DB3C7;
+  --color-accent:         #E85D4A;  /* coral red — same both themes */
   --color-accent-hover:   #F07060;
-  --color-link:           #8EADC9;  /* lightened for dark bg readability */
-  --color-code-bg:        #243744;
-  --color-code-text:      #F09787;  /* muted coral for inline code */
-  --color-blockquote-bg:        #2D4255;
-  --color-blockquote-border:    #E85D4A;  /* coral pop */
-  --color-blockquote-text:      #d1d5db;
-  --color-pre-bg:         #151F29;  /* deepest for code blocks */
-  --color-pre-text:       #e2e8f0;
-  --color-table-header-bg: #243744;
+  --color-link:           #8DB3C7;
+  --color-code-bg:        #2A2A27;
+  --color-code-text:      #F09787;  /* muted coral */
+  --color-blockquote-bg:        #242421;
+  --color-blockquote-border:    #E85D4A;
+  --color-blockquote-text:      #D4D2CB;
+  --color-pre-bg:         #12120F;
+  --color-pre-text:       #E8E6DF;
+  --color-table-header-bg: #242421;
 }
 
 /* Smooth scrolling for anchor links (TOC sidebar) */
@@ -64,9 +64,14 @@ body {
   color: var(--color-text);
 }
 
+/* ── Serif headings for academic gravitas ── */
+h1, h2 {
+  font-family: var(--font-serif), Georgia, serif;
+}
+
 /* Blog content typography — using CSS variables for theme support */
-.blog-content h1 { @apply text-2xl font-medium mt-8 mb-4; color: var(--color-text); }
-.blog-content h2 { @apply text-xl font-medium mt-8 mb-3 pb-1 border-b; color: var(--color-text); border-color: var(--color-border); }
+.blog-content h1 { @apply text-2xl font-semibold mt-8 mb-4; font-family: var(--font-serif), Georgia, serif; color: var(--color-text); }
+.blog-content h2 { @apply text-xl font-semibold mt-8 mb-3 pb-1 border-b; font-family: var(--font-serif), Georgia, serif; color: var(--color-text); border-color: var(--color-border); }
 .blog-content h3 { @apply text-lg font-medium mt-6 mb-2; color: var(--color-text); }
 .blog-content h4 { @apply text-base font-semibold mt-5 mb-2; color: var(--color-text); }
 .blog-content p { @apply my-3 leading-relaxed; }
