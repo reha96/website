@@ -17,6 +17,12 @@ export default function BlogIndexClient({ posts, allTopics }: BlogIndexClientPro
     return true;
   });
 
+  // Topic counts for filter pills
+  const topicCounts: Record<string, number> = {};
+  for (const post of posts) {
+    topicCounts[post.topic] = (topicCounts[post.topic] || 0) + 1;
+  }
+
   // Group posts by year
   const groupedByYear: Record<string, BlogPost[]> = {};
   for (const post of filteredPosts) {
@@ -53,14 +59,17 @@ export default function BlogIndexClient({ posts, allTopics }: BlogIndexClientPro
               <button
                 key={topic}
                 onClick={() => handleTopicClick(topic)}
-                className={`px-2.5 py-1 text-xs font-medium rounded-md transition-colors ${
+                className={`inline-flex items-center gap-1 px-3 py-1.5 text-sm rounded-xl transition-all duration-200 ${
                   activeTopic === topic
                     ? "text-white"
-                    : "bg-gray-100 dark:bg-charcoal-700 text-gray-600 dark:text-gray-400 hover:bg-gray-200 dark:hover:bg-charcoal-600"
+                    : "bg-gray-100 dark:bg-charcoal-700 text-gray-700 dark:text-gray-300 hover:bg-glaucous-500 hover:text-white dark:hover:bg-coral-600 dark:hover:text-white"
                 }`}
                 style={activeTopic === topic ? { backgroundColor: 'var(--color-accent)' } : undefined}
               >
                 {topic}
+                <span className={`text-xs ${activeTopic === topic ? "text-white/70" : "text-gray-400 dark:text-gray-500"}`}>
+                  ({topicCounts[topic] || 0})
+                </span>
               </button>
             ))}
             {activeTopic && (
@@ -85,12 +94,12 @@ export default function BlogIndexClient({ posts, allTopics }: BlogIndexClientPro
               <h2 className="text-xl font-medium text-gray-800 dark:text-gray-200 mb-4 pb-2 border-b border-gray-200 dark:border-charcoal-600">
                 {year}
               </h2>
-              <div className="space-y-6">
+              <div className="space-y-4">
                 {groupedByYear[year].map((post) => (
-                  <article key={post.slug} className="group">
+                  <article key={post.slug}>
                     <Link
                       href={`/blog/${post.year}/${post.month}/${post.day}/${post.slug}`}
-                      className="block"
+                      className="block rounded-xl border border-gray-100 dark:border-charcoal-700 p-4 transition-all duration-200 hover:scale-[1.01] hover:shadow-md hover:border-glaucous-200 dark:hover:border-charcoal-600 bg-transparent hover:bg-gray-50/50 dark:hover:bg-charcoal-800/50"
                     >
                       <div className="flex items-baseline gap-4">
                         <time
@@ -102,10 +111,15 @@ export default function BlogIndexClient({ posts, allTopics }: BlogIndexClientPro
                             day: "numeric",
                           })}
                         </time>
-                        <div>
-                          <h3 className="text-base font-medium text-gray-800 dark:text-gray-200 group-hover:text-glaucous-600 dark:group-hover:text-coral-400 transition-colors">
-                            {post.title}
-                          </h3>
+                        <div className="min-w-0 flex-1">
+                          <div className="flex items-center gap-2 mb-1">
+                            <h3 className="text-base font-medium text-gray-800 dark:text-gray-200">
+                              {post.title}
+                            </h3>
+                            <span className="shrink-0 px-1.5 py-0.5 text-xs rounded-md bg-glaucous-50 dark:bg-charcoal-700 text-glaucous-700 dark:text-coral-400 font-medium">
+                              {post.topic}
+                            </span>
+                          </div>
                           {post.excerpt && (
                             <p className="text-sm text-gray-500 dark:text-gray-400 mt-0.5 line-clamp-1">
                               {post.excerpt}
@@ -115,7 +129,7 @@ export default function BlogIndexClient({ posts, allTopics }: BlogIndexClientPro
                             {post.tags.slice(0, 4).map((tag) => (
                               <span
                                 key={tag}
-                                className="px-1.5 py-0.5 text-xs bg-gray-100 dark:bg-charcoal-700 text-gray-500 dark:text-gray-400 rounded"
+                                className="px-1.5 py-0.5 text-xs bg-glaucous-50 dark:bg-charcoal-700 text-glaucous-700 dark:text-coral-400 rounded"
                               >
                                 {tag}
                               </span>

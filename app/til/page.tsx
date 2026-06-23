@@ -30,7 +30,7 @@ export default function TilIndexPage() {
               <Link
                 key={topic.slug}
                 href={`/til/${topic.slug}`}
-                className="inline-flex items-center gap-1 px-3 py-1.5 text-sm rounded-xl bg-gray-100 dark:bg-charcoal-700 text-gray-700 dark:text-gray-300 hover:bg-glaucous-100 dark:hover:bg-charcoal-600 transition-colors"
+                className="inline-flex items-center gap-1 px-3 py-1.5 text-sm rounded-xl bg-gray-100 dark:bg-charcoal-700 text-gray-700 dark:text-gray-300 hover:bg-glaucous-500 hover:text-white dark:hover:bg-coral-600 dark:hover:text-white transition-all duration-200"
               >
                 {topic.name}
                 <span className="text-gray-400 dark:text-gray-500 text-xs">({topic.count})</span>
