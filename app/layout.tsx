@@ -13,7 +13,15 @@ const playfair = Playfair_Display({
 
 export const metadata: Metadata = {
   title: 'Reha Tuncer',
-  description: 'Academic website',
+  description: 'Academic website — behavioral economics, web development, and reinforcement learning',
+  icons: {
+    icon: [
+      { url: '/favicon.ico', sizes: '48x48' },
+      { url: '/favicon-64.png', sizes: '64x64' },
+      { url: '/favicon-128.png', sizes: '128x128' },
+    ],
+    apple: '/favicon-256.png',
+  },
 }
 
 export default function RootLayout({
@@ -22,7 +30,7 @@ export default function RootLayout({
   children: React.ReactNode
 }) {
   return (
-    <html lang="en" suppressHydrationWarning>
+    <html lang="en" suppressHydrationWarning data-scroll-behavior="smooth">
       <body className={`${inter.variable} ${playfair.variable} font-sans`}>
         <ThemeProvider>
           <Navbar />

@@ -7,37 +7,37 @@
 
 /* ── Theme CSS Variables ── */
 :root {
-  /* Light theme: glaucous blue + coral red */
-  --color-bg:        #ffffff;
-  --color-bg-secondary: #f9fafb;
-  --color-bg-tertiary:  #f3f4f6;
+  /* Light theme: cream bg, glaucous blue + coral red */
+  --color-bg:        #DCDDC7;
+  --color-bg-secondary: #D3D4C0;
+  --color-bg-tertiary:  #C9CAB7;
   --color-text:       #1f2937;
   --color-text-secondary: #6b7280;
   --color-text-muted: #9ca3af;
-  --color-border:     #e5e7eb;
+  --color-border:     #C0C1AE;
   --color-primary:    #789BB9;  /* light glaucous blue */
   --color-primary-hover: #5F829E;
   --color-accent:     #E85D4A;  /* coral red */
   --color-accent-hover:  #CC3D2A;
   --color-link:       #5F829E;
-  --color-code-bg:    #f3f4f6;
+  --color-code-bg:    #E8E9DA;
   --color-code-text:  #db2777;
-  --color-blockquote-bg:   #FDF0EE;
+  --color-blockquote-bg:   #E5E6D5;
   --color-blockquote-border: #E85D4A;
   --color-blockquote-text:  #4b5563;
   --color-pre-bg:     #1e293b;
   --color-pre-text:   #e2e8f0;
-  --color-table-header-bg: #f9fafb;
+  --color-table-header-bg: #D3D4C0;
 }
 
 .dark {
-  /* Dark theme: warm charcoal + coral red (Claude-inspired) */
+  /* Dark theme: warm charcoal + cream text + coral red */
   --color-bg:             #1A1A17;
   --color-bg-secondary:   #242421;
   --color-bg-tertiary:    #2E2E2B;
-  --color-text:           #FAF9F5;
-  --color-text-secondary: #A8A6A0;
-  --color-text-muted:     #6E6D68;
+  --color-text:           #DCDDC7;
+  --color-text-secondary: #A8A69A;
+  --color-text-muted:     #78776B;
   --color-border:         #333330;
   --color-primary:        #7BA0B5;  /* warm blue */
   --color-primary-hover:  #8DB3C7;
@@ -45,12 +45,12 @@
   --color-accent-hover:   #F07060;
   --color-link:           #8DB3C7;
   --color-code-bg:        #2A2A27;
-  --color-code-text:      #F09787;  /* muted coral */
+  --color-code-text:      #D6D7B8;  /* cream code text */
   --color-blockquote-bg:        #242421;
   --color-blockquote-border:    #E85D4A;
-  --color-blockquote-text:      #D4D2CB;
+  --color-blockquote-text:      #C5C5B3;
   --color-pre-bg:         #12120F;
-  --color-pre-text:       #E8E6DF;
+  --color-pre-text:       #DCDDC7;
   --color-table-header-bg: #242421;
 }
 

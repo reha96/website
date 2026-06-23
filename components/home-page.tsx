@@ -28,11 +28,12 @@ export default function HomePage({ abstracts }: { abstracts: Record<string, Pape
           {/* Photo Column */}
           <div className="w-full md:w-1/3 mb-8 md:mb-0">
             <Image
-              src="/test_pp.png"
+              src="/new_pp.png"
               alt="Reha Tuncer"
               width={300}
               height={300}
               className="w-full max-w-xs rounded"
+              priority
             />
           </div>
 

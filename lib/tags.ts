@@ -1,8 +1,10 @@
 import { getAllBlogPostsMeta } from "@/lib/github";
 import { getAllTils } from "@/lib/til";
+import { PAPER_TAGS } from "@/lib/paper-tags";
 
 /**
- * Get a unified list of all tags used across blog posts and TILs, with counts.
+ * Get a unified list of all tags used across blog posts, TILs, and papers,
+ * with counts for the /tags cloud.
  */
 export async function getAllTags(): Promise<{ tag: string; count: number }[]> {
   const tagMap = new Map<string, number>();
@@ -19,6 +21,13 @@ export async function getAllTags(): Promise<{ tag: string; count: number }[]> {
   const tils = getAllTils();
   for (const til of tils) {
     for (const tag of til.tags) {
+      tagMap.set(tag, (tagMap.get(tag) || 0) + 1);
+    }
+  }
+
+  // Papers (static — from lib/paper-tags.ts)
+  for (const tags of Object.values(PAPER_TAGS)) {
+    for (const tag of tags) {
       tagMap.set(tag, (tagMap.get(tag) || 0) + 1);
     }
   }

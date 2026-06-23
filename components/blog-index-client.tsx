@@ -6,16 +6,13 @@ import type { BlogPost } from "@/lib/blog-types";
 
 interface BlogIndexClientProps {
   posts: BlogPost[];
-  allTags: string[];
   allTopics: string[];
 }
 
-export default function BlogIndexClient({ posts, allTags, allTopics }: BlogIndexClientProps) {
-  const [activeTag, setActiveTag] = useState<string | null>(null);
+export default function BlogIndexClient({ posts, allTopics }: BlogIndexClientProps) {
   const [activeTopic, setActiveTopic] = useState<string | null>(null);
 
   const filteredPosts = posts.filter((post) => {
-    if (activeTag && !post.tags.includes(activeTag)) return false;
     if (activeTopic && post.topic !== activeTopic) return false;
     return true;
   });
@@ -29,18 +26,11 @@ export default function BlogIndexClient({ posts, allTags, allTopics }: BlogIndex
 
   const years = Object.keys(groupedByYear).sort((a, b) => Number(b) - Number(a));
 
-  const handleTagClick = (tag: string) => {
-    setActiveTag(activeTag === tag ? null : tag);
-    setActiveTopic(null);
-  };
-
   const handleTopicClick = (topic: string) => {
     setActiveTopic(activeTopic === topic ? null : topic);
-    setActiveTag(null);
   };
 
   const clearFilters = () => {
-    setActiveTag(null);
     setActiveTopic(null);
   };
 
@@ -54,9 +44,9 @@ export default function BlogIndexClient({ posts, allTags, allTopics }: BlogIndex
         </p>
 
         {/* Filter Bar — Topics */}
-        <div className="mb-4">
+        <div className="mb-8">
           <span className="text-xs font-medium text-gray-500 dark:text-gray-400 uppercase tracking-wide mr-3">
-            Topic
+            Topics
           </span>
           <div className="inline-flex flex-wrap gap-1.5">
             {allTopics.map((topic) => (
@@ -73,41 +63,13 @@ export default function BlogIndexClient({ posts, allTags, allTopics }: BlogIndex
                 {topic}
               </button>
             ))}
-            {(activeTag || activeTopic) && (
+            {activeTopic && (
               <button
                 onClick={clearFilters}
                 className="px-2.5 py-1 text-xs font-medium rounded-md bg-red-50 dark:bg-red-900/30 text-red-600 dark:text-red-400 hover:bg-red-100 dark:hover:bg-red-900/50 transition-colors"
               >
                 ✕ Clear
               </button>
-            )}
-          </div>
-        </div>
-
-        {/* Filter Bar — Tags */}
-        <div className="mb-8">
-          <span className="text-xs font-medium text-gray-500 dark:text-gray-400 uppercase tracking-wide mr-3">
-            Tags
-          </span>
-          <div className="inline-flex flex-wrap gap-1.5">
-            {allTags.slice(0, 20).map((tag) => (
-              <button
-                key={tag}
-                onClick={() => handleTagClick(tag)}
-                className={`px-2 py-0.5 text-xs rounded-md transition-colors ${
-                  activeTag === tag
-                    ? "text-white"
-                    : "bg-gray-50 dark:bg-charcoal-700 text-gray-500 dark:text-gray-400 hover:bg-gray-100 dark:hover:bg-charcoal-600"
-                }`}
-                style={activeTag === tag ? { backgroundColor: 'var(--color-primary)' } : undefined}
-              >
-                {tag}
-              </button>
-            ))}
-            {allTags.length > 20 && (
-              <span className="text-xs text-gray-400 dark:text-gray-500 self-center">
-                +{allTags.length - 20} more
-              </span>
             )}
           </div>
         </div>

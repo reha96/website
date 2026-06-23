@@ -3,11 +3,11 @@ import BlogIndexClient from "@/components/blog-index-client";
 
 /**
  * Blog index page — SSG.
- * Lists all posts grouped by year with tag/topic filtering.
+ * Lists all posts grouped by year with topic filtering.
  */
 export default async function BlogIndexPage() {
   const posts = await getAllBlogPostsMeta();
-  const { tags, topics } = await getFilters();
+  const { topics } = await getFilters();
 
-  return <BlogIndexClient posts={posts} allTags={tags} allTopics={topics} />;
+  return <BlogIndexClient posts={posts} allTopics={topics} />;
 }
