@@ -7,7 +7,7 @@ topic: "Web Development"
 author: "Reha Tuncer"
 ---
 
-# How I Rebuilt My Website with DeepSeek V4 Pro for under $3
+# How I Rebuilt My Website with DeepSeek V4 Pro for $2
 
 Yesterday I was in a workshop about building AI-powered personal brands using platforms like bolt.new, Canva, Lovable and other similar tools. The premise of these companies is to make one-shot prompts into usable websites, without delving into techinicalities of front-end development. Of course, once the not-so-generous free tokens run out and you are making changes to your landing page, you are invited to subscribe for a $30 per month plan. That's essentially the entire business plan. 
 
