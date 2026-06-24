@@ -117,3 +117,13 @@ h1, h2 {
 .card-hover:hover {
   background-color: var(--color-accent) !important;
 }
+
+/* ── Mobile menu animation ── */
+.mobile-menu {
+  max-height: 0;
+  overflow: hidden;
+  transition: max-height 0.3s ease;
+}
+.mobile-menu-open {
+  max-height: 24rem;
+}

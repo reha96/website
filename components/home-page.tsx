@@ -33,8 +33,6 @@ export default function HomePage({ abstracts }: { abstracts: Record<string, Pape
             University of Luxembourg
           </Link>
           <span className="text-gray-400 dark:text-gray-500">·</span>
-          <span className="text-gray-500 dark:text-gray-400">reha.tuncer[at]gmail.com</span>
-          <span className="text-gray-400 dark:text-gray-500">·</span>
           <Link
             href="/CV_RT.pdf"
             className="font-medium hover:underline"
