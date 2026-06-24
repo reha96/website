@@ -166,10 +166,7 @@ export default function LandingPage() {
           </a>
         </div>
 
-        {/* ── Footer ── */}
-        <div className="border-t border-gray-400 dark:border-charcoal-700 pt-6 text-sm text-gray-400 dark:text-gray-500">
-          &copy; {new Date().getFullYear()} Reha Tuncer. All rights reserved.
-        </div>
+
       </div>
     </main>
   );
