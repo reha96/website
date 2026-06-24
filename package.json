@@ -5,7 +5,7 @@
   "scripts": {
     "dev": "next dev",
     "build": "next build",
-    "postbuild": "npx tsx lib/search-index.ts",
+    "postbuild": "npx tsx lib/search-index.ts && npx tsx lib/sitemap.ts",
     "start": "next start",
     "lint": "next lint"
   },
