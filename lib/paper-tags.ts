@@ -5,11 +5,11 @@
  */
 
 export const PAPER_TAGS: Record<string, string[]> = {
-  paper1: ["Revealed Preference", "Heterogeneity"],
-  paper2: ["Scarcity", "User Experience"],
-  paper3: ["Intertemporal Choice", "User Experience"],
-  paper4: ["Human Capital", "Contact Theory"],
-  paper5: ["Social Capital", "Inequality"],
+  paper1: ["revealed-preference", "heterogeneity"],
+  paper2: ["scarcity", "user-experience"],
+  paper3: ["intertemporal-choice", "user-experience"],
+  paper4: ["human-capital", "contact-theory"],
+  paper5: ["social-capital", "inequality"],
 };
 
 /** Map each tag to the paper ID it belongs to (for linking to /academic#paperN). */
