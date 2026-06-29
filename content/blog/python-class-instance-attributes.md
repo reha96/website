@@ -2,7 +2,7 @@
 title: "Class and Instance Attributes in Python — How __dict__ Ties It All Together"
 date: "2026-05-28"
 slug: "python-class-instance-attributes"
-tags: ["Python", "OOP", "Classes", "Attributes", "__dict__", "Programming"]
+tags: ["python", "oop", "classes", "attributes", "__dict__", "programming"]
 topic: "Python"
 author: "Reha Tuncer"
 ---

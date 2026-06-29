@@ -2,7 +2,7 @@
 title: "Database Design Template"
 date: "2026-05-28"
 slug: "database-design-template"
-tags: ["Database Design", "SQL", "Schema", "ERD", "Template", "Guide"]
+tags: ["database-design", "sql", "schema", "erd", "template", "guide"]
 topic: "Database Design"
 author: "Reha Tuncer"
 ---

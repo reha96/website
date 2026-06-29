@@ -2,7 +2,7 @@
 title: "How I Rebuilt My Website in an Afternoon (and Why It Only Cost $2)"
 date: "2026-06-23"
 slug: "ai-powered-personal-website-rebuild"
-tags: ["AI", "Web Development", "GitHub Copilot", "Next.js", "Design", "Personal Branding"]
+tags: ["ai", "web-development", "github-copilot", "nextjs", "design", "personal-branding"]
 topic: "Web Development"
 author: "Reha Tuncer"
 ---

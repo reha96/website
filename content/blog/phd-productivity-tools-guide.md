@@ -2,7 +2,7 @@
 title: "PhD Productivity Tools Guide"
 date: "2025-09-30"
 slug: "phd-productivity-tools-guide"
-tags: ["PhD", "Research", "LaTeX", "Zotero", "GitHub", "Overleaf", "AI", "Productivity"]
+tags: ["phd", "research", "latex", "zotero", "github", "overleaf", "ai", "productivity"]
 topic: "Academic Tools"
 author: "Reha Tuncer"
 ---

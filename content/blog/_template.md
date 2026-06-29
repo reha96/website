@@ -2,7 +2,7 @@
 title: "Your Post Title"
 date: "2026-06-20"
 slug: "your-post-slug"
-tags: ["Tag1", "Tag2", "Tag3"]
+tags: ["tag1", "tag2", "tag3"]
 topic: "Your Topic"
 author: "Reha Tuncer"
 ---
