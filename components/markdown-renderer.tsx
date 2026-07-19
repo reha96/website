@@ -19,7 +19,7 @@ export default function MarkdownRenderer({ content }: MarkdownRendererProps) {
     <div className="blog-content text-gray-700 dark:text-gray-300 leading-relaxed space-y-4">
       <ReactMarkdown
         remarkPlugins={[remarkGfm, remarkMath]}
-        rehypePlugins={[rehypeKatex, rehypeHighlight, rehypeSlug, rehypeRaw, rehypeSanitize]}
+        rehypePlugins={[rehypeKatex, rehypeHighlight, rehypeSlug, rehypeRaw, [rehypeSanitize, { clobberPrefix: "" }]]}
         components={{
           a: ({ href, title, children }) => {
             const isExternal = href && (href.startsWith("http://") || href.startsWith("https://"));
