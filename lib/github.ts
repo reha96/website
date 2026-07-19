@@ -105,19 +105,15 @@ async function fetchWithTimeout(url: string, timeoutMs = 10000): Promise<Respons
 
 /**
  * Get the creation date for a repo or a specific file path.
- * Checks local cache first to avoid GitHub API rate limits (60 req/hr unauthenticated).
- * Falls back to API only for new/missing entries, then saves to cache.
- * Uses a 10-second timeout per API call so builds never hang on rate limits.
+ * Reads from the shared cache; on cache miss, fetches from GitHub API.
+ * Does NOT persist to disk — callers must call saveCommitCache() once at the end.
  */
-async function fetchDate(repo: string, path: string): Promise<string> {
+async function fetchDate(repo: string, path: string, cache: Map<string, string>): Promise<string> {
   const cacheKey = path ? `${repo}/${path}` : repo;
-  const cache = loadCommitCache();
 
-  // 1. Return cached date if available
   const cached = cache.get(cacheKey);
   if (cached) return cached;
 
-  // 2. Fetch from GitHub API (with timeout)
   let isoDate = "";
   try {
     if (path) {
@@ -142,15 +138,11 @@ async function fetchDate(repo: string, path: string): Promise<string> {
     // Timeout or network error — fall through to fallback
   }
 
-  // 3. Fallback: use today's date if API failed
   if (!isoDate) {
     isoDate = new Date().toISOString();
   }
 
-  // 4. Save to cache for future builds
   cache.set(cacheKey, isoDate);
-  saveCommitCache(cache);
-
   return isoDate;
 }
 
@@ -274,6 +266,9 @@ async function getAllBlogPosts(): Promise<BlogPostWithContent[]> {
   const entries = Object.entries(BLOG_POSTS_CONFIG);
   const posts: BlogPostWithContent[] = [];
 
+  // Load the commit-date cache once to avoid parallel-write race conditions
+  const cache = loadCommitCache();
+
   // Fetch all in parallel for speed
   const results = await Promise.all(
     entries.map(async ([slug, meta]) => {
@@ -283,7 +278,7 @@ async function getAllBlogPosts(): Promise<BlogPostWithContent[]> {
       const titleFromMd = extractTitle(content, makeDisplayTitle(meta));
       const title = titleFromMd;
       const excerpt = extractExcerpt(content);
-      const isoDate = await fetchDate(meta.repo, meta.path);
+      const isoDate = await fetchDate(meta.repo, meta.path, cache);
       const { year, month, day } = dateToParts(isoDate);
 
       const post: BlogPostWithContent = {
@@ -304,6 +299,9 @@ async function getAllBlogPosts(): Promise<BlogPostWithContent[]> {
       return post;
     })
   );
+
+  // Persist cache once after all API calls complete
+  saveCommitCache(cache);
 
   for (const result of results) {
     if (result) posts.push(result);
@@ -341,7 +339,9 @@ export async function getBlogPost(slug: string): Promise<BlogPostWithContent | n
 
   const titleFromMd = extractTitle(content, makeDisplayTitle(meta));
   const excerpt = extractExcerpt(content);
-  const isoDate = await fetchDate(meta.repo, meta.path);
+  const cache = loadCommitCache();
+  const isoDate = await fetchDate(meta.repo, meta.path, cache);
+  saveCommitCache(cache);
   const { year, month, day } = dateToParts(isoDate);
 
   // Build path mapping and rewrite internal cross-reference links
