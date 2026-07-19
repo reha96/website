@@ -1,6 +1,5 @@
 "use client";
 
-import Image from "next/image";
 import Link from "next/link";
 import { useState } from "react";
 import type { PaperAbstract } from "@/lib/tex-fetch";
@@ -78,7 +77,7 @@ export default function HomePage({ abstracts }: { abstracts: Record<string, Pape
               <div className="my-4 p-4 bg-white dark:bg-charcoal-900 rounded-xl border border-gray-200 dark:border-charcoal-600">
                 <h4 className="text-sm font-semibold mb-2 dark:text-gray-200">Abstract</h4>
                 <p className="text-sm text-gray-700 dark:text-gray-300">
-                  {abstracts["paper1"].text}
+                  {abstracts["paper1"]?.text ?? "Abstract not available."}
                 </p>
               </div>
             )}
@@ -195,7 +194,7 @@ export default function HomePage({ abstracts }: { abstracts: Record<string, Pape
               <div className="my-4 p-4 bg-white dark:bg-charcoal-900 rounded-xl border border-gray-200 dark:border-charcoal-600">
                 <h4 className="text-sm font-semibold mb-2 dark:text-gray-200">Abstract</h4>
                 <p className="text-sm text-gray-700 dark:text-gray-300">
-                  {abstracts["paper2"].text}
+                  {abstracts["paper2"]?.text ?? "Abstract not available."}
                 </p>
               </div>
             )}

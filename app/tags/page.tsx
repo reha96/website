@@ -9,7 +9,17 @@ export const metadata: Metadata = {
 };
 
 export default async function TagsIndexPage() {
-  const tags = await getAllTags();
+  let tags: { tag: string; count: number }[];
+  try {
+    tags = await getAllTags();
+  } catch (error) {
+    console.error("Failed to fetch tags:", error);
+    return (
+      <div className="min-h-screen flex items-center justify-center">
+        <p className="text-gray-500 dark:text-gray-400">Failed to load tags. Please try again later.</p>
+      </div>
+    );
+  }
 
   // Group tags by first letter
   const byLetter: Record<string, typeof tags> = {};

@@ -106,7 +106,7 @@ export default function BlogIndexClient({ posts, allTopics }: BlogIndexClientPro
                           dateTime={post.date}
                           className="text-sm text-gray-400 dark:text-gray-500 whitespace-nowrap min-w-[80px]"
                         >
-                          {new Date(post.date).toLocaleDateString("en-US", {
+                          {new Date(`${post.year}-${post.month}-${post.day}T12:00:00`).toLocaleDateString("en-US", {
                             month: "short",
                             day: "numeric",
                           })}

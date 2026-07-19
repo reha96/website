@@ -3,7 +3,7 @@
 import Image from "next/image";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-import { useState, useEffect, useCallback } from "react";
+import { useState, useEffect } from "react";
 import ThemeToggle from "./theme-toggle";
 import SearchDialog from "./search-dialog";
 
@@ -48,10 +48,10 @@ export default function Navbar() {
     { href: "#", label: "Projects", disabled: true },
   ];
 
-  const isActive = useCallback((href: string) => {
+  const isActive = (href: string) => {
     if (href === "/") return pathname === "/";
     return pathname.startsWith(href);
-  }, [pathname]);
+  };
 
   return (
     <>
@@ -107,8 +107,8 @@ export default function Navbar() {
               <button
                 onClick={() => setSearchOpen(true)}
                 className="p-2 rounded-md transition-colors hover:bg-gray-100 dark:hover:bg-charcoal-700 text-gray-600 dark:text-gray-400"
-                aria-label="Search (⌘K)"
-                title="Search (⌘K)"
+                aria-label="Search (Command K)"
+                title="Search (Command K)"
               >
                 <svg className="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
                   <path strokeLinecap="round" strokeLinejoin="round" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
@@ -136,6 +136,7 @@ export default function Navbar() {
                 className="p-2 rounded-md transition-colors hover:bg-gray-100 dark:hover:bg-charcoal-700 text-gray-600 dark:text-gray-400"
                 aria-label={mobileMenuOpen ? "Close menu" : "Open menu"}
                 aria-expanded={mobileMenuOpen}
+                aria-controls="mobile-menu-panel"
               >
                 <svg className="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
                   {mobileMenuOpen ? (
@@ -151,6 +152,9 @@ export default function Navbar() {
 
         {/* Mobile menu panel */}
         <div
+          id="mobile-menu-panel"
+          role="navigation"
+          aria-label="Mobile navigation"
           className={`md:hidden mobile-menu ${mobileMenuOpen ? "mobile-menu-open" : ""}`}
         >
           <div className="max-w-4xl mx-auto px-4 py-3 space-y-1 border-t border-gray-100 dark:border-charcoal-700 bg-white/95 dark:bg-charcoal-900/95 backdrop-blur">

@@ -31,11 +31,15 @@ export default async function TilEntryPage({ params }: { params: Promise<Params>
 
   if (!til) notFound();
 
-  const formattedDate = new Date(til.date).toLocaleDateString("en-US", {
-    year: "numeric",
-    month: "long",
-    day: "numeric",
-  });
+  const formattedDate = (() => {
+    const dateObj = new Date(til.date);
+    if (isNaN(dateObj.getTime())) return til.date;
+    return dateObj.toLocaleDateString("en-US", {
+      year: "numeric",
+      month: "long",
+      day: "numeric",
+    });
+  })();
 
   return (
     <div className="min-h-screen">

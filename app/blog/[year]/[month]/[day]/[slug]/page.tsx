@@ -1,7 +1,7 @@
 import { Metadata } from "next";
 import Link from "next/link";
 import { notFound } from "next/navigation";
-import { getBlogPost } from "@/lib/github";
+import { getBlogPost, getAllBlogPostsMeta } from "@/lib/github";
 import MarkdownRenderer from "@/components/markdown-renderer";
 import TableOfContents, { TocHeading } from "@/components/table-of-contents";
 import ReadingProgress from "@/components/reading-progress";
@@ -40,14 +40,14 @@ function extractHeadings(markdown: string): TocHeading[] {
   while ((match = headingRegex.exec(markdown)) !== null) {
     const level = match[1].length;
     const rawText = match[2].trim();
-    let id = slug(rawText);
+    const originalSlug = slug(rawText);
+    let id = originalSlug;
 
-    // Deduplicate: match rehype-slug's behavior of appending -1, -2, etc.
-    const count = seenIds.get(id) ?? 0;
+    const count = seenIds.get(originalSlug) ?? 0;
     if (count > 0) {
-      id = `${id}-${count}`;
+      id = `${originalSlug}-${count}`;
     }
-    seenIds.set(slug(rawText), count + 1);
+    seenIds.set(originalSlug, count + 1);
 
     const text = cleanHeadingText(rawText);
     headings.push({ text: text || rawText, id, level });
@@ -59,8 +59,6 @@ function extractHeadings(markdown: string): TocHeading[] {
  * Pre-build all paths at build time.
  */
 export async function generateStaticParams(): Promise<Params[]> {
-  // Fetch all posts to get their date components
-  const { getAllBlogPostsMeta } = await import("@/lib/github");
   const posts = await getAllBlogPostsMeta();
   return posts.map((post) => ({
     year: post.year,
@@ -71,30 +69,44 @@ export async function generateStaticParams(): Promise<Params[]> {
 }
 
 export async function generateMetadata({ params }: { params: Promise<Params> }): Promise<Metadata> {
-  const { slug } = await params;
-  const post = await getBlogPost(slug);
-  if (!post) return { title: "Post Not Found" };
+  try {
+    const { slug } = await params;
+    const post = await getBlogPost(slug);
+    if (!post) return { title: "Post Not Found" };
 
-  return {
-    title: `${post.title} — Reha Tuncer`,
-    description: post.excerpt || `Blog post about ${post.topic}: ${post.title}`,
-  };
+    return {
+      title: `${post.title} — Reha Tuncer`,
+      description: post.excerpt || `Blog post about ${post.topic}: ${post.title}`,
+    };
+  } catch (error) {
+    console.error("Failed to fetch blog post for metadata:", error);
+    return { title: "Post Not Found" };
+  }
 }
 
 export default async function BlogPostPage({ params }: { params: Promise<Params> }) {
   const { slug } = await params;
-  const post = await getBlogPost(slug);
+  let post;
+  try {
+    post = await getBlogPost(slug);
+  } catch (error) {
+    console.error("Failed to fetch blog post:", error);
+    notFound();
+  }
 
   if (!post) {
     notFound();
   }
 
   const headings = extractHeadings(post.content);
-  const formattedDate = new Date(post.date).toLocaleDateString("en-US", {
-    year: "numeric",
-    month: "long",
-    day: "numeric",
-  });
+  const dateObj = new Date(post.date);
+  const formattedDate = isNaN(dateObj.getTime())
+    ? post.date
+    : dateObj.toLocaleDateString("en-US", {
+        year: "numeric",
+        month: "long",
+        day: "numeric",
+      });
 
   return (
     <div className="min-h-screen">

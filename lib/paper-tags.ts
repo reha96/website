@@ -7,7 +7,7 @@
 export const PAPER_TAGS: Record<string, string[]> = {
   paper1: ["revealed-preference", "heterogeneity"],
   paper2: ["scarcity", "user-experience"],
-  paper3: ["intertemporal-choice", "user-experience"],
+  paper3: ["intertemporal-choice", "behavioral-economics"],
   paper4: ["human-capital", "contact-theory"],
   paper5: ["social-capital", "inequality"],
 };

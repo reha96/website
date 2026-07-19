@@ -6,7 +6,6 @@ interface SearchResult {
   url: string;
   excerpt: string;
   meta: Record<string, string>;
-  sub_results?: SearchResult[];
 }
 
 interface SearchDialogProps {
@@ -81,9 +80,8 @@ export default function SearchDialog({ open, onClose }: SearchDialogProps) {
   // Focus input when opened
   useEffect(() => {
     if (open && inputRef.current) {
-      setTimeout(() => inputRef.current?.focus(), 50);
+      inputRef.current.focus();
     }
-    // Reset state when closed
     if (!open) {
       setQuery("");
       setResults([]);
@@ -98,17 +96,21 @@ export default function SearchDialog({ open, onClose }: SearchDialogProps) {
       return;
     }
 
+    let cancelled = false;
+
     const timer = setTimeout(async () => {
       setLoading(true);
       setError(null);
       try {
         const entries = await fetchIndex();
+        if (cancelled) return;
         const q = query.trim();
         const results = entries
           .map((e) => ({ entry: e, s: score(e, q) }))
           .filter((e) => e.s > 0)
           .sort((a, b) => b.s - a.s)
           .slice(0, 15);
+        if (cancelled) return;
         setResults(
           results.map((r) => ({
             url: r.entry.url,
@@ -121,13 +123,16 @@ export default function SearchDialog({ open, onClose }: SearchDialogProps) {
           }))
         );
       } catch {
-        setError("Search failed. Please try again.");
+        if (!cancelled) setError("Search failed. Please try again.");
       } finally {
-        setLoading(false);
+        if (!cancelled) setLoading(false);
       }
     }, 300);
 
-    return () => clearTimeout(timer);
+    return () => {
+      cancelled = true;
+      clearTimeout(timer);
+    };
   }, [query]);
 
   // Close on outside click
@@ -221,10 +226,9 @@ export default function SearchDialog({ open, onClose }: SearchDialogProps) {
                 {result.meta?.title || result.url}
               </h3>
               {result.excerpt && (
-                <p
-                  className="text-xs text-gray-500 dark:text-gray-400 line-clamp-2"
-                  dangerouslySetInnerHTML={{ __html: result.excerpt }}
-                />
+                <p className="text-xs text-gray-500 dark:text-gray-400 line-clamp-2">
+                  {result.excerpt}
+                </p>
               )}
               <div className="flex items-center gap-2 mt-1">
                 {result.meta?.date && (

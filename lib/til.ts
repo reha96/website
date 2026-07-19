@@ -92,7 +92,7 @@ export function getAllTils(): TilEntry[] {
   }
 
   // Sort by date, newest first
-  allTils.sort((a, b) => new Date(b.date).getTime() - new Date(a.date).getTime());
+  allTils.sort((a, b) => (new Date(b.date).getTime() || 0) - (new Date(a.date).getTime() || 0));
   return allTils;
 }
 

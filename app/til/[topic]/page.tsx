@@ -55,11 +55,15 @@ export default async function TilTopicPage({ params }: { params: Promise<Params>
                     dateTime={til.date}
                     className="text-sm text-gray-400 dark:text-gray-500 whitespace-nowrap min-w-[90px]"
                   >
-                    {new Date(til.date).toLocaleDateString("en-US", {
-                      year: "numeric",
-                      month: "short",
-                      day: "numeric",
-                    })}
+                    {(() => {
+                      const dateObj = new Date(til.date);
+                      if (isNaN(dateObj.getTime())) return til.date;
+                      return dateObj.toLocaleDateString("en-US", {
+                        year: "numeric",
+                        month: "short",
+                        day: "numeric",
+                      });
+                    })()}
                   </time>
                   <div>
                     <h3 className="text-base text-gray-800 dark:text-gray-200 group-hover:underline">

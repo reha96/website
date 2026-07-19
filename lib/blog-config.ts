@@ -170,4 +170,19 @@ export const BLOG_POSTS_CONFIG: Record<string, BlogPostMeta> = {
     tags: ["ai", "music", "recommendation", "machine-learning", "embeddings", "flask"],
     topic: "AI & ML",
   },
+
+  // ── dlh-modern_ai ──────────────────────────────────────────
+
+  "data-preparation-visualization": {
+    repo: "dlh-modern_ai",
+    path: "data_analysis/data_preparation_visualization",
+    tags: ["data-preparation", "visualization", "pandas", "matplotlib", "seaborn", "feature-engineering"],
+    topic: "Data Analysis",
+  },
+  "tree-based-models": {
+    repo: "dlh-modern_ai",
+    path: "machine_learning/tree_models",
+    tags: ["decision-trees", "random-forest", "xgboost", "lightgbm", "scikit-learn", "machine-learning"],
+    topic: "Machine Learning",
+  },
 };

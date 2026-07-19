@@ -2,6 +2,8 @@ import { Metadata } from "next";
 import { notFound } from "next/navigation";
 import Link from "next/link";
 import { getBlogPostsByTag, getTilsByTag, getAllTags } from "@/lib/tags";
+import { BlogPost } from "@/lib/blog-types";
+import { TilEntry } from "@/lib/til";
 
 interface Params {
   tag: string;
@@ -15,12 +17,17 @@ export async function generateStaticParams(): Promise<Params[]> {
   return tags.map(({ tag }) => ({ tag: tag.toLowerCase() }));
 }
 
-export function generateMetadata({ params }: { params: Promise<Params> }): Metadata {
-  // Note: params is a Promise in Next.js 15, but we can't await in generateMetadata
-  // The tag name will be set dynamically
+export async function generateMetadata({ params }: { params: Promise<Params> }): Promise<Metadata> {
+  const { tag: rawTag } = await params;
+  const decodedTag = decodeURIComponent(rawTag);
+
+  if (!/^[\w\s#-]+$/.test(decodedTag)) {
+    return { title: "Tags — Reha Tuncer", description: "Browse all tags" };
+  }
+
   return {
-    title: "Tags — Reha Tuncer",
-    description: "Browse all tags",
+    title: `#${decodedTag} — Reha Tuncer`,
+    description: `Browse items tagged with "${decodedTag}"`,
   };
 }
 
@@ -28,8 +35,23 @@ export default async function TagPage({ params }: { params: Promise<Params> }) {
   const { tag: rawTag } = await params;
   const decodedTag = decodeURIComponent(rawTag);
 
-  const blogPosts = await getBlogPostsByTag(decodedTag);
-  const tils = getTilsByTag(decodedTag);
+  if (!/^[\w\s#-]+$/.test(decodedTag)) {
+    notFound();
+  }
+
+  let blogPosts: BlogPost[];
+  let tils: TilEntry[];
+  try {
+    blogPosts = await getBlogPostsByTag(decodedTag);
+    tils = await getTilsByTag(decodedTag);
+  } catch (error) {
+    console.error(`Failed to fetch data for tag "${decodedTag}":`, error);
+    return (
+      <div className="min-h-screen flex items-center justify-center">
+        <p className="text-gray-500 dark:text-gray-400">Failed to load tag data. Please try again later.</p>
+      </div>
+    );
+  }
 
   if (blogPosts.length === 0 && tils.length === 0) {
     notFound();

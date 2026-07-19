@@ -8,6 +8,15 @@ export const metadata: Metadata = {
 };
 
 export default async function AcademicPage() {
-  const abstracts = await fetchAllAbstracts();
-  return <HomePage abstracts={abstracts} />;
+  try {
+    const abstracts = await fetchAllAbstracts();
+    return <HomePage abstracts={abstracts} />;
+  } catch (error) {
+    console.error("Failed to fetch abstracts:", error);
+    return (
+      <main className="flex min-h-screen items-center justify-center">
+        <p className="text-gray-500 dark:text-gray-400">Failed to load academic data. Please try again later.</p>
+      </main>
+    );
+  }
 }

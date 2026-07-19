@@ -66,7 +66,7 @@ function buildIndex() {
           excerpt: data.excerpt || extractExcerpt(content),
           date: data.date, tags: data.tags || [], type: "blog",
         });
-      } catch { /* skip */ }
+      } catch (e) { console.warn("Skipping local blog post:", file, e); }
     }
   }
 
@@ -97,7 +97,7 @@ function buildIndex() {
                 excerpt: meta.excerpt, date: meta.date,
                 tags: [], type: "blog",
               });
-            } catch { /* skip */ }
+            } catch (e) { console.warn("Skipping built blog HTML:", slugName, e); }
           }
         }
       }
@@ -116,7 +116,7 @@ function buildIndex() {
             excerpt: extractExcerpt(content),
             date: data.date, tags: data.tags || [], type: "til",
           });
-        } catch { /* skip */ }
+        } catch (e) { console.warn("Skipping TIL:", file, e); }
       }
     }
   }
