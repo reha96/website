@@ -65,6 +65,12 @@ export const BLOG_POSTS_CONFIG: Record<string, BlogPostMeta> = {
     tags: ["plotting", "matplotlib", "visualization", "python", "pca", "charts"],
     topic: "Math",
   },
+  "math-multivariate-prob": {
+    repo: "dlh-machine_learning",
+    path: "math/multivariate_prob",
+    tags: ["multivariate-statistics", "probability", "normal-distribution", "covariance", "numpy", "math"],
+    topic: "Math",
+  },
   "pipeline": {
     repo: "dlh-machine_learning",
     path: "pipeline",
@@ -75,6 +81,12 @@ export const BLOG_POSTS_CONFIG: Record<string, BlogPostMeta> = {
     repo: "dlh-machine_learning",
     path: "pipeline/databases",
     tags: ["sql", "mongodb", "databases", "crud", "mysql", "pymongo"],
+    topic: "Data Engineering",
+  },
+  "pipeline-pandas": {
+    repo: "dlh-machine_learning",
+    path: "pipeline/pandas",
+    tags: ["pandas", "dataframes", "data-manipulation", "python", "numpy", "data-engineering"],
     topic: "Data Engineering",
   },
 

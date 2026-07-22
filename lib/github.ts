@@ -262,7 +262,20 @@ function rewriteInternalLinks(
  * Fetch all blog posts with full content and metadata.
  * Called at build time for SSG.
  */
+let allBlogPostsPromise: Promise<BlogPostWithContent[]> | null = null;
+
+/**
+ * Fetch all blog posts with full content and metadata.
+ * Called at build time for SSG. Result is memoized so the cache is
+ * loaded and saved exactly once per build.
+ */
 async function getAllBlogPosts(): Promise<BlogPostWithContent[]> {
+  if (allBlogPostsPromise) return allBlogPostsPromise;
+  allBlogPostsPromise = fetchAllBlogPosts();
+  return allBlogPostsPromise;
+}
+
+async function fetchAllBlogPosts(): Promise<BlogPostWithContent[]> {
   const entries = Object.entries(BLOG_POSTS_CONFIG);
   const posts: BlogPostWithContent[] = [];
 
@@ -327,7 +340,6 @@ async function getAllBlogPosts(): Promise<BlogPostWithContent[]> {
  * Get a single blog post by slug (with full content).
  */
 export async function getBlogPost(slug: string): Promise<BlogPostWithContent | null> {
-  // Check local posts first
   const localPost = getLocalBlogPost(slug);
   if (localPost) return localPost;
 
@@ -341,7 +353,6 @@ export async function getBlogPost(slug: string): Promise<BlogPostWithContent | n
   const excerpt = extractExcerpt(content);
   const cache = loadCommitCache();
   const isoDate = await fetchDate(meta.repo, meta.path, cache);
-  saveCommitCache(cache);
   const { year, month, day } = dateToParts(isoDate);
 
   // Build path mapping and rewrite internal cross-reference links
