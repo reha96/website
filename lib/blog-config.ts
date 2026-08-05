@@ -89,6 +89,18 @@ export const BLOG_POSTS_CONFIG: Record<string, BlogPostMeta> = {
     tags: ["Pandas", "DataFrames", "Cleaning", "Time Series", "Visualization", "NumPy"],
     topic: "Data Engineering",
   },
+  "unsupervised-clustering": {
+    repo: "dlh-machine_learning",
+    path: "unsupervised_learning/clustering",
+    tags: ["Clustering", "K-Means", "Gaussian Mixture Models", "EM Algorithm", "Unsupervised", "NumPy"],
+    topic: "Machine Learning",
+  },
+  "unsupervised-dimensionality-reduction": {
+    repo: "dlh-machine_learning",
+    path: "unsupervised_learning/dimensionality_reduction",
+    tags: ["Dimensionality Reduction", "PCA", "t-SNE", "SVD", "Unsupervised", "NumPy"],
+    topic: "Machine Learning",
+  },
 
   // ── dlh-higher_level_programming ──────────────────────────
 
