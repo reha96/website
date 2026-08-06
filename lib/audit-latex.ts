@@ -42,6 +42,9 @@ type Schema = import("hast-util-sanitize").Schema;
 /** A `\command{` in visible text is raw LaTeX that failed to render. */
 const RAW_LATEX_RE = /\\[a-zA-Z]{2,}\{/;
 
+/** Brace-less LaTeX commands like \mu \top \Sigma — only valid inside math nodes. */
+const RAW_LATEX_TEXT_RE = /\\[a-zA-Z]{2,}(?![a-zA-Z])/;
+
 const processor = unified()
   .use(remarkParse)
   .use(remarkGfm)
@@ -104,13 +107,65 @@ async function fetchReadme(repo: string, p: string): Promise<string | null> {
 }
 
 /** Count real math nodes in the mdast tree (remark-math only marks real math). */
-function countMathNodes(md: string): number {
-  const tree = processor.parse(md);
+function countMathNodes(tree: any): number {
   let count = 0;
   visit(tree, (node: any) => {
     if (node.type === "math" || node.type === "inlineMath") count++;
   });
   return count;
+}
+
+interface Problem {
+  line: number;
+  reason: string;
+}
+
+/** Text from text nodes only (skips inlineCode/inlineMath values). */
+function textOnly(node: any): string {
+  let out = "";
+  for (const child of node.children ?? []) {
+    if (child.type === "text") out += child.value;
+    else if (child.children) out += textOnly(child);
+  }
+  return out;
+}
+
+/**
+ * Structural checks on the mdast tree: table shape, dollar/backtick parity
+ * in cells, `$` inside inline code, and brace-less LaTeX leaking into prose.
+ */
+function runMdastChecks(tree: any): Problem[] {
+  const problems: Problem[] = [];
+  const add = (node: any, reason: string) => {
+    problems.push({ line: node?.position?.start?.line ?? 0, reason });
+  };
+  visit(tree, (node: any) => {
+    if (node.type === "table") {
+      let expected: number | null = null;
+      for (const row of node.children ?? []) {
+        const count = (row.children ?? []).length;
+        if (expected === null) expected = count;
+        else if (count !== expected) {
+          add(row, `table row has ${count} cells, expected ${expected}`);
+        }
+      }
+    } else if (node.type === "tableCell") {
+      const text = textOnly(node);
+      const dollars = (text.replace(/\\\$/g, "").match(/\$/g) || []).length;
+      if (dollars % 2 === 1) add(node, "odd number of $ in table cell");
+      const backticks = (text.match(/`/g) || []).length;
+      if (backticks % 2 === 1) add(node, "unmatched backtick in table cell");
+    } else if (
+      node.type === "inlineCode" &&
+      node.value.includes("$") &&
+      ((node.value.startsWith("$") && node.value.endsWith("$")) || /\\[a-zA-Z]/.test(node.value))
+    ) {
+      add(node, "inline code contains $ — math in code renders literally");
+    } else if (node.type === "text" && RAW_LATEX_TEXT_RE.test(node.value)) {
+      add(node, `raw LaTeX in prose: ${JSON.stringify(node.value.trim().slice(0, 40))}`);
+    }
+  });
+  return problems;
 }
 
 /** Walk a hast tree: count katex spans and raw latex leaks in visible text. */
@@ -169,15 +224,20 @@ async function main() {
 
   let failed = 0;
   for (const { name, md } of sources) {
-    const mathNodes = countMathNodes(md);
+    const tree = processor.parse(md);
+    const mathNodes = countMathNodes(tree);
     if (mathNodes === 0) continue;
-    const tree = await renderer.run(processor.parse(md));
-    const { katex, leaks } = analyzeHast(tree);
-    const ok = leaks === 0 && katex > 0;
+    const problems = runMdastChecks(tree);
+    const hastTree = await renderer.run(tree);
+    const { katex, leaks } = analyzeHast(hastTree);
+    const ok = leaks === 0 && katex > 0 && problems.length === 0;
     if (!ok) failed++;
     console.log(
       `${ok ? "PASS" : "FAIL"} ${name}: ${mathNodes} math node(s), ${katex} katex span(s), ${leaks} leak(s)`
     );
+    for (const p of problems) {
+      console.log(`  line ${p.line}: ${p.reason}`);
+    }
   }
 
   const builtProblems = scanBuiltHtml();
