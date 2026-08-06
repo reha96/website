@@ -31,7 +31,7 @@ export default async function TilTopicPage({ params }: { params: Promise<Params>
       <div className="max-w-4xl mx-auto px-6 py-8 md:py-12">
         <Link
           href="/til"
-          className="inline-flex items-center text-sm text-gray-500 dark:text-gray-400 hover:text-gray-700 dark:hover:text-gray-200 mb-6 transition-colors"
+          className="inline-flex items-center text-sm text-gray-600 dark:text-gray-400 underline underline-offset-2 hover:text-gray-800 dark:hover:text-gray-200 mb-6 transition-colors"
         >
           <svg className="h-4 w-4 mr-1" fill="none" viewBox="0 0 24 24" stroke="currentColor">
             <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 19l-7-7 7-7" />
@@ -42,7 +42,7 @@ export default async function TilTopicPage({ params }: { params: Promise<Params>
         <h1 className="text-3xl font-medium text-gray-800 dark:text-gray-100 mb-2 capitalize">
           {topic}
         </h1>
-        <p className="text-gray-500 dark:text-gray-400 mb-8">
+        <p className="text-gray-600 dark:text-gray-400 mb-8">
           {tils.length} TIL{tils.length !== 1 ? "s" : ""}
         </p>
 
@@ -53,7 +53,7 @@ export default async function TilTopicPage({ params }: { params: Promise<Params>
                 <div className="flex items-baseline gap-4">
                   <time
                     dateTime={til.date}
-                    className="text-sm text-gray-400 dark:text-gray-500 whitespace-nowrap min-w-[90px]"
+                    className="text-sm text-gray-600 dark:text-gray-400 whitespace-nowrap min-w-[90px]"
                   >
                     {(() => {
                       const dateObj = new Date(til.date);
@@ -70,7 +70,7 @@ export default async function TilTopicPage({ params }: { params: Promise<Params>
                       {til.title}
                     </h3>
                     {til.excerpt && (
-                      <p className="text-sm text-gray-500 dark:text-gray-400 mt-0.5 line-clamp-2">
+                      <p className="text-sm text-gray-600 dark:text-gray-400 mt-0.5 line-clamp-2">
                         {til.excerpt}
                       </p>
                     )}
@@ -79,7 +79,7 @@ export default async function TilTopicPage({ params }: { params: Promise<Params>
                         <Link
                           key={tag}
                           href={`/tags/${encodeURIComponent(tag.toLowerCase())}`}
-                          className="px-1.5 py-0.5 text-xs bg-gray-50 dark:bg-charcoal-700/50 text-gray-400 dark:text-gray-500 rounded hover:bg-gray-100 dark:hover:bg-charcoal-600 transition-colors"
+                          className="px-1.5 py-0.5 text-xs bg-gray-50 dark:bg-charcoal-700/50 text-gray-600 dark:text-gray-400 rounded hover:bg-gray-100 dark:hover:bg-charcoal-600 transition-colors"
                         >
                           {tag}
                         </Link>

@@ -25,7 +25,7 @@ export default function AboutPage() {
     console.error("Failed to read about page:", error);
     return (
       <main className="min-h-screen flex items-center justify-center">
-        <p className="text-gray-500 dark:text-gray-400">Page content unavailable.</p>
+        <p className="text-gray-600 dark:text-gray-400">Page content unavailable.</p>
       </main>
     );
   }

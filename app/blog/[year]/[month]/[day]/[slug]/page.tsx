@@ -123,7 +123,7 @@ export default async function BlogPostPage({ params }: { params: Promise<Params>
             {/* Back link */}
             <Link
               href="/blog"
-              className="inline-flex items-center text-sm text-gray-500 dark:text-gray-400 hover:text-gray-700 dark:hover:text-gray-200 mb-6 transition-colors"
+              className="inline-flex items-center text-sm text-gray-600 dark:text-gray-400 underline underline-offset-2 hover:text-gray-800 dark:hover:text-gray-200 mb-6 transition-colors"
             >
               <svg className="h-4 w-4 mr-1" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 19l-7-7 7-7" />
@@ -132,10 +132,10 @@ export default async function BlogPostPage({ params }: { params: Promise<Params>
             </Link>
 
             {/* Article Header */}
-            <header className="mb-8 pb-6 border-b border-gray-200 dark:border-charcoal-600">
+            <header className="mb-8 pb-6 border-b border-gray-500 dark:border-charcoal-400">
               <h1 className="text-3xl font-medium text-gray-900 dark:text-gray-100 mb-4" data-pagefind-meta="title">{post.title}</h1>
 
-              <div className="flex flex-wrap items-center gap-4 text-sm text-gray-500 dark:text-gray-400 mb-4">
+              <div className="flex flex-wrap items-center gap-4 text-sm text-gray-600 dark:text-gray-400 mb-4">
                 <time dateTime={post.date} data-pagefind-meta="date">{formattedDate}</time>
                 <span className="sr-only" data-pagefind-meta="excerpt">{post.excerpt}</span>
                 <span>·</span>
@@ -165,7 +165,7 @@ export default async function BlogPostPage({ params }: { params: Promise<Params>
                 href={`https://github.com/reha96/${post.repo}/tree/main/${post.path || ""}`}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="inline-flex items-center text-sm text-gray-400 dark:text-gray-500 hover:text-gray-600 dark:hover:text-gray-300 transition-colors"
+                className="inline-flex items-center text-sm text-gray-600 dark:text-gray-400 underline underline-offset-2 hover:text-gray-800 dark:hover:text-gray-200 transition-colors"
               >
                 <svg
                   className="h-4 w-4 mr-1"

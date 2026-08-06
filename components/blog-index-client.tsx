@@ -51,7 +51,7 @@ export default function BlogIndexClient({ posts, allTopics }: BlogIndexClientPro
 
         {/* Filter Bar — Topics */}
         <div className="mb-8">
-          <span className="text-xs font-medium text-gray-500 dark:text-gray-400 uppercase tracking-wide mr-3">
+          <span className="text-xs font-medium text-gray-600 dark:text-gray-400 uppercase tracking-wide mr-3">
             Topics
           </span>
           <div className="inline-flex flex-wrap gap-1.5">
@@ -62,12 +62,12 @@ export default function BlogIndexClient({ posts, allTopics }: BlogIndexClientPro
                 className={`inline-flex items-center gap-1 px-3 py-1.5 text-sm rounded-xl transition-all duration-200 ${
                   activeTopic === topic
                     ? "text-white"
-                    : "bg-gray-100 dark:bg-charcoal-700 text-gray-700 dark:text-gray-300 hover:bg-glaucous-500 hover:text-white dark:hover:bg-coral-600 dark:hover:text-white"
+                    : "bg-gray-100 dark:bg-charcoal-700 text-gray-700 dark:text-gray-300 hover:bg-glaucous-700 hover:text-white dark:hover:bg-coral-600 dark:hover:text-white"
                 }`}
-                style={activeTopic === topic ? { backgroundColor: 'var(--color-accent)' } : undefined}
+                style={activeTopic === topic ? { backgroundColor: '#CC3D2A' } : undefined}
               >
                 {topic}
-                <span className={`text-xs ${activeTopic === topic ? "text-white/70" : "text-gray-400 dark:text-gray-500"}`}>
+                <span className={`text-xs ${activeTopic === topic ? "text-white" : "text-gray-600 dark:text-gray-400"}`}>
                   ({topicCounts[topic] || 0})
                 </span>
               </button>
@@ -75,7 +75,7 @@ export default function BlogIndexClient({ posts, allTopics }: BlogIndexClientPro
             {activeTopic && (
               <button
                 onClick={clearFilters}
-                className="px-2.5 py-1 text-xs font-medium rounded-md bg-red-50 dark:bg-red-900/30 text-red-600 dark:text-red-400 hover:bg-red-100 dark:hover:bg-red-900/50 transition-colors"
+                className="px-2.5 py-1 text-xs font-medium rounded-md bg-red-50 dark:bg-red-900/30 text-red-700 dark:text-red-400 hover:bg-red-100 dark:hover:bg-red-900/50 transition-colors"
               >
                 ✕ Clear
               </button>
@@ -85,13 +85,13 @@ export default function BlogIndexClient({ posts, allTopics }: BlogIndexClientPro
 
         {/* Post List grouped by year */}
         {filteredPosts.length === 0 ? (
-          <div className="text-center py-12 text-gray-500 dark:text-gray-400">
+          <div className="text-center py-12 text-gray-600 dark:text-gray-400">
             No posts match the selected filters.
           </div>
         ) : (
           years.map((year) => (
             <div key={year} className="mb-10">
-              <h2 className="text-xl font-medium text-gray-800 dark:text-gray-200 mb-4 pb-2 border-b border-gray-200 dark:border-charcoal-600">
+              <h2 className="text-xl font-medium text-gray-800 dark:text-gray-200 mb-4 pb-2 border-b border-gray-500 dark:border-charcoal-400">
                 {year}
               </h2>
               <div className="space-y-4">
@@ -99,12 +99,12 @@ export default function BlogIndexClient({ posts, allTopics }: BlogIndexClientPro
                   <article key={post.slug}>
                     <Link
                       href={`/blog/${post.year}/${post.month}/${post.day}/${post.slug}`}
-                      className="block rounded-xl border border-gray-100 dark:border-charcoal-700 p-4 transition-all duration-200 hover:scale-[1.01] hover:shadow-md hover:border-glaucous-200 dark:hover:border-charcoal-600 bg-transparent hover:bg-gray-50/50 dark:hover:bg-charcoal-800/50"
+                      className="block rounded-xl border border-gray-500 dark:border-charcoal-400 p-4 transition-all duration-200 hover:scale-[1.01] hover:shadow-md hover:border-glaucous-700 dark:hover:border-charcoal-500 bg-transparent hover:bg-gray-50/50 dark:hover:bg-charcoal-800/50"
                     >
                       <div className="flex items-baseline gap-4">
                         <time
                           dateTime={post.date}
-                          className="text-sm text-gray-400 dark:text-gray-500 whitespace-nowrap min-w-[80px]"
+                          className="text-sm text-gray-600 dark:text-gray-400 whitespace-nowrap min-w-[80px]"
                         >
                           {new Date(`${post.year}-${post.month}-${post.day}T12:00:00`).toLocaleDateString("en-US", {
                             month: "short",
@@ -121,7 +121,7 @@ export default function BlogIndexClient({ posts, allTopics }: BlogIndexClientPro
                             </span>
                           </div>
                           {post.excerpt && (
-                            <p className="text-sm text-gray-500 dark:text-gray-400 mt-0.5 line-clamp-1">
+                            <p className="text-sm text-gray-600 dark:text-gray-400 mt-0.5 line-clamp-1">
                               {post.excerpt}
                             </p>
                           )}
@@ -135,7 +135,7 @@ export default function BlogIndexClient({ posts, allTopics }: BlogIndexClientPro
                               </span>
                             ))}
                             {post.tags.length > 4 && (
-                              <span className="text-xs text-gray-400 dark:text-gray-500">+{post.tags.length - 4}</span>
+                              <span className="text-xs text-gray-600 dark:text-gray-400">+{post.tags.length - 4}</span>
                             )}
                           </div>
                         </div>

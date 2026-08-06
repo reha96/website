@@ -12,18 +12,18 @@
   --color-bg-secondary: #D3D4C0;
   --color-bg-tertiary:  #C9CAB7;
   --color-text:       #1f2937;
-  --color-text-secondary: #6b7280;
-  --color-text-muted: #9ca3af;
-  --color-border:     #C0C1AE;
+  --color-text-secondary: #4b5563;
+  --color-text-muted: #4b5563;
+  --color-border:     #6b7280;
   --color-primary:    #789BB9;  /* light glaucous blue */
   --color-primary-hover: #5F829E;
   --color-accent:     #E85D4A;  /* coral red */
   --color-accent-hover:  #CC3D2A;
-  --color-link:       #5F829E;
+  --color-link:       #385062;
   --color-code-bg:    #E8E9DA;
-  --color-code-text:  #db2777;
+  --color-code-text:  #9d174d;
   --color-blockquote-bg:   #E5E6D5;
-  --color-blockquote-border: #E85D4A;
+  --color-blockquote-border: #CC3D2A;
   --color-blockquote-text:  #4b5563;
   --color-pre-bg:     #1e293b;
   --color-pre-text:   #e2e8f0;
@@ -37,21 +37,21 @@
   --color-bg-tertiary:    #2E2E2B;
   --color-text:           #DCDDC7;
   --color-text-secondary: #A8A69A;
-  --color-text-muted:     #78776B;
-  --color-border:         #333330;
+  --color-text-muted:     #9ca3af;
+  --color-border:         #6E6D68;
   --color-primary:        #7BA0B5;  /* warm blue */
   --color-primary-hover:  #8DB3C7;
   --color-accent:         #E85D4A;  /* coral red — same both themes */
-  --color-accent-hover:   #F07060;
+  --color-accent-hover:   #CC3D2A;
   --color-link:           #8DB3C7;
   --color-code-bg:        #2A2A27;
   --color-code-text:      #D6D7B8;  /* cream code text */
   --color-blockquote-bg:        #242421;
-  --color-blockquote-border:    #E85D4A;
+  --color-blockquote-border:    #CC3D2A;
   --color-blockquote-text:      #C5C5B3;
   --color-pre-bg:         #12120F;
   --color-pre-text:       #DCDDC7;
-  --color-table-header-bg: #242421;
+  --color-table-header-bg: #2E2E2B;
 }
 
 /* Smooth scrolling for anchor links (TOC sidebar) */
@@ -64,12 +64,20 @@ body {
   color: var(--color-text);
 }
 
+/* Visible focus ring for keyboard navigation */
+:focus-visible {
+  outline: 2px solid var(--color-link);
+  outline-offset: 2px;
+  border-radius: 2px;
+}
+
 /* ── Serif headings for academic gravitas ── */
 h1, h2 {
   font-family: var(--font-serif), Georgia, serif;
 }
 
 /* Blog content typography — using CSS variables for theme support */
+.blog-content { max-width: 45rem; }
 .blog-content h1 { @apply text-2xl font-semibold mt-8 mb-4; font-family: var(--font-serif), Georgia, serif; color: var(--color-text); }
 .blog-content h2 { @apply text-xl font-semibold mt-8 mb-3 pb-1 border-b; font-family: var(--font-serif), Georgia, serif; color: var(--color-text); border-color: var(--color-border); }
 .blog-content h3 { @apply text-lg font-medium mt-6 mb-2; color: var(--color-text); }
@@ -79,7 +87,7 @@ h1, h2 {
 .blog-content ol { @apply my-3 pl-6 list-decimal space-y-1; }
 .blog-content li { @apply leading-relaxed; }
 .blog-content blockquote { @apply border-l-4 px-4 py-2 my-4 italic; border-color: var(--color-blockquote-border); background-color: var(--color-blockquote-bg); color: var(--color-blockquote-text); }
-.blog-content a { color: var(--color-link); @apply no-underline hover:underline; }
+.blog-content a { color: var(--color-link); @apply underline underline-offset-2 hover:underline-offset-4; }
 .blog-content strong { @apply font-semibold; color: var(--color-text); }
 .blog-content hr { @apply my-8; border-color: var(--color-border); }
 .blog-content pre { @apply rounded-lg p-4 my-4 overflow-x-auto text-sm; background-color: var(--color-pre-bg); color: var(--color-pre-text); }
@@ -115,7 +123,7 @@ h1, h2 {
 
 /* ── Card hover: coral fill + scale (arc.net style) ── */
 .card-hover:hover {
-  background-color: var(--color-accent) !important;
+  background-color: var(--color-accent-hover) !important;
 }
 
 /* ── Mobile menu animation ── */

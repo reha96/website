@@ -15,7 +15,7 @@ export default async function BlogIndexPage() {
     console.error("Failed to fetch blog posts:", error);
     return (
       <div className="min-h-screen flex items-center justify-center">
-        <p className="text-gray-500 dark:text-gray-400">Failed to load blog data. Please try again later.</p>
+        <p className="text-gray-600 dark:text-gray-400">Failed to load blog data. Please try again later.</p>
       </div>
     );
   }

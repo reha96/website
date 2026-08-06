@@ -15,7 +15,7 @@ export default async function AcademicPage() {
     console.error("Failed to fetch abstracts:", error);
     return (
       <main className="flex min-h-screen items-center justify-center">
-        <p className="text-gray-500 dark:text-gray-400">Failed to load academic data. Please try again later.</p>
+        <p className="text-gray-600 dark:text-gray-400">Failed to load academic data. Please try again later.</p>
       </main>
     );
   }
