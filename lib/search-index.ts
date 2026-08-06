@@ -6,6 +6,7 @@
 import fs from "fs";
 import path from "path";
 import matter from "gray-matter";
+import { BLOG_POSTS_CONFIG } from "./blog-config";
 
 const OUT_DIR = path.join(process.cwd(), "out");
 const BLOG_DIR = path.join(process.cwd(), "content", "blog");
@@ -38,15 +39,35 @@ function dateToParts(iso: string) {
   return { year: String(d.getUTCFullYear()), month: String(d.getUTCMonth() + 1).padStart(2, "0"), day: String(d.getUTCDate()).padStart(2, "0") };
 }
 
+/** Normalize any date string to ISO YYYY-MM-DD. Date-only strings pass through unchanged. */
+function toIsoDate(d: string): string {
+  const t = d.trim();
+  if (/^\d{4}-\d{2}-\d{2}$/.test(t)) return t;
+  const parsed = new Date(t);
+  if (isNaN(parsed.getTime())) return t;
+  const year = parsed.getFullYear();
+  const month = String(parsed.getMonth() + 1).padStart(2, "0");
+  const day = String(parsed.getDate()).padStart(2, "0");
+  return `${year}-${month}-${day}`;
+}
+
 /** Extract title and meta from built blog HTML (data-pagefind-meta attributes) */
 function parseHtmlMeta(html: string): { title: string; date: string; excerpt: string } | null {
   const titleMatch = html.match(/data-pagefind-meta="title"[^>]*>([^<]+)</);
   const dateMatch = html.match(/data-pagefind-meta="date"[^>]*>([^<]+)</);
   const title = titleMatch ? titleMatch[1].trim() : "";
-  const date = dateMatch ? dateMatch[1].trim() : "";
-  // First paragraph after the header block
-  const pMatch = html.match(/<\/header>\s*<[^>]+>\s*<p[^>]*>([^<]+)</);
-  const excerpt = pMatch ? pMatch[1].trim().slice(0, 160) : "";
+  const date = dateMatch ? toIsoDate(dateMatch[1]) : "";
+  // Hidden excerpt attribute; fall back to the first <p> after the title
+  let excerpt = "";
+  const excerptMatch = html.match(/data-pagefind-meta="excerpt"[^>]*>([^<]+)</);
+  if (excerptMatch) {
+    excerpt = excerptMatch[1].trim().slice(0, 160);
+  }
+  if (!excerpt && titleMatch) {
+    const afterTitle = html.slice(titleMatch.index! + titleMatch[0].length);
+    const pMatch = afterTitle.match(/<p[^>]*>([^<]+)</);
+    if (pMatch) excerpt = pMatch[1].trim().slice(0, 160);
+  }
   if (!title) return null;
   return { title, date, excerpt };
 }
@@ -56,7 +77,7 @@ function buildIndex() {
 
   // ── Local blog posts (markdown) ──
   if (fs.existsSync(BLOG_DIR)) {
-    for (const file of fs.readdirSync(BLOG_DIR).filter((f) => f.endsWith(".md"))) {
+    for (const file of fs.readdirSync(BLOG_DIR).filter((f) => f.endsWith(".md") && !f.startsWith("_"))) {
       try {
         const { data, content } = matter(fs.readFileSync(path.join(BLOG_DIR, file), "utf-8"));
         if (!data.title || !data.date || !data.slug) continue;
@@ -64,7 +85,7 @@ function buildIndex() {
         entries.push({
           title: data.title, url: `/blog/${year}/${month}/${day}/${data.slug}`,
           excerpt: data.excerpt || extractExcerpt(content),
-          date: data.date, tags: data.tags || [], type: "blog",
+          date: toIsoDate(data.date), tags: data.tags || [], type: "blog",
         });
       } catch (e) { console.warn("Skipping local blog post:", file, e); }
     }
@@ -86,6 +107,7 @@ function buildIndex() {
             const htmlFile = path.join(dayDir, slug);
             if (!htmlFile.endsWith(".html")) continue;
             const slugName = slug.replace(/\.html$/, "");
+            if (!BLOG_POSTS_CONFIG[slugName]) continue;
             try {
               const html = fs.readFileSync(htmlFile, "utf-8");
               const meta = parseHtmlMeta(html);
@@ -95,7 +117,7 @@ function buildIndex() {
               entries.push({
                 title: meta.title, url,
                 excerpt: meta.excerpt, date: meta.date,
-                tags: [], type: "blog",
+                tags: BLOG_POSTS_CONFIG[slugName]?.tags ?? [], type: "blog",
               });
             } catch (e) { console.warn("Skipping built blog HTML:", slugName, e); }
           }
@@ -114,7 +136,7 @@ function buildIndex() {
           entries.push({
             title: data.title, url: `/til/${topic}/${path.basename(file, ".md")}`,
             excerpt: extractExcerpt(content),
-            date: data.date, tags: data.tags || [], type: "til",
+            date: toIsoDate(data.date), tags: data.tags || [], type: "til",
           });
         } catch (e) { console.warn("Skipping TIL:", file, e); }
       }

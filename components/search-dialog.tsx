@@ -2,10 +2,17 @@
 
 import { useState, useEffect, useCallback, useRef } from "react";
 
+interface SearchResultMeta {
+  title: string;
+  date: string;
+  type: string;
+  tags: string[];
+}
+
 interface SearchResult {
   url: string;
   excerpt: string;
-  meta: Record<string, string>;
+  meta: SearchResultMeta;
 }
 
 interface SearchDialogProps {
@@ -40,6 +47,11 @@ function fetchIndex(): Promise<SearchEntry[]> {
 /** Simple relevance scoring — title matches weighted highest. */
 function score(entry: SearchEntry, query: string): number {
   const q = query.toLowerCase();
+  if (q.startsWith("#")) {
+    const term = q.slice(1).trim();
+    if (!term) return 0;
+    return entry.tags.some((t) => t.toLowerCase().includes(term)) ? 20 : 0;
+  }
   const words = q.split(/\s+/);
   let s = 0;
   const title = entry.title.toLowerCase();
@@ -119,6 +131,7 @@ export default function SearchDialog({ open, onClose }: SearchDialogProps) {
               title: r.entry.title,
               date: r.entry.date,
               type: r.entry.type,
+              tags: r.entry.tags,
             },
           }))
         );
@@ -216,34 +229,47 @@ export default function SearchDialog({ open, onClose }: SearchDialogProps) {
           )}
 
           {results.map((result, i) => (
-            <a
+            <div
               key={i}
-              href={result.url}
-              onClick={onClose}
-              className="block px-4 py-3 hover:bg-gray-50 dark:hover:bg-charcoal-700/50 border-b border-gray-100 dark:border-charcoal-700/50 last:border-b-0 transition-colors"
+              className="px-4 py-3 hover:bg-gray-50 dark:hover:bg-charcoal-700/50 border-b border-gray-100 dark:border-charcoal-700/50 last:border-b-0 transition-colors"
             >
-              <h3 className="text-sm font-medium text-gray-800 dark:text-gray-200 mb-0.5">
-                {result.meta?.title || result.url}
-              </h3>
-              {result.excerpt && (
-                <p className="text-xs text-gray-500 dark:text-gray-400 line-clamp-2">
-                  {result.excerpt}
-                </p>
-              )}
-              <div className="flex items-center gap-2 mt-1">
-                {result.meta?.date && (
-                  <span className="text-xs text-gray-400 dark:text-gray-500">{result.meta.date}</span>
+              <a href={result.url} onClick={onClose} className="block">
+                <h3 className="text-sm font-medium text-gray-800 dark:text-gray-200 mb-0.5">
+                  {result.meta?.title || result.url}
+                </h3>
+                {result.excerpt && (
+                  <p className="text-xs text-gray-500 dark:text-gray-400 line-clamp-2">
+                    {result.excerpt}
+                  </p>
                 )}
-              </div>
-            </a>
+                <div className="flex items-center gap-2 mt-1">
+                  {result.meta?.date && (
+                    <span className="text-xs text-gray-400 dark:text-gray-500">{result.meta.date}</span>
+                  )}
+                </div>
+              </a>
+              {result.meta?.tags?.length > 0 && (
+                <div className="flex flex-wrap gap-1.5 mt-2">
+                  {result.meta.tags.map((tag) => (
+                    <a
+                      key={tag}
+                      href={`/tags/${encodeURIComponent(tag.toLowerCase())}`}
+                      onClick={onClose}
+                      className="text-xs text-gray-400 dark:text-gray-500 hover:text-gray-600 dark:hover:text-gray-300 hover:underline border border-gray-200 dark:border-charcoal-600 rounded px-1.5 py-0.5 transition-colors"
+                    >
+                      {tag}
+                    </a>
+                  ))}
+                </div>
+              )}
+            </div>
           ))}
         </div>
 
         {/* Footer */}
         <div className="px-4 py-2 border-t border-gray-200 dark:border-charcoal-600 text-xs text-gray-400 dark:text-gray-500 flex items-center justify-between">
           <span>
-            <kbd className="px-1 py-0.5 bg-gray-100 dark:bg-charcoal-700 rounded">↑↓</kbd> navigate{" "}
-            <kbd className="px-1 py-0.5 bg-gray-100 dark:bg-charcoal-700 rounded">↵</kbd> open
+            Type <kbd className="px-1 py-0.5 bg-gray-100 dark:bg-charcoal-700 rounded">#</kbd> to search by tag
           </span>
         </div>
       </div>

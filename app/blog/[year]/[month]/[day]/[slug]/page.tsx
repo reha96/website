@@ -137,6 +137,7 @@ export default async function BlogPostPage({ params }: { params: Promise<Params>
 
               <div className="flex flex-wrap items-center gap-4 text-sm text-gray-500 dark:text-gray-400 mb-4">
                 <time dateTime={post.date} data-pagefind-meta="date">{formattedDate}</time>
+                <span className="sr-only" data-pagefind-meta="excerpt">{post.excerpt}</span>
                 <span>·</span>
                 <span>{post.author}</span>
                 <span>·</span>

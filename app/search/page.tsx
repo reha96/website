@@ -23,7 +23,7 @@ export default function SearchPage() {
           page to open the search dialog.
         </p>
         <p className="text-sm text-gray-400 dark:text-gray-500 mb-8">
-          Search is powered by Pagefind and indexes all blog posts and TILs
+          Search indexes titles, excerpts, and tags across all posts and TILs
           at build time.
         </p>
 
