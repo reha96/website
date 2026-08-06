@@ -86,7 +86,7 @@ h1, h2 {
 .blog-content ul { @apply my-3 pl-6 list-disc space-y-1; }
 .blog-content ol { @apply my-3 pl-6 list-decimal space-y-1; }
 .blog-content li { @apply leading-relaxed; }
-.blog-content blockquote { @apply border-l-4 px-4 py-2 my-4 italic; border-color: var(--color-blockquote-border); background-color: var(--color-blockquote-bg); color: var(--color-blockquote-text); }
+.blog-content blockquote { @apply border-l-4 px-4 py-2 my-4 italic; border-color: var(--color-blockquote-border); background-color: var(--color-blockquote-bg); color: var(--color-blockquote-text); } /* impeccable-disable-line side-tab -- blockquote quote marker, part of the coral accent system */
 .blog-content a { color: var(--color-link); @apply underline underline-offset-2 hover:underline-offset-4; }
 .blog-content strong { @apply font-semibold; color: var(--color-text); }
 .blog-content hr { @apply my-8; border-color: var(--color-border); }
@@ -126,12 +126,29 @@ h1, h2 {
   background-color: var(--color-accent-hover) !important;
 }
 
+/* ── Paper card: coral left accent, blockquote-toned background ── */
+.paper-card {
+  border-left: 4px solid var(--color-blockquote-border);
+  background-color: var(--color-blockquote-bg);
+  border-radius: 1rem;
+}
+
 /* ── Mobile menu animation ── */
 .mobile-menu {
-  max-height: 0;
+  display: grid;
+  grid-template-rows: 0fr;
   overflow: hidden;
-  transition: max-height 0.3s ease;
+  transition: grid-template-rows 0.3s ease;
+}
+.mobile-menu-inner {
+  min-height: 0;
+  overflow: hidden;
 }
 .mobile-menu-open {
-  max-height: 24rem;
+  grid-template-rows: 1fr;
+}
+@media (prefers-reduced-motion: reduce) {
+  .mobile-menu {
+    transition: none;
+  }
 }

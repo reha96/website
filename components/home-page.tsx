@@ -48,7 +48,7 @@ export default function HomePage({ abstracts }: { abstracts: Record<string, Pape
           </h2>
 
           {/* Paper 1 - with accent border */}
-          <div id="paper1" className="mb-8 p-6 border-l-4 rounded-2xl shadow-md transition-colors duration-300 hover:bg-gray-50 dark:hover:bg-charcoal-800" style={{ borderLeftColor: 'var(--color-accent)', backgroundColor: 'var(--color-blockquote-bg)' }}>
+          <div id="paper1" className="mb-8 p-6 paper-card shadow-md transition-colors duration-300 hover:bg-gray-50 dark:hover:bg-charcoal-800">
             <Link href="https://doi.org/10.1111/ecca.12524">
               <h3 className="text-lg font-medium underline underline-offset-2 mb-1" style={{ color: 'var(--color-link)' }}>
                 From unobserved to observed preference heterogeneity: a revealed
@@ -161,7 +161,7 @@ export default function HomePage({ abstracts }: { abstracts: Record<string, Pape
           </div>
 
           {/* Paper 2 */}
-          <div id="paper2" className="mb-8 p-6 border-l-4 rounded-2xl shadow-md transition-colors duration-300 hover:bg-gray-50 dark:hover:bg-charcoal-800" style={{ borderLeftColor: 'var(--color-accent)', backgroundColor: 'var(--color-blockquote-bg)' }}>
+          <div id="paper2" className="mb-8 p-6 paper-card shadow-md transition-colors duration-300 hover:bg-gray-50 dark:hover:bg-charcoal-800">
             <Link href="https://doi.org/10.1080/0144929X.2023.2242966">
               <h3 className="text-lg font-medium underline underline-offset-2 mb-1" style={{ color: 'var(--color-link)' }}>
                 Running out of time(rs): effects of scarcity cues on perceived
@@ -251,7 +251,7 @@ export default function HomePage({ abstracts }: { abstracts: Record<string, Pape
           </h2>
 
           {/* Paper 3 */}
-          <div id="paper3" className="mb-8 p-6 border-l-4 rounded-2xl shadow-md transition-colors duration-300 hover:bg-gray-50 dark:hover:bg-charcoal-800" style={{ borderLeftColor: 'var(--color-accent)', backgroundColor: 'var(--color-blockquote-bg)' }}>
+          <div id="paper3" className="mb-8 p-6 paper-card shadow-md transition-colors duration-300 hover:bg-gray-50 dark:hover:bg-charcoal-800">
             <h3 className="text-lg font-medium text-gray-800 dark:text-gray-200 mb-1">
             Does autoplay drive excessive screen time? Evidence from an online experiment
             </h3>
@@ -336,7 +336,7 @@ export default function HomePage({ abstracts }: { abstracts: Record<string, Pape
           </div>
 
           {/* Paper 4 */}
-          <div id="paper4" className="mb-8 p-6 border-l-4 rounded-2xl shadow-md transition-colors duration-300 hover:bg-gray-50 dark:hover:bg-charcoal-800" style={{ borderLeftColor: 'var(--color-accent)', backgroundColor: 'var(--color-blockquote-bg)' }}>
+          <div id="paper4" className="mb-8 p-6 paper-card shadow-md transition-colors duration-300 hover:bg-gray-50 dark:hover:bg-charcoal-800">
             <h3 className="text-lg font-medium text-gray-800 dark:text-gray-200 mb-1">
             Peer skill identification and social class: Evidence from a referral experiment
             </h3>
@@ -422,7 +422,7 @@ export default function HomePage({ abstracts }: { abstracts: Record<string, Pape
           </div>
 
           {/* Paper 5 */}
-          <div id="paper5" className="mb-8 p-6 border-l-4 rounded-2xl shadow-md transition-colors duration-300 hover:bg-gray-50 dark:hover:bg-charcoal-800" style={{ borderLeftColor: 'var(--color-accent)', backgroundColor: 'var(--color-blockquote-bg)' }}>
+          <div id="paper5" className="mb-8 p-6 paper-card shadow-md transition-colors duration-300 hover:bg-gray-50 dark:hover:bg-charcoal-800">
             <h3 className="text-lg font-medium text-gray-800 dark:text-gray-200 mb-1">
               When proximity isn&apos;t enough: Network segregation and class bias in referrals </h3>
             <p className="text-gray-600 dark:text-gray-400 mb-3">Munoz M, Reuben E, Tuncer R</p>

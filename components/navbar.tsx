@@ -157,7 +157,8 @@ export default function Navbar() {
           aria-label="Mobile navigation"
           className={`md:hidden mobile-menu ${mobileMenuOpen ? "mobile-menu-open" : ""}`}
         >
-          <div className="max-w-4xl mx-auto px-4 py-3 space-y-1 border-t border-gray-500 dark:border-charcoal-400 bg-white/95 dark:bg-charcoal-900/95 backdrop-blur">
+          <div className="mobile-menu-inner">
+            <div className="max-w-4xl mx-auto px-4 py-3 space-y-1 border-t border-gray-500 dark:border-charcoal-400 bg-white/95 dark:bg-charcoal-900/95 backdrop-blur">
             {navItems.map((item) => {
               const active = isActive(item.href);
                 if (item.disabled) {
@@ -186,6 +187,7 @@ export default function Navbar() {
                 </Link>
               );
             })}
+            </div>
           </div>
         </div>
       </nav>
