@@ -62,10 +62,10 @@ export default function TableOfContents({ headings }: TableOfContentsProps) {
       aria-label="Table of contents"
     >
       <div className="sticky top-20 max-h-[calc(100vh-6rem)] overflow-y-auto pr-4">
-        <h4 className="text-xs font-semibold text-gray-400 dark:text-gray-500 uppercase tracking-wider mb-3">
+        <h4 className="text-xs font-semibold text-gray-600 dark:text-gray-400 uppercase tracking-wider mb-3">
           On this page
         </h4>
-        <ul className="space-y-0.5 border-l border-gray-200 dark:border-charcoal-600">
+        <ul className="space-y-0.5 border-l border-gray-500 dark:border-charcoal-400">
           {headings.map((heading) => {
             const isActive = activeId === heading.id;
             const indent = heading.level === 3 ? "pl-4" : "pl-3";
@@ -80,8 +80,8 @@ export default function TableOfContents({ headings }: TableOfContentsProps) {
                     "border-l-2 -ml-px",
                     indent,
                     isActive
-                      ? "border-glaucous-500 dark:border-coral-400 text-glaucous-600 dark:text-coral-400 font-medium"
-                      : "border-transparent text-gray-500 dark:text-gray-400 hover:text-gray-800 dark:hover:text-gray-200 hover:border-gray-300 dark:hover:border-charcoal-600",
+                      ? "border-glaucous-700 dark:border-coral-400 text-glaucous-800 dark:text-coral-400 font-medium"
+                      : "border-transparent text-gray-600 dark:text-gray-400 hover:text-gray-800 dark:hover:text-gray-200 hover:border-gray-500 dark:hover:border-charcoal-400",
                   ].join(" ")}
                 >
                   {heading.text}

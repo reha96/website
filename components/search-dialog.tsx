@@ -166,11 +166,11 @@ export default function SearchDialog({ open, onClose }: SearchDialogProps) {
       aria-modal="true"
       aria-label="Search"
     >
-      <div className="w-full max-w-lg bg-white dark:bg-charcoal-800 rounded-2xl shadow-2xl border border-gray-200 dark:border-charcoal-600 overflow-hidden">
+      <div className="w-full max-w-lg bg-white dark:bg-charcoal-800 rounded-2xl shadow-2xl border border-gray-500 dark:border-charcoal-400 overflow-hidden">
         {/* Search input */}
-        <div className="flex items-center px-4 py-3 border-b border-gray-200 dark:border-charcoal-600">
+        <div className="flex items-center px-4 py-3 border-b border-gray-500 dark:border-charcoal-400">
           <svg
-            className="h-5 w-5 text-gray-400 dark:text-gray-500 mr-3 shrink-0"
+            className="h-5 w-5 text-gray-500 dark:text-gray-400 mr-3 shrink-0"
             fill="none"
             viewBox="0 0 24 24"
             stroke="currentColor"
@@ -188,9 +188,9 @@ export default function SearchDialog({ open, onClose }: SearchDialogProps) {
             value={query}
             onChange={(e) => setQuery(e.target.value)}
             placeholder="Search posts, TILs..."
-            className="flex-1 bg-transparent text-gray-800 dark:text-gray-100 placeholder-gray-400 dark:placeholder-gray-500 outline-none text-base"
+            className="flex-1 bg-transparent text-gray-800 dark:text-gray-100 placeholder-gray-500 dark:placeholder-gray-400 text-base"
           />
-          <kbd className="ml-2 px-1.5 py-0.5 text-xs text-gray-400 dark:text-gray-500 bg-gray-100 dark:bg-charcoal-700 rounded border border-gray-200 dark:border-charcoal-600">
+          <kbd className="ml-2 px-1.5 py-0.5 text-xs text-gray-600 dark:text-gray-300 bg-gray-200 dark:bg-charcoal-700 rounded border border-gray-500 dark:border-charcoal-400">
             ESC
           </kbd>
         </div>
@@ -204,9 +204,9 @@ export default function SearchDialog({ open, onClose }: SearchDialogProps) {
           )}
 
           {error && (
-            <div className="px-4 py-8 text-center text-red-500 dark:text-red-400 text-sm">
+            <div className="px-4 py-8 text-center text-red-600 dark:text-red-400 text-sm">
               {error}
-              <p className="mt-2 text-gray-400 dark:text-gray-500">
+              <p className="mt-2 text-gray-500 dark:text-gray-400">
                 Try using the{" "}
                 <a href="/search" className="underline">
                   search page
@@ -223,7 +223,7 @@ export default function SearchDialog({ open, onClose }: SearchDialogProps) {
           )}
 
           {!query && (
-            <div className="px-4 py-8 text-center text-gray-400 dark:text-gray-500 text-sm">
+            <div className="px-4 py-8 text-center text-gray-500 dark:text-gray-400 text-sm">
               Start typing to search...
             </div>
           )}
@@ -244,7 +244,7 @@ export default function SearchDialog({ open, onClose }: SearchDialogProps) {
                 )}
                 <div className="flex items-center gap-2 mt-1">
                   {result.meta?.date && (
-                    <span className="text-xs text-gray-400 dark:text-gray-500">{result.meta.date}</span>
+                    <span className="text-xs text-gray-500 dark:text-gray-400">{result.meta.date}</span>
                   )}
                 </div>
               </a>
@@ -255,7 +255,7 @@ export default function SearchDialog({ open, onClose }: SearchDialogProps) {
                       key={tag}
                       href={`/tags/${encodeURIComponent(tag.toLowerCase())}`}
                       onClick={onClose}
-                      className="text-xs text-gray-400 dark:text-gray-500 hover:text-gray-600 dark:hover:text-gray-300 hover:underline border border-gray-200 dark:border-charcoal-600 rounded px-1.5 py-0.5 transition-colors"
+                      className="text-xs text-gray-500 dark:text-gray-400 hover:text-gray-700 dark:hover:text-gray-300 hover:underline border border-gray-500 dark:border-charcoal-400 rounded px-1.5 py-0.5 transition-colors"
                     >
                       {tag}
                     </a>
@@ -267,9 +267,9 @@ export default function SearchDialog({ open, onClose }: SearchDialogProps) {
         </div>
 
         {/* Footer */}
-        <div className="px-4 py-2 border-t border-gray-200 dark:border-charcoal-600 text-xs text-gray-400 dark:text-gray-500 flex items-center justify-between">
+        <div className="px-4 py-2 border-t border-gray-500 dark:border-charcoal-400 text-xs text-gray-500 dark:text-gray-400 flex items-center justify-between">
           <span>
-            Type <kbd className="px-1 py-0.5 bg-gray-100 dark:bg-charcoal-700 rounded">#</kbd> to search by tag
+            Type <kbd className="px-1 py-0.5 bg-gray-200 dark:bg-charcoal-700 text-gray-600 dark:text-gray-300 rounded">#</kbd> to search by tag
           </span>
         </div>
       </div>

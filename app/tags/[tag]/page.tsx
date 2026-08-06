@@ -48,7 +48,7 @@ export default async function TagPage({ params }: { params: Promise<Params> }) {
     console.error(`Failed to fetch data for tag "${decodedTag}":`, error);
     return (
       <div className="min-h-screen flex items-center justify-center">
-        <p className="text-gray-500 dark:text-gray-400">Failed to load tag data. Please try again later.</p>
+        <p className="text-gray-600 dark:text-gray-400">Failed to load tag data. Please try again later.</p>
       </div>
     );
   }
@@ -71,7 +71,7 @@ export default async function TagPage({ params }: { params: Promise<Params> }) {
         {/* Back link */}
         <Link
           href="/tags"
-          className="inline-flex items-center text-sm text-gray-500 dark:text-gray-400 hover:text-gray-700 dark:hover:text-gray-200 mb-6 transition-colors"
+          className="inline-flex items-center text-sm text-gray-600 dark:text-gray-400 underline underline-offset-2 hover:text-gray-800 dark:hover:text-gray-200 mb-6 transition-colors"
         >
           <svg className="h-4 w-4 mr-1" fill="none" viewBox="0 0 24 24" stroke="currentColor">
             <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 19l-7-7 7-7" />
@@ -82,19 +82,19 @@ export default async function TagPage({ params }: { params: Promise<Params> }) {
         <h1 className="text-3xl font-medium text-gray-800 dark:text-gray-100 mb-2">
           #{decodedTag}
         </h1>
-        <p className="text-gray-500 dark:text-gray-400 mb-8">
+        <p className="text-gray-600 dark:text-gray-400 mb-8">
           {blogPosts.length + tils.length} item{(blogPosts.length + tils.length) !== 1 ? "s" : ""} tagged &ldquo;{decodedTag}&rdquo;
         </p>
 
         {/* Blog Posts */}
         {blogPosts.length > 0 && (
           <section className="mb-10">
-            <h2 className="text-lg font-medium text-gray-800 dark:text-gray-200 mb-4 pb-2 border-b border-gray-200 dark:border-charcoal-600">
+            <h2 className="text-lg font-medium text-gray-800 dark:text-gray-200 mb-4 pb-2 border-b border-gray-500 dark:border-charcoal-400">
               Blog Posts ({blogPosts.length})
             </h2>
             {years.map((year) => (
               <div key={year} className="mb-6">
-                <h3 className="text-sm font-medium text-gray-500 dark:text-gray-400 mb-3">{year}</h3>
+                <h3 className="text-sm font-medium text-gray-600 dark:text-gray-400 mb-3">{year}</h3>
                 <div className="space-y-4">
                   {groupedByYear[year].map((post) => (
                     <article key={post.slug}>
@@ -103,7 +103,7 @@ export default async function TagPage({ params }: { params: Promise<Params> }) {
                         className="group"
                       >
                         <div className="flex items-baseline gap-4">
-                          <time className="text-sm text-gray-400 dark:text-gray-500 whitespace-nowrap min-w-[80px]">
+                          <time className="text-sm text-gray-600 dark:text-gray-400 whitespace-nowrap min-w-[80px]">
                             {new Date(post.date).toLocaleDateString("en-US", {
                               month: "short",
                               day: "numeric",
@@ -125,7 +125,7 @@ export default async function TagPage({ params }: { params: Promise<Params> }) {
         {/* TILs */}
         {tils.length > 0 && (
           <section className="mb-10">
-            <h2 className="text-lg font-medium text-gray-800 dark:text-gray-200 mb-4 pb-2 border-b border-gray-200 dark:border-charcoal-600">
+            <h2 className="text-lg font-medium text-gray-800 dark:text-gray-200 mb-4 pb-2 border-b border-gray-500 dark:border-charcoal-400">
               TILs ({tils.length})
             </h2>
             <div className="space-y-4">
@@ -136,7 +136,7 @@ export default async function TagPage({ params }: { params: Promise<Params> }) {
                     className="group"
                   >
                     <div className="flex items-baseline gap-4">
-                      <span className="text-xs text-gray-400 dark:text-gray-500 whitespace-nowrap min-w-[100px] px-1.5 py-0.5 bg-gray-100 dark:bg-charcoal-700 rounded">
+                      <span className="text-xs text-gray-600 dark:text-gray-400 whitespace-nowrap min-w-[100px] px-1.5 py-0.5 bg-gray-100 dark:bg-charcoal-700 rounded">
                         {til.topic}
                       </span>
                       <div>
@@ -144,7 +144,7 @@ export default async function TagPage({ params }: { params: Promise<Params> }) {
                           {til.title}
                         </h3>
                         {til.excerpt && (
-                          <p className="text-sm text-gray-500 dark:text-gray-400 mt-0.5 line-clamp-1">
+                          <p className="text-sm text-gray-600 dark:text-gray-400 mt-0.5 line-clamp-1">
                             {til.excerpt}
                           </p>
                         )}

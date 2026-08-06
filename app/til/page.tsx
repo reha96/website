@@ -18,7 +18,7 @@ export default function TilIndexPage() {
     <div className="min-h-screen">
       <div className="max-w-4xl mx-auto px-6 py-8 md:py-12">
         <h1 className="text-3xl font-medium text-gray-800 dark:text-gray-100 mb-1">Today I Learned</h1>
-        <p className="text-gray-500 dark:text-gray-400 mb-8">
+        <p className="text-gray-600 dark:text-gray-400 mb-8">
           Short notes on things I&apos;ve discovered — {tils.length} TILs so far
         </p>
 
@@ -30,10 +30,10 @@ export default function TilIndexPage() {
               <Link
                 key={topic.slug}
                 href={`/til/${topic.slug}`}
-                className="inline-flex items-center gap-1 px-3 py-1.5 text-sm rounded-xl bg-gray-100 dark:bg-charcoal-700 text-gray-700 dark:text-gray-300 hover:bg-glaucous-500 hover:text-white dark:hover:bg-coral-600 dark:hover:text-white transition-all duration-200"
+                className="inline-flex items-center gap-1 px-3 py-1.5 text-sm rounded-xl bg-gray-100 dark:bg-charcoal-700 text-gray-700 dark:text-gray-300 hover:bg-glaucous-700 hover:text-white dark:hover:bg-coral-600 dark:hover:text-white transition-all duration-200"
               >
                 {topic.name}
-                <span className="text-gray-400 dark:text-gray-500 text-xs">({topic.count})</span>
+                <span className="text-gray-600 dark:text-gray-400 text-xs">({topic.count})</span>
               </Link>
             ))}
           </div>
@@ -41,7 +41,7 @@ export default function TilIndexPage() {
 
         {/* Recent TILs */}
         <section>
-          <h2 className="text-lg font-medium text-gray-800 dark:text-gray-200 mb-4 pb-2 border-b border-gray-200 dark:border-charcoal-600">
+          <h2 className="text-lg font-medium text-gray-800 dark:text-gray-200 mb-4 pb-2 border-b border-gray-500 dark:border-charcoal-400">
             Recent TILs
           </h2>
           <div className="space-y-4">
@@ -52,7 +52,7 @@ export default function TilIndexPage() {
                   className="group block"
                 >
                   <div className="flex items-baseline gap-4">
-                    <span className="text-xs text-gray-400 dark:text-gray-500 whitespace-nowrap min-w-[100px] px-1.5 py-0.5 bg-gray-100 dark:bg-charcoal-700 rounded">
+                    <span className="text-xs text-gray-600 dark:text-gray-400 whitespace-nowrap min-w-[100px] px-1.5 py-0.5 bg-gray-100 dark:bg-charcoal-700 rounded">
                       {til.topic}
                     </span>
                     <div>
@@ -60,7 +60,7 @@ export default function TilIndexPage() {
                         {til.title}
                       </h3>
                       {til.excerpt && (
-                        <p className="text-sm text-gray-500 dark:text-gray-400 mt-0.5 line-clamp-1">
+                        <p className="text-sm text-gray-600 dark:text-gray-400 mt-0.5 line-clamp-1">
                           {til.excerpt}
                         </p>
                       )}
@@ -68,7 +68,7 @@ export default function TilIndexPage() {
                         {til.tags.slice(0, 3).map((tag) => (
                           <span
                             key={tag}
-                            className="px-1.5 py-0.5 text-xs bg-gray-50 dark:bg-charcoal-700/50 text-gray-400 dark:text-gray-500 rounded"
+                            className="px-1.5 py-0.5 text-xs bg-gray-50 dark:bg-charcoal-700/50 text-gray-600 dark:text-gray-400 rounded"
                           >
                             {tag}
                           </span>
@@ -82,7 +82,7 @@ export default function TilIndexPage() {
           </div>
 
           {tils.length > 20 && (
-            <p className="mt-4 text-sm text-gray-400 dark:text-gray-500">
+            <p className="mt-4 text-sm text-gray-600 dark:text-gray-400">
               Showing 20 of {tils.length} TILs. Browse by topic above for more.
             </p>
           )}

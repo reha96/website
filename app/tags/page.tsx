@@ -16,7 +16,7 @@ export default async function TagsIndexPage() {
     console.error("Failed to fetch tags:", error);
     return (
       <div className="min-h-screen flex items-center justify-center">
-        <p className="text-gray-500 dark:text-gray-400">Failed to load tags. Please try again later.</p>
+        <p className="text-gray-600 dark:text-gray-400">Failed to load tags. Please try again later.</p>
       </div>
     );
   }
@@ -36,13 +36,13 @@ export default async function TagsIndexPage() {
     <div className="min-h-screen">
       <div className="max-w-4xl mx-auto px-6 py-8 md:py-12">
         <h1 className="text-3xl font-medium text-gray-800 dark:text-gray-100 mb-2">Tags</h1>
-        <p className="text-gray-500 dark:text-gray-400 mb-8">
+        <p className="text-gray-600 dark:text-gray-400 mb-8">
           {tags.length} tags across all content
         </p>
 
         {letters.map((letter) => (
           <div key={letter} className="mb-6">
-            <h2 className="text-lg font-medium text-gray-800 dark:text-gray-200 mb-3 pb-1 border-b border-gray-200 dark:border-charcoal-600">
+            <h2 className="text-lg font-medium text-gray-800 dark:text-gray-200 mb-3 pb-1 border-b border-gray-500 dark:border-charcoal-400">
               {letter}
             </h2>
             <div className="flex flex-wrap gap-2">
@@ -58,7 +58,7 @@ export default async function TagsIndexPage() {
                     className="inline-flex items-center gap-1 px-2.5 py-1 rounded-md transition-colors text-sm bg-glaucous-50 dark:bg-charcoal-700 text-glaucous-700 dark:text-coral-400 hover:bg-glaucous-100 dark:hover:bg-charcoal-600"
                   >
                     {tag}
-                    <span className="text-gray-400 dark:text-gray-500 text-xs">({count})</span>
+                    <span className="text-gray-600 dark:text-gray-400 text-xs">({count})</span>
                   </Link>
                 );
               })}

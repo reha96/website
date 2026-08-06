@@ -55,7 +55,7 @@ export default function Navbar() {
 
   return (
     <>
-      <nav className="sticky top-0 z-50 bg-white/90 dark:bg-charcoal-900/90 backdrop-blur border-b border-gray-100 dark:border-charcoal-700">
+      <nav className="sticky top-0 z-50 bg-white/90 dark:bg-charcoal-900/90 backdrop-blur border-b border-gray-500 dark:border-charcoal-400">
         <div className="max-w-4xl mx-auto px-4 md:px-6">
           <div className="flex items-center justify-between h-14">
             {/* Logo / Name — text hidden on mobile, visible md+ */}
@@ -81,7 +81,7 @@ export default function Navbar() {
                   return (
                     <span
                       key={item.label}
-                      className="px-2.5 py-1.5 text-sm text-gray-300 dark:text-gray-600 cursor-not-allowed rounded-md"
+                      className="px-2.5 py-1.5 text-sm text-gray-500 dark:text-gray-500 cursor-not-allowed rounded-md"
                       title="Coming soon"
                     >
                       {item.label}
@@ -157,20 +157,20 @@ export default function Navbar() {
           aria-label="Mobile navigation"
           className={`md:hidden mobile-menu ${mobileMenuOpen ? "mobile-menu-open" : ""}`}
         >
-          <div className="max-w-4xl mx-auto px-4 py-3 space-y-1 border-t border-gray-100 dark:border-charcoal-700 bg-white/95 dark:bg-charcoal-900/95 backdrop-blur">
+          <div className="max-w-4xl mx-auto px-4 py-3 space-y-1 border-t border-gray-500 dark:border-charcoal-400 bg-white/95 dark:bg-charcoal-900/95 backdrop-blur">
             {navItems.map((item) => {
               const active = isActive(item.href);
-              if (item.disabled) {
-                return (
-                  <span
-                    key={item.label}
-                    className="block px-3 py-2.5 text-sm text-gray-300 dark:text-gray-600 rounded-md"
-                  >
-                    {item.label}
-                    <span className="ml-2 text-xs text-gray-400 dark:text-gray-500">— coming soon</span>
-                  </span>
-                );
-              }
+                if (item.disabled) {
+                  return (
+                    <span
+                      key={item.label}
+                      className="block px-3 py-2.5 text-sm text-gray-500 dark:text-gray-500 rounded-md"
+                    >
+                      {item.label}
+                      <span className="ml-2 text-xs text-gray-500 dark:text-gray-500">— coming soon</span>
+                    </span>
+                  );
+                }
               return (
                 <Link
                   key={item.href}

@@ -26,15 +26,15 @@ export default function HomePage({ abstracts }: { abstracts: Record<string, Pape
         <div className="mb-12 text-sm text-gray-600 dark:text-[var(--color-text-secondary)] flex flex-wrap items-center gap-x-4 gap-y-1">
           <Link
             href="https://hci.uni.lu/reha-tuncer/"
-            className="font-medium hover:underline"
+            className="font-medium underline underline-offset-2"
             style={{ color: 'var(--color-link)' }}
           >
             University of Luxembourg
           </Link>
-          <span className="text-gray-400 dark:text-gray-500">·</span>
+          <span>·</span>
           <Link
             href="/CV_RT.pdf"
-            className="font-medium hover:underline"
+            className="font-medium underline underline-offset-2"
             style={{ color: 'var(--color-link)' }}
           >
             Academic CV
@@ -50,7 +50,7 @@ export default function HomePage({ abstracts }: { abstracts: Record<string, Pape
           {/* Paper 1 - with accent border */}
           <div id="paper1" className="mb-8 p-6 border-l-4 rounded-2xl shadow-md transition-colors duration-300 hover:bg-gray-50 dark:hover:bg-charcoal-800" style={{ borderLeftColor: 'var(--color-accent)', backgroundColor: 'var(--color-blockquote-bg)' }}>
             <Link href="https://doi.org/10.1111/ecca.12524">
-              <h3 className="text-lg font-medium hover:underline mb-1" style={{ color: 'var(--color-link)' }}>
+              <h3 className="text-lg font-medium underline underline-offset-2 mb-1" style={{ color: 'var(--color-link)' }}>
                 From unobserved to observed preference heterogeneity: a revealed
                 preference methodology
               </h3>
@@ -74,7 +74,7 @@ export default function HomePage({ abstracts }: { abstracts: Record<string, Pape
 
             {/* Abstract section that shows/hides based on state */}
             {visibleAbstracts["paper1"] && (
-              <div className="my-4 p-4 bg-white dark:bg-charcoal-900 rounded-xl border border-gray-200 dark:border-charcoal-600">
+              <div className="my-4 p-4 bg-white dark:bg-charcoal-900 rounded-xl border border-gray-500 dark:border-charcoal-400">
                 <h4 className="text-sm font-semibold mb-2 dark:text-gray-200">Abstract</h4>
                 <p className="text-sm text-gray-700 dark:text-gray-300">
                   {abstracts["paper1"]?.text ?? "Abstract not available."}
@@ -85,7 +85,7 @@ export default function HomePage({ abstracts }: { abstracts: Record<string, Pape
             <div className="flex flex-wrap gap-2">
               <button
                 onClick={() => toggleAbstract("paper1")}
-                className="flex items-center px-3 py-1 bg-gray-200 dark:bg-charcoal-700 text-sm text-gray-700 dark:text-gray-300 rounded-lg hover:bg-[#5F829F] hover:text-white dark:hover:bg-coral-600 dark:hover:text-white transition-colors"
+                className="flex items-center px-3 py-1 bg-gray-200 dark:bg-charcoal-700 text-sm text-gray-700 dark:text-gray-300 rounded-lg hover:bg-glaucous-800 hover:text-white dark:hover:bg-coral-600 dark:hover:text-white transition-colors"
               >
                 <svg
                   xmlns="http://www.w3.org/2000/svg"
@@ -105,7 +105,7 @@ export default function HomePage({ abstracts }: { abstracts: Record<string, Pape
               </button>
               <Link
                 href="https://osf.io/epbdq/"
-                className="flex items-center px-3 py-1 bg-gray-200 dark:bg-charcoal-700 text-sm text-gray-700 dark:text-gray-300 rounded-lg hover:bg-[#5F829F] hover:text-white dark:hover:bg-coral-600 dark:hover:text-white transition-colors"
+                className="flex items-center px-3 py-1 bg-gray-200 dark:bg-charcoal-700 text-sm text-gray-700 dark:text-gray-300 rounded-lg hover:bg-glaucous-800 hover:text-white dark:hover:bg-coral-600 dark:hover:text-white transition-colors"
               >
                 <svg
                   xmlns="http://www.w3.org/2000/svg"
@@ -125,7 +125,7 @@ export default function HomePage({ abstracts }: { abstracts: Record<string, Pape
               </Link>
               <Link
                 href="/RP.pdf"
-                className="flex items-center px-3 py-1 bg-gray-200 dark:bg-charcoal-700 text-sm text-gray-700 dark:text-gray-300 rounded-lg hover:bg-[#5F829F] hover:text-white dark:hover:bg-coral-600 dark:hover:text-white transition-colors"
+                className="flex items-center px-3 py-1 bg-gray-200 dark:bg-charcoal-700 text-sm text-gray-700 dark:text-gray-300 rounded-lg hover:bg-glaucous-800 hover:text-white dark:hover:bg-coral-600 dark:hover:text-white transition-colors"
               >
                 <svg
                   xmlns="http://www.w3.org/2000/svg"
@@ -145,7 +145,7 @@ export default function HomePage({ abstracts }: { abstracts: Record<string, Pape
               </Link>
               <Link
                 href="https://github.com/reha96/python_for_cplex"
-                className="flex items-center px-3 py-1 bg-gray-200 dark:bg-charcoal-700 text-sm text-gray-700 dark:text-gray-300 rounded-lg hover:bg-[#5F829F] hover:text-white dark:hover:bg-coral-600 dark:hover:text-white transition-colors"
+                className="flex items-center px-3 py-1 bg-gray-200 dark:bg-charcoal-700 text-sm text-gray-700 dark:text-gray-300 rounded-lg hover:bg-glaucous-800 hover:text-white dark:hover:bg-coral-600 dark:hover:text-white transition-colors"
               >
                 <svg
                   xmlns="http://www.w3.org/2000/svg"
@@ -163,7 +163,7 @@ export default function HomePage({ abstracts }: { abstracts: Record<string, Pape
           {/* Paper 2 */}
           <div id="paper2" className="mb-8 p-6 border-l-4 rounded-2xl shadow-md transition-colors duration-300 hover:bg-gray-50 dark:hover:bg-charcoal-800" style={{ borderLeftColor: 'var(--color-accent)', backgroundColor: 'var(--color-blockquote-bg)' }}>
             <Link href="https://doi.org/10.1080/0144929X.2023.2242966">
-              <h3 className="text-lg font-medium hover:underline mb-1" style={{ color: 'var(--color-link)' }}>
+              <h3 className="text-lg font-medium underline underline-offset-2 mb-1" style={{ color: 'var(--color-link)' }}>
                 Running out of time(rs): effects of scarcity cues on perceived
                 task load, perceived benevolence and user experience on
                 e-commerce sites
@@ -191,7 +191,7 @@ export default function HomePage({ abstracts }: { abstracts: Record<string, Pape
             </div>
 
             {visibleAbstracts["paper2"] && (
-              <div className="my-4 p-4 bg-white dark:bg-charcoal-900 rounded-xl border border-gray-200 dark:border-charcoal-600">
+              <div className="my-4 p-4 bg-white dark:bg-charcoal-900 rounded-xl border border-gray-500 dark:border-charcoal-400">
                 <h4 className="text-sm font-semibold mb-2 dark:text-gray-200">Abstract</h4>
                 <p className="text-sm text-gray-700 dark:text-gray-300">
                   {abstracts["paper2"]?.text ?? "Abstract not available."}
@@ -202,7 +202,7 @@ export default function HomePage({ abstracts }: { abstracts: Record<string, Pape
             <div className="flex flex-wrap gap-2">
               <button
                 onClick={() => toggleAbstract("paper2")}
-                className="flex items-center px-3 py-1 bg-gray-200 dark:bg-charcoal-700 text-sm text-gray-700 dark:text-gray-300 rounded-lg hover:bg-[#5F829F] hover:text-white dark:hover:bg-coral-600 dark:hover:text-white transition-colors"
+                className="flex items-center px-3 py-1 bg-gray-200 dark:bg-charcoal-700 text-sm text-gray-700 dark:text-gray-300 rounded-lg hover:bg-glaucous-800 hover:text-white dark:hover:bg-coral-600 dark:hover:text-white transition-colors"
               >
                 <svg
                   xmlns="http://www.w3.org/2000/svg"
@@ -222,7 +222,7 @@ export default function HomePage({ abstracts }: { abstracts: Record<string, Pape
               </button>
               <Link
                 href="https://osf.io/xgdpm/"
-                className="flex items-center px-3 py-1 bg-gray-200 dark:bg-charcoal-700 text-sm text-gray-700 dark:text-gray-300 rounded-lg hover:bg-[#5F829F] hover:text-white dark:hover:bg-coral-600 dark:hover:text-white transition-colors"
+                className="flex items-center px-3 py-1 bg-gray-200 dark:bg-charcoal-700 text-sm text-gray-700 dark:text-gray-300 rounded-lg hover:bg-glaucous-800 hover:text-white dark:hover:bg-coral-600 dark:hover:text-white transition-colors"
               >
                 <svg
                   xmlns="http://www.w3.org/2000/svg"
@@ -267,7 +267,7 @@ export default function HomePage({ abstracts }: { abstracts: Record<string, Pape
             </div>
 
             {visibleAbstracts["paper3"] && (
-              <div className="my-4 p-4 bg-white dark:bg-charcoal-900 rounded-xl border border-gray-200 dark:border-charcoal-600">
+              <div className="my-4 p-4 bg-white dark:bg-charcoal-900 rounded-xl border border-gray-500 dark:border-charcoal-400">
                 <h4 className="text-sm font-semibold mb-2 dark:text-gray-200">Abstract</h4>
                 <p className="text-sm text-gray-700 dark:text-gray-300">
                   {
@@ -280,7 +280,7 @@ export default function HomePage({ abstracts }: { abstracts: Record<string, Pape
             <div className="flex flex-wrap gap-2">
               <button
                 onClick={() => toggleAbstract("paper3")}
-                className="flex items-center px-3 py-1 bg-gray-200 dark:bg-charcoal-700 text-sm text-gray-700 dark:text-gray-300 rounded-lg hover:bg-[#5F829F] hover:text-white dark:hover:bg-coral-600 dark:hover:text-white transition-colors"
+                className="flex items-center px-3 py-1 bg-gray-200 dark:bg-charcoal-700 text-sm text-gray-700 dark:text-gray-300 rounded-lg hover:bg-glaucous-800 hover:text-white dark:hover:bg-coral-600 dark:hover:text-white transition-colors"
               >
                 <svg
                   xmlns="http://www.w3.org/2000/svg"
@@ -300,7 +300,7 @@ export default function HomePage({ abstracts }: { abstracts: Record<string, Pape
               </button>
               <Link
                 href="https://github.com/reha96/autoplay-clean"
-                className="flex items-center px-3 py-1 bg-gray-200 dark:bg-charcoal-700 text-sm text-gray-700 dark:text-gray-300 rounded-lg hover:bg-[#5F829F] hover:text-white dark:hover:bg-coral-600 dark:hover:text-white transition-colors"
+                className="flex items-center px-3 py-1 bg-gray-200 dark:bg-charcoal-700 text-sm text-gray-700 dark:text-gray-300 rounded-lg hover:bg-glaucous-800 hover:text-white dark:hover:bg-coral-600 dark:hover:text-white transition-colors"
               >
                 <svg
                   xmlns="http://www.w3.org/2000/svg"
@@ -314,7 +314,7 @@ export default function HomePage({ abstracts }: { abstracts: Record<string, Pape
               </Link>
               <Link
                 href="https://github.com/reha96/autoplay-clean/blob/main/writing/main.pdf"
-                className="flex items-center px-3 py-1 bg-gray-200 dark:bg-charcoal-700 text-sm text-gray-700 dark:text-gray-300 rounded-lg hover:bg-[#5F829F] hover:text-white dark:hover:bg-coral-600 dark:hover:text-white transition-colors"
+                className="flex items-center px-3 py-1 bg-gray-200 dark:bg-charcoal-700 text-sm text-gray-700 dark:text-gray-300 rounded-lg hover:bg-glaucous-800 hover:text-white dark:hover:bg-coral-600 dark:hover:text-white transition-colors"
               >
                 <svg
                   xmlns="http://www.w3.org/2000/svg"
@@ -353,7 +353,7 @@ export default function HomePage({ abstracts }: { abstracts: Record<string, Pape
 
             {/* Abstract section that shows/hides based on state */}
             {visibleAbstracts["paper4"] && (
-              <div className="my-4 p-4 bg-white dark:bg-charcoal-900 rounded-xl border border-gray-200 dark:border-charcoal-600">
+              <div className="my-4 p-4 bg-white dark:bg-charcoal-900 rounded-xl border border-gray-500 dark:border-charcoal-400">
                 <h4 className="text-sm font-semibold mb-2 dark:text-gray-200">Abstract</h4>
                 <p className="text-sm text-gray-700 dark:text-gray-300">
                   {
@@ -366,7 +366,7 @@ export default function HomePage({ abstracts }: { abstracts: Record<string, Pape
             <div className="flex flex-wrap gap-2">
               <button
                 onClick={() => toggleAbstract("paper4")}
-                className="flex items-center px-3 py-1 bg-gray-200 dark:bg-charcoal-700 text-sm text-gray-700 dark:text-gray-300 rounded-lg hover:bg-[#5F829F] hover:text-white dark:hover:bg-coral-600 dark:hover:text-white transition-colors"
+                className="flex items-center px-3 py-1 bg-gray-200 dark:bg-charcoal-700 text-sm text-gray-700 dark:text-gray-300 rounded-lg hover:bg-glaucous-800 hover:text-white dark:hover:bg-coral-600 dark:hover:text-white transition-colors"
               >
                 <svg
                   xmlns="http://www.w3.org/2000/svg"
@@ -386,7 +386,7 @@ export default function HomePage({ abstracts }: { abstracts: Record<string, Pape
               </button>
               <Link
                 href="https://github.com/reha96/skills-clean"
-                className="flex items-center px-3 py-1 bg-gray-200 dark:bg-charcoal-700 text-sm text-gray-700 dark:text-gray-300 rounded-lg hover:bg-[#5F829F] hover:text-white dark:hover:bg-coral-600 dark:hover:text-white transition-colors"
+                className="flex items-center px-3 py-1 bg-gray-200 dark:bg-charcoal-700 text-sm text-gray-700 dark:text-gray-300 rounded-lg hover:bg-glaucous-800 hover:text-white dark:hover:bg-coral-600 dark:hover:text-white transition-colors"
               >
                 <svg
                   xmlns="http://www.w3.org/2000/svg"
@@ -400,7 +400,7 @@ export default function HomePage({ abstracts }: { abstracts: Record<string, Pape
               </Link>
               <Link
                 href="https://github.com/reha96/skills-clean/blob/main/writing/current/manuscript.pdf"
-                className="flex items-center px-3 py-1 bg-gray-200 dark:bg-charcoal-700 text-sm text-gray-700 dark:text-gray-300 rounded-lg hover:bg-[#5F829F] hover:text-white dark:hover:bg-coral-600 dark:hover:text-white transition-colors"
+                className="flex items-center px-3 py-1 bg-gray-200 dark:bg-charcoal-700 text-sm text-gray-700 dark:text-gray-300 rounded-lg hover:bg-glaucous-800 hover:text-white dark:hover:bg-coral-600 dark:hover:text-white transition-colors"
               >
                 <svg
                   xmlns="http://www.w3.org/2000/svg"
@@ -438,7 +438,7 @@ export default function HomePage({ abstracts }: { abstracts: Record<string, Pape
 
             {/* Abstract section that shows/hides based on state */}
             {visibleAbstracts["paper5"] && (
-              <div className="my-4 p-4 bg-white dark:bg-charcoal-900 rounded-xl border border-gray-200 dark:border-charcoal-600">
+              <div className="my-4 p-4 bg-white dark:bg-charcoal-900 rounded-xl border border-gray-500 dark:border-charcoal-400">
                 <h4 className="text-sm font-semibold mb-2 dark:text-gray-200">Abstract</h4>
                 <p className="text-sm text-gray-700 dark:text-gray-300">
                   {
@@ -451,7 +451,7 @@ export default function HomePage({ abstracts }: { abstracts: Record<string, Pape
             <div className="flex flex-wrap gap-2">
               <button
                 onClick={() => toggleAbstract("paper5")}
-                className="flex items-center px-3 py-1 bg-gray-200 dark:bg-charcoal-700 text-sm text-gray-700 dark:text-gray-300 rounded-lg hover:bg-[#5F829F] hover:text-white dark:hover:bg-coral-600 dark:hover:text-white transition-colors"
+                className="flex items-center px-3 py-1 bg-gray-200 dark:bg-charcoal-700 text-sm text-gray-700 dark:text-gray-300 rounded-lg hover:bg-glaucous-800 hover:text-white dark:hover:bg-coral-600 dark:hover:text-white transition-colors"
               >
                 <svg
                   xmlns="http://www.w3.org/2000/svg"
@@ -471,7 +471,7 @@ export default function HomePage({ abstracts }: { abstracts: Record<string, Pape
               </button>
               <Link
                 href="https://github.com/reha96/icfes-referrals-clean"
-                className="flex items-center px-3 py-1 bg-gray-200 dark:bg-charcoal-700 text-sm text-gray-700 dark:text-gray-300 rounded-lg hover:bg-[#5F829F] hover:text-white dark:hover:bg-coral-600 dark:hover:text-white transition-colors"
+                className="flex items-center px-3 py-1 bg-gray-200 dark:bg-charcoal-700 text-sm text-gray-700 dark:text-gray-300 rounded-lg hover:bg-glaucous-800 hover:text-white dark:hover:bg-coral-600 dark:hover:text-white transition-colors"
               >
                 <svg
                   xmlns="http://www.w3.org/2000/svg"
@@ -485,7 +485,7 @@ export default function HomePage({ abstracts }: { abstracts: Record<string, Pape
               </Link>
               <Link
                 href="https://github.com/reha96/icfes-referrals-clean/blob/main/writing/manuscript.pdf"
-                className="flex items-center px-3 py-1 bg-gray-200 dark:bg-charcoal-700 text-sm text-gray-700 dark:text-gray-300 rounded-lg hover:bg-[#5F829F] hover:text-white dark:hover:bg-coral-600 dark:hover:text-white transition-colors"
+                className="flex items-center px-3 py-1 bg-gray-200 dark:bg-charcoal-700 text-sm text-gray-700 dark:text-gray-300 rounded-lg hover:bg-glaucous-800 hover:text-white dark:hover:bg-coral-600 dark:hover:text-white transition-colors"
               >
                 <svg
                   xmlns="http://www.w3.org/2000/svg"

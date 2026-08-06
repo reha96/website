@@ -84,7 +84,7 @@ export default function LandingPage() {
                 <h3 className="font-serif text-lg font-medium text-gray-800 dark:text-[var(--color-text)] mb-2 group-hover:text-white transition-colors duration-300">
                   {item.title}
                 </h3>
-                <p className="text-sm text-gray-600 dark:text-[var(--color-text-secondary)] leading-relaxed group-hover:text-white/90 transition-colors duration-300">
+                <p className="text-sm text-gray-600 dark:text-[var(--color-text-secondary)] leading-relaxed group-hover:text-white transition-colors duration-300">
                   {item.description}
                 </p>
               </Link>
@@ -106,7 +106,7 @@ export default function LandingPage() {
               <h3 className="font-serif text-lg font-medium text-gray-800 dark:text-[var(--color-text)] mb-2 group-hover:text-white transition-colors duration-300">
                 Blog
               </h3>
-              <p className="text-sm text-gray-600 dark:text-[var(--color-text-secondary)] leading-relaxed group-hover:text-white/90 transition-colors duration-300">
+              <p className="text-sm text-gray-600 dark:text-[var(--color-text-secondary)] leading-relaxed group-hover:text-white transition-colors duration-300">
                 Notes from courses and projects across topics in machine
                 learning, Python programming, and AI.
               </p>
@@ -119,7 +119,7 @@ export default function LandingPage() {
               <h3 className="font-serif text-lg font-medium text-gray-800 dark:text-[var(--color-text)] mb-2 group-hover:text-white transition-colors duration-300">
                 TIL
               </h3>
-              <p className="text-sm text-gray-600 dark:text-[var(--color-text-secondary)] leading-relaxed group-hover:text-white/90 transition-colors duration-300">
+              <p className="text-sm text-gray-600 dark:text-[var(--color-text-secondary)] leading-relaxed group-hover:text-white transition-colors duration-300">
                 Today I Learned: Short notes on things I&apos;ve discovered
                 while coding and researching.
               </p>
@@ -131,11 +131,11 @@ export default function LandingPage() {
               <h3 className="font-serif text-lg font-medium text-gray-800 dark:text-[var(--color-text)] mb-2 group-hover:text-white transition-colors duration-300">
                 Projects
               </h3>
-              <p className="text-sm text-gray-600 dark:text-[var(--color-text-secondary)] leading-relaxed mb-3 group-hover:text-white/90 transition-colors duration-300">
+              <p className="text-sm text-gray-600 dark:text-[var(--color-text-secondary)] leading-relaxed mb-3 group-hover:text-white transition-colors duration-300">
                 RL drones, NGO websites, and experiments at the intersection of
                 economics and code.
               </p>
-              <span className="text-xs font-medium px-2 py-0.5 rounded-md bg-gray-200 dark:bg-charcoal-600 text-gray-500 dark:text-gray-400 group-hover:bg-white/20 group-hover:text-white/80 transition-colors duration-300">
+              <span className="text-xs font-medium px-2 py-0.5 rounded-md bg-gray-200 dark:bg-charcoal-600 text-gray-600 dark:text-gray-400 group-hover:bg-white/20 group-hover:text-white transition-colors duration-300">
                 Coming soon
               </span>
             </div>
@@ -147,7 +147,7 @@ export default function LandingPage() {
           <a
             href="mailto:reha.tuncer@gmail.com"
             className="inline-flex items-center px-6 py-3 font-medium rounded-xl transition-all duration-300 hover:scale-[1.03]"
-            style={{ backgroundColor: "var(--color-accent)", color: "#fff" }}
+            style={{ backgroundColor: "#CC3D2A", color: "#fff" }}
           >
             <svg
               className="mr-2 h-4 w-4"
