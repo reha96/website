@@ -6,6 +6,7 @@ import MarkdownRenderer from "@/components/markdown-renderer";
 export const metadata: Metadata = {
   title: "About — Reha Tuncer",
   description: "Disclosures and information about this site",
+  alternates: { canonical: "/about" },
 };
 
 export default function AboutPage() {

@@ -22,6 +22,7 @@ export async function generateMetadata({ params }: { params: Promise<Params> }):
   return {
     title: `${til.title} — TIL — Reha Tuncer`,
     description: til.excerpt,
+    alternates: { canonical: `/til/${topic}/${slug}` },
   };
 }
 

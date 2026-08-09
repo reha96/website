@@ -6,6 +6,7 @@ import { isPaperTag, getPaperAnchor } from "@/lib/paper-tags";
 export const metadata: Metadata = {
   title: "Tags — Reha Tuncer",
   description: "Browse all tags used across blog posts and TILs",
+  alternates: { canonical: "/tags" },
 };
 
 export default async function TagsIndexPage() {

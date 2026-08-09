@@ -5,6 +5,7 @@ import HomePage from "@/components/home-page";
 export const metadata: Metadata = {
   title: "Academic — Reha Tuncer",
   description: "Research papers and publications in behavioral and experimental economics",
+  alternates: { canonical: "/academic" },
 };
 
 export default async function AcademicPage() {

@@ -77,6 +77,7 @@ export async function generateMetadata({ params }: { params: Promise<Params> }):
     return {
       title: `${post.title} — Reha Tuncer`,
       description: post.excerpt || `Blog post about ${post.topic}: ${post.title}`,
+      alternates: { canonical: `/blog/${post.year}/${post.month}/${post.day}/${post.slug}` },
     };
   } catch (error) {
     console.error("Failed to fetch blog post for metadata:", error);

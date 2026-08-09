@@ -13,6 +13,7 @@ const playfair = Playfair_Display({
 })
 
 export const metadata: Metadata = {
+  metadataBase: new URL('https://www.rehatuncer.com'),
   title: 'Reha Tuncer',
   description: 'Academic website — behavioral economics, web development, and reinforcement learning',
   icons: {

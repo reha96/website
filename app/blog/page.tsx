@@ -1,5 +1,12 @@
 import { getAllBlogPostsMeta, getFilters } from "@/lib/github";
 import BlogIndexClient from "@/components/blog-index-client";
+import type { Metadata } from "next";
+
+export const metadata: Metadata = {
+  title: "Blog — Reha Tuncer",
+  description: "Learning notes from DLH projects — machine learning, Python programming, and AI",
+  alternates: { canonical: "/blog" },
+};
 
 /**
  * Blog index page — SSG.

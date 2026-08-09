@@ -15,7 +15,7 @@ import fs from "fs";
 import path from "path";
 
 const OUT_DIR = path.join(process.cwd(), "out");
-const BASE_URL = "https://rehatuncer.com";
+const BASE_URL = "https://www.rehatuncer.com";
 const BUILD_DATE = new Date().toISOString().split("T")[0]; // YYYY-MM-DD
 
 interface SitemapEntry {

@@ -2,5 +2,6 @@ User-agent: *
 Allow: /
 Disallow: /private
 Disallow: /search
+Disallow: /*.txt$
 
-Sitemap: https://rehatuncer.com/sitemap.xml
+Sitemap: https://www.rehatuncer.com/sitemap.xml

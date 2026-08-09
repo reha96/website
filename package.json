@@ -5,7 +5,7 @@
   "scripts": {
     "dev": "next dev",
     "build": "next build",
-    "postbuild": "npx tsx lib/search-index.ts && npx tsx lib/sitemap.ts",
+    "postbuild": "npx tsx lib/search-index.ts && npx tsx lib/sitemap.ts && find out -name '*.txt' ! -name 'robots.txt' -delete",
     "start": "next start",
     "lint": "next lint",
     "audit:latex": "npx tsx lib/audit-latex.ts"

@@ -5,6 +5,7 @@ import { getAllTils, getTilTopics } from "@/lib/til";
 export const metadata: Metadata = {
   title: "TIL — Reha Tuncer",
   description: "Today I Learned — short notes on things I've discovered",
+  alternates: { canonical: "/til" },
 };
 
 export default function TilIndexPage() {

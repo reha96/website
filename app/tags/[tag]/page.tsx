@@ -28,6 +28,7 @@ export async function generateMetadata({ params }: { params: Promise<Params> }):
   return {
     title: `#${decodedTag} — Reha Tuncer`,
     description: `Browse items tagged with "${decodedTag}"`,
+    alternates: { canonical: `/tags/${encodeURIComponent(decodedTag.toLowerCase())}` },
   };
 }
 
