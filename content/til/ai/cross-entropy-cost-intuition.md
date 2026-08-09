@@ -8,7 +8,7 @@ tags: ["machine-learning", "logistic-regression", "cross-entropy", "cost-functio
 
 While building a single neuron from scratch in NumPy for the DLH machine-learning curriculum (classifying MNIST handwritten digits), I had to answer the question every ML beginner meets: how do you score a prediction? The answer is a cost function — one number saying how wrong the model is overall. Cross-entropy is the standard choice for classification: it is what logistic regression (the neuron's official name) uses, what neural networks use, and, generalized, what LLMs use when they train on next-word prediction. This TIL is the intuition that made it click for me, and what the −1/m in the formula is really doing.
 
-After forward propagation — running inputs through the neuron to get predictions — you have A, the prediction, one value per example, each in (0, 1) — and Y, the truth, each 0 or 1. The cost is a single number that says how wrong the model is overall. It's the number gradient descent (see my [gradient descent TIL](/til/ai/gradient-descent-mental-model)) pushes toward 0, so it must be smooth and slope "downhill" no matter where we are.
+After forward propagation — running inputs through the neuron to get predictions — you have A, the prediction, one value per example, each in (0, 1) — and Y, the truth, each 0 or 1. The cost — the number gradient descent (see my [gradient descent TIL](/til/ai/gradient-descent-mental-model)) pushes toward 0 — must be smooth and slope "downhill" no matter where we are.
 
 ## Why not mean-squared-error
 
@@ -40,8 +40,6 @@ Two more anchors from the session: cost is scored on the *soft* A before thresho
 ## Questions that made it click
 
 **"What is the m dimension here?"** — m is the number of training examples, one per column: X is (nx, m), Y and A are (1, m). The sum runs over all m columns and /m turns it into the average penalty per example — cost 0.5 means "each example costs 0.5 units of surprise."
-
-**"Why do we have − 1/m?"** — the minus flips the always-negative penalty sum so minimization means improvement; the 1/m averages so the number is comparable across dataset sizes and the gradient keeps the same scale regardless of batch size.
 
 **"Do my comments capture the operation?"** — not quite: m is the *number of examples*, not "dims for later regularization" (there is no regularization here), and only one branch uses log(1−A) — Y ∈ {0,1} picks the branch per example.
 
