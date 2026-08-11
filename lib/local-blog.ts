@@ -89,11 +89,14 @@ function readLocalPost(filePath: string): BlogPostWithContent | null {
 /**
  * Get all local blog posts with full content.
  * Reads all .md files from content/blog/ and parses their frontmatter.
+ * Files prefixed with "_" are templates and are never published.
  */
 export function getLocalBlogPosts(): BlogPostWithContent[] {
   if (!fs.existsSync(CONTENT_DIR)) return [];
 
-  const files = fs.readdirSync(CONTENT_DIR).filter((f) => f.endsWith(".md"));
+  const files = fs
+    .readdirSync(CONTENT_DIR)
+    .filter((f) => f.endsWith(".md") && !f.startsWith("_"));
   const posts: BlogPostWithContent[] = [];
 
   for (const file of files) {
@@ -119,7 +122,9 @@ export function getLocalBlogPostsMeta(): BlogPost[] {
 export function getLocalBlogPost(slug: string): BlogPostWithContent | null {
   if (!fs.existsSync(CONTENT_DIR)) return null;
 
-  const files = fs.readdirSync(CONTENT_DIR).filter((f) => f.endsWith(".md"));
+  const files = fs
+    .readdirSync(CONTENT_DIR)
+    .filter((f) => f.endsWith(".md") && !f.startsWith("_"));
   for (const file of files) {
     const post = readLocalPost(path.join(CONTENT_DIR, file));
     if (post && post.slug === slug) return post;

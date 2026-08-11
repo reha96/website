@@ -228,9 +228,9 @@ export default function SearchDialog({ open, onClose }: SearchDialogProps) {
             </div>
           )}
 
-          {results.map((result, i) => (
+          {results.map((result) => (
             <div
-              key={i}
+              key={result.url}
               className="px-4 py-3 hover:bg-gray-50 dark:hover:bg-charcoal-700/50 border-b border-gray-100 dark:border-charcoal-700/50 last:border-b-0 transition-colors"
             >
               <a href={result.url} onClick={onClose} className="block">

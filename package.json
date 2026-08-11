@@ -5,7 +5,11 @@
   "scripts": {
     "dev": "next dev",
     "build": "next build",
-    "postbuild": "npx tsx lib/search-index.ts && npx tsx lib/sitemap.ts && find out -name '*.txt' ! -name 'robots.txt' -delete",
+    "postbuild": "npx tsx lib/search-index.ts && npx tsx lib/sitemap.ts && find out -name '*.txt' ! -name 'robots.txt' -delete && npm run check && npm run audit:latex",
+    "check": "npm run check:config && npm run check:links && npm run check:artifacts",
+    "check:config": "npx tsx scripts/check-vercel-config.ts",
+    "check:links": "npx tsx scripts/check-links.ts",
+    "check:artifacts": "npx tsx scripts/check-artifacts.ts",
     "start": "next start",
     "lint": "next lint",
     "audit:latex": "npx tsx lib/audit-latex.ts"
