@@ -209,4 +209,10 @@ export const BLOG_POSTS_CONFIG: Record<string, BlogPostMeta> = {
     tags: ["Data Preparation", "Visualization", "Cleaning", "Feature Engineering", "pandas", "Seaborn"],
     topic: "Data Analysis",
   },
+  "machine-learning-linear-models": {
+    repo: "dlh-modern_ai",
+    path: "machine_learning/linear_models",
+    tags: ["Linear Regression", "Ridge", "Lasso", "Logistic Regression", "SVM", "SHAP"],
+    topic: "Machine Learning",
+  },
 };

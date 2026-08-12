@@ -5,7 +5,6 @@ import fs from "fs";
 import path from "path";
 
 const GITHUB_RAW = "https://raw.githubusercontent.com/reha96";
-const GITHUB_API = "https://api.github.com";
 const GITHUB_WEB = "https://github.com/reha96";
 
 const AUTHOR = "Reha Tuncer";
@@ -51,7 +50,7 @@ async function fetchReadme(repo: string, path: string): Promise<string | null> {
   const url = `${GITHUB_RAW}/${repo}/main/${dirPath}README.md`;
 
   try {
-    const res = await fetch(url, { next: { revalidate: false } });
+    const res = await fetch(url, { next: { revalidate: 1 } });
     if (!res.ok) return null;
     return await res.text();
   } catch {
@@ -91,60 +90,19 @@ function extractExcerpt(content: string): string {
 }
 
 /**
- * Fetch with a timeout — avoids hanging builds when GitHub API is rate-limited.
+ * Get the date for a repo or a specific file path.
+ * Reads from the committed cache (content/commit-dates.json), which is
+ * refreshed by `npm run refresh:dates` (local git, no GitHub API).
+ * On a cache miss the entry is skipped with a warning — never a network call.
  */
-async function fetchWithTimeout(url: string, timeoutMs = 10000): Promise<Response> {
-  const controller = new AbortController();
-  const timer = setTimeout(() => controller.abort(), timeoutMs);
-  try {
-    const res = await fetch(url, { signal: controller.signal, next: { revalidate: false } as any });
-    return res;
-  } finally {
-    clearTimeout(timer);
-  }
-}
-
-/**
- * Get the creation date for a repo or a specific file path.
- * Reads from the shared cache; on cache miss, fetches from GitHub API.
- * Does NOT persist to disk — callers must call saveCommitCache() once at the end.
- */
-async function fetchDate(repo: string, path: string, cache: Map<string, string>): Promise<string> {
+async function fetchDate(repo: string, path: string, cache: Map<string, string>): Promise<string | null> {
   const cacheKey = path ? `${repo}/${path}` : repo;
 
   const cached = cache.get(cacheKey);
   if (cached) return cached;
 
-  let isoDate = "";
-  try {
-    if (path) {
-      const url = `${GITHUB_API}/repos/reha96/${repo}/commits?path=${encodeURIComponent(path + "/README.md")}&per_page=1&sort=author-date&direction=asc`;
-      const res = await fetchWithTimeout(url);
-      if (res.ok) {
-        const commits = await res.json();
-        if (Array.isArray(commits) && commits.length > 0) {
-          isoDate = commits[0].commit?.committer?.date || commits[0].commit?.author?.date || "";
-        }
-      }
-    }
-    if (!isoDate) {
-      const url = `${GITHUB_API}/repos/reha96/${repo}`;
-      const res = await fetchWithTimeout(url);
-      if (res.ok) {
-        const data = await res.json();
-        isoDate = data.created_at || "";
-      }
-    }
-  } catch {
-    // Timeout or network error — fall through to fallback
-  }
-
-  if (!isoDate) {
-    isoDate = new Date().toISOString();
-  }
-
-  cache.set(cacheKey, isoDate);
-  return isoDate;
+  console.warn(`  No cached date for ${cacheKey} — run npm run refresh:dates`);
+  return null;
 }
 
 /**
@@ -294,6 +252,10 @@ async function fetchAllBlogPosts(): Promise<BlogPostWithContent[]> {
       const title = titleFromMd;
       const excerpt = extractExcerpt(content);
       const isoDate = await fetchDate(meta.repo, meta.path, cache);
+      if (!isoDate) {
+        const key = meta.path ? `${meta.repo}/${meta.path}` : meta.repo;
+        throw new Error(`No cached date for ${key} — run "npm run refresh:dates" and commit the result`);
+      }
       const { year, month, day } = dateToParts(isoDate);
 
       const post: BlogPostWithContent = {
@@ -355,6 +317,10 @@ export async function getBlogPost(slug: string): Promise<BlogPostWithContent | n
   const excerpt = extractExcerpt(content);
   const cache = loadCommitCache();
   const isoDate = await fetchDate(meta.repo, meta.path, cache);
+  if (!isoDate) {
+    const key = meta.path ? `${meta.repo}/${meta.path}` : meta.repo;
+    throw new Error(`No cached date for ${key} — run "npm run refresh:dates" and commit the result`);
+  }
   const { year, month, day } = dateToParts(isoDate);
 
   // Build path mapping and rewrite internal cross-reference links

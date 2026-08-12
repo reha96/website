@@ -44,7 +44,7 @@ const PAPER_CONFIGS = [
 async function fetchTexFile(repo: string, path: string): Promise<string | null> {
   const url = `${GITHUB_RAW}/${repo}/main/${path}`;
   try {
-    const res = await fetch(url, { next: { revalidate: false } });
+    const res = await fetch(url, { next: { revalidate: 1 } });
     if (!res.ok) return null;
     return await res.text();
   } catch {

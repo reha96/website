@@ -10,3 +10,14 @@ Rules:
 - If graphify-out/wiki/index.md exists, use it for broad navigation instead of raw source browsing.
 - Read graphify-out/GRAPH_REPORT.md only for broad architecture review or when query/path/explain do not surface enough context.
 - After modifying code, run `graphify update .` to keep the graph current (AST-only, no API cost).
+
+## Blog content freshness
+
+Post URL dates come from content/commit-dates.json, a tracked cache of GitHub commit dates. It goes stale silently, so:
+
+- After any change to a source README (dlh-* repos) that should appear on the site, run `npm run refresh:dates` to refetch all dates and rewrite content/commit-dates.json. Do not edit commit-dates.json by hand.
+- When adding a BLOG_POSTS_CONFIG entry, run `npm run refresh:dates` so the new post's date is in the cache before the build.
+- Never use `revalidate: false` on fetch calls in lib/github.ts or lib/tex-fetch.ts. It caches build-time fetches forever in .next/cache/fetch-cache, freezing README content across builds. Use `revalidate: 1`.
+- refresh:dates reads dates from the LOCAL git checkouts of the dlh-* repos at /home/rehat/Documents/GitHub (the GitHub API is never used). If a repo is missing locally, the entry keeps its previous date and refresh warns — clone the repo and re-run, rather than hand-editing dates.
+- The build fails loudly ("No cached date for ... — run npm run refresh:dates") if an entry is missing from the cache; refresh:dates is the only way to populate it.
+
