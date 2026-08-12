@@ -6,6 +6,7 @@ import path from "path";
 
 const GITHUB_RAW = "https://raw.githubusercontent.com/reha96";
 const GITHUB_API = "https://api.github.com";
+const GITHUB_WEB = "https://github.com/reha96";
 
 const AUTHOR = "Reha Tuncer";
 
@@ -236,7 +237,8 @@ function resolveGitHubPath(currentPath: string, linkTarget: string): string {
 function rewriteInternalLinks(
   content: string,
   currentPath: string,
-  pathToUrl: Map<string, string>
+  pathToUrl: Map<string, string>,
+  repo: string
 ): string {
   // Match markdown links: [text](url)
   return content.replace(/\[([^\]]+)\]\(([^)]+)\)/g, (match, text, url) => {
@@ -253,8 +255,8 @@ function rewriteInternalLinks(
       return `[${text}](${blogUrl})`;
     }
 
-    // No match found — keep original link
-    return match;
+    // Not published yet (WIP or unconfigured) — point at the repo path
+    return `[${text}](${GITHUB_WEB}/${repo}/tree/main/${resolved})`;
   });
 }
 
@@ -323,7 +325,7 @@ async function fetchAllBlogPosts(): Promise<BlogPostWithContent[]> {
   // Rewrite internal cross-reference links between blog posts
   const pathToUrl = buildPathMapping(posts);
   for (const post of posts) {
-    post.content = rewriteInternalLinks(post.content, post.path, pathToUrl);
+    post.content = rewriteInternalLinks(post.content, post.path, pathToUrl, post.repo);
   }
 
   // Merge local blog posts (content/blog/*.md) — skip link rewriting (no cross-repo links)
@@ -358,7 +360,7 @@ export async function getBlogPost(slug: string): Promise<BlogPostWithContent | n
   // Build path mapping and rewrite internal cross-reference links
   const allPostsMeta = await getAllBlogPostsMeta();
   const pathToUrl = buildPathMapping(allPostsMeta);
-  const rewrittenContent = rewriteInternalLinks(content, meta.path, pathToUrl);
+  const rewrittenContent = rewriteInternalLinks(content, meta.path, pathToUrl, meta.repo);
 
   return {
     slug,
