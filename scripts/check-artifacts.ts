@@ -8,8 +8,11 @@
  *   - search-index.json: entries resolve and exactly cover published
  *     blog + TIL detail pages (drift detection — a published page missing
  *     from search, or a stale index entry, fails the build)
+ *   - no soft 404s: no built page renders the notFound() shell (detected
+ *     by a bare "Reha Tuncer" first <title>)
  *   - tag pages: out/tags/*.html exactly matches the union of tags from
- *     blog config, local posts, TILs, and papers
+ *     blog config, local posts, and TILs (paper tags have no detail pages —
+ *     the /tags cloud links them to /academic#paperN)
  *   - robots.txt present; no stray .txt payloads besides it
  *
  * Runs during postbuild via: npm run check:artifacts
@@ -18,7 +21,6 @@ import fs from "fs";
 import path from "path";
 import matter from "gray-matter";
 import { BLOG_POSTS_CONFIG } from "../lib/blog-config";
-import { PAPER_TAGS } from "../lib/paper-tags";
 
 const OUT_DIR = path.join(process.cwd(), "out");
 const BASE_URL = "https://www.rehatuncer.com";
@@ -119,7 +121,23 @@ for (const file of htmlFiles) {
   }
 }
 
-// ── 3. Search index ─────────────────────────────────────────
+// ── 3. Soft-404 guard ───────────────────────────────────────
+// notFound() pages still export an HTML file, served with HTTP 200 and the
+// bare site title — a soft 404 in Search Console. Fail on any such page.
+// Exemptions: the homepage "/" carries the bare layout title by design
+// (it can never be a shell — notFound() at "/" renders the real 404 page),
+// and 404.html, whose first <title> is "404: This page could not be found."
+for (const file of htmlFiles) {
+  const url = fileToUrl(file);
+  if (url === "/" || url === "/404") continue;
+  const html = fs.readFileSync(file, "utf-8");
+  const titleMatch = html.match(/<title>([^<]*)<\/title>/);
+  if (titleMatch && titleMatch[1].trim() === "Reha Tuncer") {
+    fail(`${rel(file)}: soft 404 — page renders the notFound() shell (bare "Reha Tuncer" title)`);
+  }
+}
+
+// ── 4. Search index ─────────────────────────────────────────
 if (!fs.existsSync(path.join(OUT_DIR, "search-index.json"))) {
   fail("out/search-index.json is missing");
 } else {
@@ -147,7 +165,7 @@ if (!fs.existsSync(path.join(OUT_DIR, "search-index.json"))) {
   if (extraInIndex.length > 0) fail(`search index entries with no published page: ${extraInIndex.join(", ")}`);
 }
 
-// ── 4. Tag pages ────────────────────────────────────────────
+// ── 5. Tag pages ────────────────────────────────────────────
 const tagsDir = path.join(OUT_DIR, "tags");
 const expectedTags = new Set<string>();
 const CONTENT_DIR = path.join(process.cwd(), "content", "blog");
@@ -178,9 +196,6 @@ if (fs.existsSync(TIL_DIR)) {
     }
   }
 }
-for (const tags of Object.values(PAPER_TAGS)) {
-  for (const tag of tags) expectedTags.add(tag.toLowerCase());
-}
 
 const expectedTagUrls = new Set([...expectedTags].map((t) => "/tags/" + encodeURIComponent(t)));
 const actualTagUrls = new Set(
@@ -191,7 +206,7 @@ const strayTagPages = [...actualTagUrls].filter((u) => !expectedTagUrls.has(u));
 if (missingTagPages.length > 0) fail(`tags with no generated page: ${missingTagPages.join(", ")}`);
 if (strayTagPages.length > 0) fail(`tag pages with no source tag: ${strayTagPages.join(", ")}`);
 
-// ── 5. robots.txt and .txt payloads ─────────────────────────
+// ── 6. robots.txt and .txt payloads ─────────────────────────
 if (!fs.existsSync(path.join(OUT_DIR, "robots.txt"))) {
   fail("out/robots.txt is missing");
 }

@@ -2,6 +2,7 @@ import { Metadata } from "next";
 import { notFound } from "next/navigation";
 import Link from "next/link";
 import { getBlogPostsByTag, getTilsByTag, getAllTags } from "@/lib/tags";
+import { isPaperTag } from "@/lib/paper-tags";
 import { BlogPost } from "@/lib/blog-types";
 import { TilEntry } from "@/lib/til";
 
@@ -14,14 +15,18 @@ interface Params {
  */
 export async function generateStaticParams(): Promise<Params[]> {
   const tags = await getAllTags();
-  return tags.map(({ tag }) => ({ tag: tag.toLowerCase() }));
+  // Paper tags have no detail page — the /tags cloud links them to /academic#paperN.
+  // Generating pages for them only produced notFound() shells (soft 404s).
+  return tags
+    .filter(({ tag }) => !isPaperTag(tag))
+    .map(({ tag }) => ({ tag: tag.toLowerCase() }));
 }
 
 export async function generateMetadata({ params }: { params: Promise<Params> }): Promise<Metadata> {
   const { tag: rawTag } = await params;
   const decodedTag = decodeURIComponent(rawTag);
 
-  if (!/^[\w\s#-]+$/.test(decodedTag)) {
+  if (!/^[\w\s#/-]+$/.test(decodedTag)) {
     return { title: "Tags — Reha Tuncer", description: "Browse all tags" };
   }
 
@@ -36,7 +41,7 @@ export default async function TagPage({ params }: { params: Promise<Params> }) {
   const { tag: rawTag } = await params;
   const decodedTag = decodeURIComponent(rawTag);
 
-  if (!/^[\w\s#-]+$/.test(decodedTag)) {
+  if (!/^[\w\s#/-]+$/.test(decodedTag)) {
     notFound();
   }
 
