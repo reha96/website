@@ -1,10 +1,13 @@
 /* eslint-disable */
 /**
- * Refreshes content/commit-dates.json with the last-edit dates of each
- * configured README, read from the LOCAL git checkouts of the dlh-* repos.
- * No GitHub API — no rate limits, works offline.
+ * Refreshes content/commit-dates.json with the FIRST-commit (publish) dates
+ * of each configured README, read from the LOCAL git checkouts of the dlh-*
+ * repos. No GitHub API — no rate limits, works offline.
  *
- * Run after any source README changes:
+ * First-commit dates make post URLs immutable: editing a README later never
+ * moves its /blog/<year>/<month>/<day>/<slug> URL.
+ *
+ * Run after any source README changes (search/excerpt data refresh):
  *   npm run refresh:dates
  *
  * If a repo is not cloned locally, the entry keeps its previous date and
@@ -26,11 +29,11 @@ function git(cmd: string): string | null {
   }
 }
 
-/** Last commit date touching the given file inside the repo, as UTC ISO. */
-function lastCommitDate(repo: string, filePath: string): string | null {
+/** First commit date touching the given file inside the repo, as UTC ISO. */
+function firstCommitDate(repo: string, filePath: string): string | null {
   const repoDir = path.join(REPOS_DIR, repo);
   if (!fs.existsSync(repoDir)) return null;
-  const raw = git(`git -C "${repoDir}" log -1 --format=%cI -- "${filePath}"`);
+  const raw = git(`git -C "${repoDir}" log --reverse --format=%cI -- "${filePath}" | head -1`);
   return raw ? toUtcIso(raw) : null;
 }
 
@@ -65,7 +68,7 @@ function main() {
   for (const [slug, meta] of Object.entries(BLOG_POSTS_CONFIG)) {
     const key = meta.path ? `${meta.repo}/${meta.path}` : meta.repo;
     const date = meta.path
-      ? lastCommitDate(meta.repo, `${meta.path}/README.md`)
+      ? firstCommitDate(meta.repo, `${meta.path}/README.md`)
       : repoCreatedDate(meta.repo);
     if (date) {
       next[key] = date;

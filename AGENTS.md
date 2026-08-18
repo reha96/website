@@ -15,7 +15,7 @@ Rules:
 
 Post URL dates come from content/commit-dates.json, a tracked cache of GitHub commit dates. It goes stale silently, so:
 
-- After any change to a source README (dlh-* repos) that should appear on the site, run `npm run refresh:dates` to refetch all dates and rewrite content/commit-dates.json. Do not edit commit-dates.json by hand.
+- Dates are FIRST-commit (publish) dates, so post URLs never move when a README is edited later. After any change to a source README (dlh-* repos) that should appear on the site, run `npm run refresh:dates` to refetch all dates and rewrite content/commit-dates.json (search/excerpt data refresh — URL dates stay stable). Do not edit commit-dates.json by hand.
 - When adding a BLOG_POSTS_CONFIG entry, run `npm run refresh:dates` so the new post's date is in the cache before the build.
 - Never use `revalidate: false` on fetch calls in lib/github.ts or lib/tex-fetch.ts. It caches build-time fetches forever in .next/cache/fetch-cache, freezing README content across builds. Use `revalidate: 1`.
 - refresh:dates reads dates from the LOCAL git checkouts of the dlh-* repos at /home/rehat/Documents/GitHub (the GitHub API is never used). If a repo is missing locally, the entry keeps its previous date and refresh warns — clone the repo and re-run, rather than hand-editing dates.

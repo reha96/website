@@ -4,7 +4,142 @@
       "source": "/:path*",
       "destination": "https://www.rehatuncer.com/:path*",
       "permanent": true,
-      "has": [{ "type": "host", "value": "rehatuncer.com" }]
+      "has": [
+        {
+          "type": "host",
+          "value": "rehatuncer.com"
+        }
+      ]
+    },
+    {
+      "source": "/blog/2026/05/10/python-data-structures",
+      "destination": "https://www.rehatuncer.com/blog/2026/04/28/python-data-structures",
+      "permanent": true
+    },
+    {
+      "source": "/blog/2026/05/10/python-exceptions",
+      "destination": "https://www.rehatuncer.com/blog/2026/05/02/python-exceptions",
+      "permanent": true
+    },
+    {
+      "source": "/blog/2026/05/10/python-hello-world",
+      "destination": "https://www.rehatuncer.com/blog/2026/04/22/python-hello-world",
+      "permanent": true
+    },
+    {
+      "source": "/blog/2026/05/10/python-if-else-loops-functions",
+      "destination": "https://www.rehatuncer.com/blog/2026/04/25/python-if-else-loops-functions",
+      "permanent": true
+    },
+    {
+      "source": "/blog/2026/05/10/python-import-modules",
+      "destination": "https://www.rehatuncer.com/blog/2026/04/25/python-import-modules",
+      "permanent": true
+    },
+    {
+      "source": "/blog/2026/05/10/python-input-output",
+      "destination": "https://www.rehatuncer.com/blog/2026/05/08/python-input-output",
+      "permanent": true
+    },
+    {
+      "source": "/blog/2026/05/10/python-more-data-structures",
+      "destination": "https://www.rehatuncer.com/blog/2026/04/29/python-more-data-structures",
+      "permanent": true
+    },
+    {
+      "source": "/blog/2026/05/17/math-linear-algebra",
+      "destination": "https://www.rehatuncer.com/blog/2026/05/12/math-linear-algebra",
+      "permanent": true
+    },
+    {
+      "source": "/blog/2026/05/30/math-advanced-linear-algebra",
+      "destination": "https://www.rehatuncer.com/blog/2026/05/20/math-advanced-linear-algebra",
+      "permanent": true
+    },
+    {
+      "source": "/blog/2026/06/17/dlh-shell-permissions",
+      "destination": "https://www.rehatuncer.com/blog/2026/04/21/dlh-shell-permissions",
+      "permanent": true
+    },
+    {
+      "source": "/blog/2026/06/17/math-plotting",
+      "destination": "https://www.rehatuncer.com/blog/2026/06/05/math-plotting",
+      "permanent": true
+    },
+    {
+      "source": "/blog/2026/06/17/math-probability",
+      "destination": "https://www.rehatuncer.com/blog/2026/06/10/math-probability",
+      "permanent": true
+    },
+    {
+      "source": "/blog/2026/06/17/python-classes",
+      "destination": "https://www.rehatuncer.com/blog/2026/05/05/python-classes",
+      "permanent": true
+    },
+    {
+      "source": "/blog/2026/06/17/python-more-classes",
+      "destination": "https://www.rehatuncer.com/blog/2026/05/07/python-more-classes",
+      "permanent": true
+    },
+    {
+      "source": "/blog/2026/06/17/python-serialization",
+      "destination": "https://www.rehatuncer.com/blog/2026/05/10/python-serialization",
+      "permanent": true
+    },
+    {
+      "source": "/blog/2026/06/29/math-bayesian-prob",
+      "destination": "https://www.rehatuncer.com/blog/2026/06/15/math-bayesian-prob",
+      "permanent": true
+    },
+    {
+      "source": "/blog/2026/06/29/math-calculus",
+      "destination": "https://www.rehatuncer.com/blog/2026/06/03/math-calculus",
+      "permanent": true
+    },
+    {
+      "source": "/blog/2026/06/29/math-multivariate-prob",
+      "destination": "https://www.rehatuncer.com/blog/2026/06/25/math-multivariate-prob",
+      "permanent": true
+    },
+    {
+      "source": "/blog/2026/07/09/math",
+      "destination": "https://www.rehatuncer.com/blog/2026/05/17/math",
+      "permanent": true
+    },
+    {
+      "source": "/blog/2026/07/09/pipeline",
+      "destination": "https://www.rehatuncer.com/blog/2026/05/17/pipeline",
+      "permanent": true
+    },
+    {
+      "source": "/blog/2026/07/09/pipeline-databases",
+      "destination": "https://www.rehatuncer.com/blog/2026/05/15/pipeline-databases",
+      "permanent": true
+    },
+    {
+      "source": "/blog/2026/07/09/pipeline-pandas",
+      "destination": "https://www.rehatuncer.com/blog/2026/07/07/pipeline-pandas",
+      "permanent": true
+    },
+    {
+      "source": "/blog/2026/07/18/data-analysis-data-preparation-visualization",
+      "destination": "https://www.rehatuncer.com/blog/2026/07/10/data-analysis-data-preparation-visualization",
+      "permanent": true
+    },
+    {
+      "source": "/blog/2026/08/05/unsupervised-clustering",
+      "destination": "https://www.rehatuncer.com/blog/2026/07/28/unsupervised-clustering",
+      "permanent": true
+    },
+    {
+      "source": "/blog/2026/08/06/math-multivariate-prob",
+      "destination": "https://www.rehatuncer.com/blog/2026/06/25/math-multivariate-prob",
+      "permanent": true
+    },
+    {
+      "source": "/blog/2026/08/12/machine-learning-linear-models",
+      "destination": "https://www.rehatuncer.com/blog/2026/07/22/machine-learning-linear-models",
+      "permanent": true
     }
   ]
 }
